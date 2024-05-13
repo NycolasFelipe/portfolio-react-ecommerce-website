@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+# Ecommerce website built with React.js
+Aplicação web para ecommerce de uma loja de eletrônicos, desenvolvida com React. A aplicação possui diversos recursos, incluindo:
+- Sistema de login: Permite que os usuários criem contas e façam login para acessar informações personalizadas.
+- Carrinho de compras: Permite que os usuários adicionem produtos ao carrinho, visualizem o conteúdo do carrinho e finalizem a compra.
+- Busca por produtos: Permite que os usuários pesquisem produtos desejados.
+- Modal de produto: Exibe informações detalhadas sobre um produto específico, incluindo imagens, descrição e preço.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A aplicação foi projetada para ser fácil de usar e intuitiva, com uma interface amigável e um design agradável. A aplicação também é responsiva, e pode ser acessada em dispositivos móveis e desktops.
 
-## Available Scripts
+## Requisitos
+Para executar a aplicação, é preciso ter os seguintes softwares instalados no computador:
+- [Node.js](https://nodejs.org/en)
 
-In the project directory, you can run:
+## Instalação
+Para instalar a aplicação, siga estas etapas:
 
-### `npm start`
+1. Clone este repositório em seu computador.
+2. Abra um terminal e navegue até o diretório da aplicação.
+3. Execute o seguinte comando para instalar as dependências da aplicação:
+`npm install`
+4. Execute o seguinte comando para iniciar a aplicação:
+`npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Capturas
+![print-1](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/3b4e460b-fb32-4f06-80c5-171631fb4c39)
+![print-2](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/d64837d2-34a8-48a1-ad35-2713d37b7573)
+![print-3](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/90879916-f3cf-4687-a021-b0238280478a)
+![print-4](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/7d52293e-e657-4435-898f-c7a2b5e4b22b)
+![print-5](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/b7cd4a63-aec0-46d5-b05e-aad220b0cf5a)
