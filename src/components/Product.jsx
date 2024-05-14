@@ -73,8 +73,10 @@ const Product = ({ product, setProduct, detail, closeDetail, setCloseDetail, vie
                   <li onClick={() => filterProduct("Mouse")}>Mouse</li>
                   <li onClick={() => filterProduct("Processador")}>Processador</li>
                   <li onClick={() => filterProduct("Console")}>Console</li>
+                  <li onClick={() => filterProduct("Monitor")}>Monitor</li>
                   <li onClick={() => filterProduct("Placa de Vídeo")}>Placa de Vídeo</li>
                   <li onClick={() => filterProduct("Tablet")}>Tablet</li>
+                  <li onClick={() => filterProduct("Cadeira")}>Cadeira</li>
                 </ul>
               </div>
               <div className="brand">

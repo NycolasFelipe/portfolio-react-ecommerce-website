@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import { FaTruckMoving } from "react-icons/fa";
@@ -10,8 +10,7 @@ import { CiLogout } from "react-icons/ci";
 import { IoSearch } from "react-icons/io5";
 import "./Nav.css";
 
-const Nav = ({ searchButton }) => {
-  const [search, setSearch] = useState("");
+const Nav = ({ search, setSearch, searchButton }) => {
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
 
   return (

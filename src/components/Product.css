@@ -59,6 +59,7 @@
 
 .products .container .filter .categories ul {
   margin-top: 10px;
+  min-width: 300px;
 }
 
 .products .container .filter .categories ul li {

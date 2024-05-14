@@ -79,6 +79,126 @@ const ProductDetail = [
     price: "R$ 3.799,99",
     img: "./img/tp10.png"
   },
+  {
+    id: 11,
+    title: "Monitor Gamer SuperFrame Vision, 24 Pol, Full HD, IPS, FreeSync, 1ms, 165Hz, HDMI/DP, SFV2409S",
+    category: "Monitor",
+    description: "Os monitores SuperFrame trazem um ótimo desempenho para você ter uma experiência surpreendente com gráficos fluídos e de altíssima qualidade! O monitor Vision é equipado com tela Full HD IPS com uma taxa de...",
+    price: "R$ 699,90",
+    img: "./img/tp11.png"
+  },
+  {
+    id: 12,
+    title: "Cadeira Gamer Ninja Hiryu Confort, Tecido, Preto",
+    category: "Cadeira",
+    description: "Conheça a cadeira Ninja Hiryu Confort, desenvolvida especialmente para gamers. Com espuma de alta densidade revestida por um Tecido de ótima qualidade, a Hiryu te proporcionará várias horas de jogo repletas de conforto!",
+    price: "R$ 349,90",
+    img: "./img/tp12.png"
+  },
+  {
+    id: 13,
+    title: "Mouse Gamer Redragon Cobra V2 RGB, 12400 DPI, 8 Botões Programáveis, Black, M711 V2",
+    category: "Mouse",
+    description: "Trazendo a já amada iluminação Redragon Chroma Mark II o mouse Gamer Profissional Cobra V2 impressiona com tanta beleza, conforto e precisão. Vá além e customize do seu jeito a iluminação do seu mouse com o software Redragon.",
+    price: "R$ 139,90",
+    img: "./img/tp13.png"
+  },
+  {
+    id: 14,
+    title: "Mouse Gamer Redragon King Cobra FPS RGB, 24000 DPI, 7 Botões Programáveis, Lunar White, M711W-FPS",
+    category: "Mouse",
+    description: "O King Cobra Lunar White apresenta o mesmo visual moderno do aclamado King Cobra, mas adiciona ainda mais beleza e elegância, estilizado na cor branca.",
+    price: "R$ 129,90",
+    img: "./img/tp14.png"
+  },
+  {
+    id: 15,
+    title: "Mouse Gamer Fortrek Óptico Spider Tarantula, OM702, 54623",
+    category: "Mouse",
+    description: "Vença todas as batalhas com precisão letal.",
+    price: "R$ 34,90",
+    img: "./img/tp15.png"
+  },
+  {
+    id: 16,
+    title: "Notebook Acer Aspire 3 Intel Core i3 1005G1 / 4GB DDR4 / SSD 240GB / Windows 11 Home, A315-56-3478",
+    category: "Notebook",
+    description: "Desenvolvido para não deixar você parar, o Aspire 3 tem a tecnologia queacompanha seu estilo de vida. Equipado com o processador Intel® i3 estudar, trabalhar e se divertir fica mais fácil.",
+    price: "R$ 2.357,10",
+    img: "./img/tp16.png"
+  },
+  {
+    id: 17,
+    title: "Notebook Gamer Acer Nitro 5 Intel Core i5 11400H / GTX 1650 4GB / 8GB DDR4 / SSD 240GB / Windows 11 Pro, AN515-57-579B",
+    category: "Notebook",
+    description: "A fase avançada do seu jogo chegou! Esteja preparado com o notebook gamer Acer Aspire Nitro 5. Com ele, não existe game difícil, existe game brutal!",
+    price: "R$ 4.949,10",
+    img: "./img/tp17.png"
+  },
+  {
+    id: 18,
+    title: "Notebook Acer Aspire 3 Intel Core i5 1135G7 / 8GB DDR4 / SSD 240GB / Windows 11 Home, A315-58-573P",
+    category: "Notebook",
+    description: "O Aspire 3 foi desenvolvido para aqueles que querem estudar, trabalhar ou se divertir com facilidade gastando pouco. Independente do seu estilo de vida e da sua família, o processador Intel® Core i5 não vai deixar ninguém na mão.",
+    price: "R$ 3.023,10",
+    img: "./img/tp18.png"
+  },
+  {
+    id: 19,
+    title: "Console Xbox Series S + Fortnite + Rocket League + Fall Guys, 512GB, White, Com 1 Controle, RRS-00076",
+    category: "Console",
+    description: "Obtenha o Xbox Series S, nosso Xbox menor e totalmente digital, em uma versão especial limitada: pacote Fortnite, Rocket League e Fall Guys. Xbox Series S, o menor e mais elegante de todos os tempos.",
+    price: "R$ 2.159,10",
+    img: "./img/tp19.png"
+  },
+  {
+    id: 20,
+    title: "Processador Intel Core i5 12400F, 2.5GHz (4.4GHz Turbo), 12ª Geração, 6-Cores 12-Threads, LGA 1700, Com Cooler, BX8071512400F",
+    category: "Processador",
+    description: "Processador de desktop Intel Core i5-12400F de 12ª geração. Apresentando suporte PCIe Gen 5.0 e 4.0, suporte DDR5 e DDR4, os processadores Intel Core para desktop de 12ª Geração são otimizados para gamers entusiastas e produtores...",
+    price: "R$ 775,99",
+    img: "./img/tp20.png"
+  },
+  {
+    id: 21,
+    title: "Placa de Vídeo ASRock Radeon RX 6600 Challenger D, 8GB, GDDR6, FSR, Ray Tracing, 90-GA2RZZ-00UANF",
+    category: "Placa de Vídeo",
+    description: "As placas de vídeo da série AMD Radeon RX 6600 oferecem jogos de 1080p e taxas de quadros ultra-altas. Obtenha até 32 unidades de computação de alto desempenho, o inovador AMD Infinity Cache e até 8 GB de memória GDDR6 dedicada.",
+    price: "R$ 1.299,99",
+    img: "./img/tp21.png"
+  },
+  {
+    id: 22,
+    title: "Relógio Smartwatch Xiaomi, Haylou Solar LS05, Bluetooth, Black",
+    category: "Smartwatch",
+    description: "O Smartwatch Haylou Solar LS05 vem recheado de tecnologias para você otimizar a sua rotina sem deixar de lado o estilo que você precisa para compor o visual.",
+    price: "R$ 170,10",
+    img: "./img/tp22.png"
+  },
+  {
+    id: 23,
+    title: "Relógio Smartwatch Xiaomi, Mi Band 5, Bluetooth, Black",
+    category: "Smartwatch",
+    description: "A linha mais querida de Smart Bands Xiaomi, traz ao brasil a Mi Smart Band 5, com funções aprimoradas e novas modalidades esportivas.",
+    price: "R$ 143,10",
+    img: "./img/tp23.png"
+  },
+  {
+    id: 24,
+    title: "Headphone Hoopson, Sem Fio, Bluetooth, Drivers de 40mm, Preto, F-402-PT",
+    category: "Headphone",
+    description: "Versão do Bluetooth: V5.0, Bateria: 3.7V/300mAh, Tamanho do produto: 194x167x73 mm, Peso: 210g, Alcance: Aprox. 10m, Tamanho do speaker: 40mm, Sensibilidade: 110±3dB a 1KHz;1mW, Perfil: A2DP,VARCP,HFP e HSPV, Impedância: I32Ω±15%...",
+    price: "R$ 119,90",
+    img: "./img/tp24.png"
+  },
+  {
+    id: 25,
+    title: "Headphone Gamer Fifine H8, 3.5mm, Drivers de 50mm, Black",
+    category: "Headphone",
+    description: "Trabalhado com impedância de 32ohms e faixa de frequência de 20Hz~20KHz, o headphone fornece som claro e limpo, que apresenta médios precisos e melhores graves e agudos. ",
+    price: "R$ 233,10",
+    img: "./img/tp25.png"
+  },
 ];
 
 export default ProductDetail;
