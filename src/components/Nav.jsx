@@ -52,9 +52,17 @@ const Nav = ({ search, setSearch, searchButton }) => {
               <Link to="/" className="link">
                 <AiOutlineHeart />
               </Link>
-              <Link to="/cart" className="link">
-                <BsBagCheck />
-              </Link>
+              {
+                isAuthenticated ? (
+                  <Link to="/cart" className="link">
+                    <BsBagCheck />
+                  </Link>
+                ) : (
+                  <Link onClick={() => loginWithRedirect()} className="link">
+                    <BsBagCheck />
+                  </Link>
+                )
+              }
             </div>
           </div>
         </div>

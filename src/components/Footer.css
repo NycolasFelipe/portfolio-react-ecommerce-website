@@ -1,15 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  box-sizing: border-box;
-}
-
 .footer {
   padding: 30px 40px;
   width: 100%;
-  background: #ecf2f7;
-  margin-top: 60px;
+  background: var(--background-color);
 }
 
 .footer .container {
@@ -29,7 +21,7 @@
 .footer .container .about .detail p {
   margin-top: 20px;
   font-size: 18px;
-  color: #010f1c;
+  color: var(--text-black);
   letter-spacing: 1px;
 }
 
@@ -43,7 +35,7 @@
   list-style: none;
   padding: 10px;
   background: #fff;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  box-shadow: var(--box-shadow);
   cursor: pointer;
   transition: 0.3s;
   border-radius: 5px;
@@ -55,7 +47,7 @@
 }
 
 .footer .container .about .detail .icon li:hover {
-  background: #6a33e9;
+  background: var(--primary-color);
   transition: 0.3s;
 }
 
@@ -66,7 +58,7 @@
 
 .footer .container .about .detail .icon li a {
   text-decoration: none;
-  color: #010f1c;
+  color: var(--text-black);
 }
 
 .footer .container .account {
@@ -77,7 +69,7 @@
 
 .footer .container .account h3 {
   font-size: 28px;
-  color: #010f1c;
+  color: var(--text-black);
 }
 
 .footer .container .account ul {
@@ -88,7 +80,7 @@
 
 .footer .container .account ul li {
   margin-top: 5px;
-  color: #010f1c;
+  color: var(--text-black);
   font-size: 18px;
   transform: 0.3s;
   cursor: pointer;
@@ -96,7 +88,7 @@
 }
 
 .footer .container .account ul li:hover {
-  color: #6a33e9;
+  color: var(--primary-color);
 }
 
 .footer .container .page {
@@ -106,7 +98,7 @@
 
 .footer .container .page h3 {
   font-size: 28px;
-  color: #010f1c;
+  color: var(--text-black);
 }
 
 .footer .container .page ul {
@@ -116,7 +108,7 @@
 
 .footer .container .page ul li {
   margin-top: 5px;
-  color: #010f1c;
+  color: var(--text-black);
   font-size: 18px;
   transform: 0.3s;
   cursor: pointer;
@@ -124,7 +116,7 @@
 }
 
 .footer .container .page ul li:hover {
-  color: #6a33e9;
+  color: var(--primary-color);
 }
 
 @media (min-width: 1101px) {

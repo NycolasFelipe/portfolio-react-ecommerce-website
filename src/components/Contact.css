@@ -1,14 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  box-sizing: border-box;
-}
-
 .contact-container {
   padding: 30px 40px;
   width: 100%;
-  background: #f6f6f6;
+  background: var(--background-color);
 }
 
 .contact-container .contant {
@@ -18,7 +11,7 @@
 
 .contact-container .contant h2 {
   font-size: 32px;
-  color: #010f1c;
+  color: var(--text-black);
   font-weight: 200;
   margin-bottom: 25px;
 }
@@ -32,7 +25,7 @@
   padding: 20px 30px;
   background: #fff;
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: var(--box-shadow);
 }
 
 .contact-container .contant .form form {
@@ -43,7 +36,7 @@
 
 .contact-container .contant .form form h3 {
   letter-spacing: 1px;
-  color: #bbbbbb;
+  color: var(--grey-color-variation-1);
 }
 
 .contact-container .contant .form form input {
@@ -51,7 +44,7 @@
   border: none;
   outline: none;
   background: none;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid var(--border-color);
   width: 350px;
   margin-top: 20px;
 }
@@ -61,7 +54,7 @@
   border: none;
   outline: none;
   background: none;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid var(--border-color);
   width: 350px;
   margin-top: 20px;
   resize: vertical;
@@ -73,7 +66,7 @@
   padding: 10px 0;
   border: none;
   outline: none;
-  background: #010f1c;
+  background: var(--text-black);
   cursor: pointer;
   border-radius: 5px;
   color: #fff;
@@ -82,7 +75,7 @@
 }
 
 .contact-container .contant .form form button:hover {
-  background: #6a33e9;
+  background: var(--primary-color);
   transition: 0.3s;
 }
 

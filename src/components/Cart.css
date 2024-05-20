@@ -1,15 +1,8 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  box-sizing: border-box;
-}
-
 .cart-container {
   padding: 40px 50px;
   width: 100%;
   background: #f1f1f1;
-  border-bottom: 1px solid #9a9a9a;
+  border-bottom: 1px solid var(--grey-color-variation-1);
 }
 
 .cart-container .empty-cart {
@@ -19,9 +12,10 @@
 
 .cart-container .empty-cart h2 {
   font-size: 28px;
-  color: #010f1c;
+  color: var(--text-black);
   font-weight: 300;
   text-transform: uppercase;
+  padding-top: 30px;
 }
 
 .cart-container .empty-cart .empty-cart-button {
@@ -31,14 +25,14 @@
   text-decoration: none;
   color: #fff;
   padding: 10px 20px;
-  background: #010f1c;
+  background: var(--text-black);
   border-radius: 5px;
   max-width: 240px;
   transition: 0.3s;
 }
 
 .cart-container .empty-cart .empty-cart-button:hover {
-  background: #6a33e9;
+  background: var(--primary-color);
   transition: 0.3s;
 }
 
@@ -76,7 +70,7 @@
 .cart-container .contant .cart-item .detail .info h4 {
   text-transform: uppercase;
   font-size: 16px;
-  color: #9a9a9a;
+  color: var(--grey-color-variation-1);
   font-weight: 100;
   letter-spacing: 1.5px;
 }
@@ -84,7 +78,7 @@
 
 .cart-container .contant .cart-item .detail .info h3 {
   margin-top: 20px;
-  color: #010f1c;
+  color: var(--text-black);
   font-size: 22px;
   font-weight: 200;
   letter-spacing: 1px;
@@ -92,7 +86,7 @@
 
 .cart-container .contant .cart-item .detail .info p {
   margin-top: 20px;
-  color: #010f1c;
+  color: var(--text-black);
   letter-spacing: 1px;
 }
 
@@ -106,7 +100,7 @@
   background: none;
   outline: none;
   border: none;
-  color: #6a33e9;
+  color: var(--primary-color);
   font-size: 32px;
   cursor: pointer;
   transition: 0.3s;
@@ -119,7 +113,7 @@
 .cart-container .contant .cart-item .detail .info .qtd .inc-qtd:hover,
 .cart-container .contant .cart-item .detail .info .qtd .dec-qtd:hover {
   transition: 0.3s;
-  border: 2px solid #dadada;
+  border: 2px solid var(--grey-color-variation-2);
 }
 
 .cart-container .contant .cart-item .detail .info .qtd input {
@@ -127,13 +121,13 @@
   outline: none;
   background: none;
   font-size: 22px;
-  color: #010f1c;
+  color: var(--text-black);
   width: 60px;
   text-align: center;
 }
 
 .cart-container .contant .cart-item .detail .info .subtotal {
-  color: #010f1c;
+  color: var(--text-black);
   font-size: 18px;
   margin-top: 20px;
 }
@@ -148,7 +142,7 @@
   outline: none;
   border: none;
   font-size: 22px;
-  color: #9a9a9a;
+  color: var(--grey-color-variation-1);
   background: none;
   cursor: pointer;
   transition: 0.3s;
@@ -180,7 +174,7 @@
   color: #fff;
   border: none;
   outline: none;
-  background: #6a33e9;
+  background: var(--primary-color);
   border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
@@ -188,7 +182,7 @@
 }
 
 .cart-container .checkout-button:hover {
-  background: #8961e7;
+  background: var(--primary-color-variation);
   transition: 0.3s;
 }
 

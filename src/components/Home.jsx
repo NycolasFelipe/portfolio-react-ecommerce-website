@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import { BsArrowRight, BsCurrencyDollar, BsEye } from "react-icons/bs";
@@ -6,15 +6,17 @@ import { BiHeadphone } from "react-icons/bi";
 import { FiTruck } from "react-icons/fi";
 import { AiOutlineCloseCircle, AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
-import HomeProduct from "../scripts/homeProduct.js";
-import addCartAnimation from "../scripts/addCartAnimation.js";
+import addCartAnimation from "../scripts/addCartAnimation";
+import getProducts from "../scripts/getProducts";
+import formatMoney from "../scripts/formatMoney";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./Home.css";
 
 const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
-  const [homeProduct, setHomeProduct] = useState(HomeProduct);
+  const [homeProduct, setHomeProduct] = useState([]);
+  const [loading, setLoading] = useState(true);
   const sliderSettings = {
     infinite: false,
     speed: 300,
@@ -22,6 +24,15 @@ const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) =
     variableWidth: true,
     initialSlide: 1,
   }
+
+  useEffect(() => {
+    getProducts().then((data) => {
+      setHomeProduct(data)
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+    });
+  }, []);
 
   return (
     <>   {
@@ -32,15 +43,15 @@ const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) =
             {
               detail.map((curElm) => {
                 return (
-                  <div className="product-box" key={curElm.id}>
+                  <div className="product-box" key={curElm.ProductId}>
                     <div className="img-box">
-                      <img src={curElm.img} alt={curElm.title} />
+                      <img src={curElm.Img} alt={curElm.Title} />
                     </div>
                     <div className="detail">
-                      <h4>{curElm.category}</h4>
-                      <h2>{curElm.title}</h2>
-                      <p>{curElm.description}</p>
-                      <h3>{curElm.price}</h3>
+                      <h4>{curElm.Category}</h4>
+                      <h2>{curElm.Title}</h2>
+                      <p>{curElm.Description}</p>
+                      <h3>{formatMoney(curElm.Price)}</h3>
                       {
                         isAuthenticated ?
                           <button className="button-detail" onClick={(e) => { addToCart(curElm); addCartAnimation(e) }}>Adicionar ao carrinho</button>
@@ -172,34 +183,40 @@ const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) =
       </div>
       <div className="product">
         <h2>Produtos em Alta</h2>
-        <div className="container">
-          {
-            homeProduct.map((curElm) => {
-              return (
-                <div className="box" key={curElm.id}>
-                  <div className="img-box">
-                    <img src={curElm.img} alt={curElm.title} />
-                    <div className="icon">
-                      {
-                        isAuthenticated ?
-                          <li className="button-product" onClick={(e) => { addToCart(curElm); addCartAnimation(e) }}><AiOutlineShoppingCart /></li>
-                          :
-                          <li onClick={() => loginWithRedirect()}><AiOutlineShoppingCart /></li>
-                      }
-                      <li onClick={() => viewProduct(curElm)}><BsEye /></li>
-                      <li><AiOutlineHeart /></li>
+        {
+          loading ? (
+            <img className="loading" src="./img/loading.svg" alt="Loading" />
+          ) : (
+            <div className="container">
+              {
+                homeProduct.map((curElm) => {
+                  return (
+                    <div className="box" key={curElm.ProductId}>
+                      <div className="img-box">
+                        <img src={curElm.Img} alt={curElm.Title} />
+                        <div className="icon">
+                          {
+                            isAuthenticated ?
+                              <li className="button-product" onClick={(e) => { addToCart(curElm); addCartAnimation(e) }}><AiOutlineShoppingCart /></li>
+                              :
+                              <li onClick={() => loginWithRedirect()}><AiOutlineShoppingCart /></li>
+                          }
+                          <li onClick={() => viewProduct(curElm)}><BsEye /></li>
+                          <li><AiOutlineHeart /></li>
+                        </div>
+                      </div>
+                      <div className="detail">
+                        <p>{curElm.Category}</p>
+                        <h3>{curElm.Title}</h3>
+                        <h4>{formatMoney(curElm.Price)}</h4>
+                      </div>
                     </div>
-                  </div>
-                  <div className="detail">
-                    <p>{curElm.category}</p>
-                    <h3>{curElm.title}</h3>
-                    <h4>{curElm.price}</h4>
-                  </div>
-                </div>
-              )
-            })
-          }
-        </div>
+                  )
+                })
+              }
+            </div>
+          )
+        }
       </div>
       <div className="banner">
         <div className="container">
