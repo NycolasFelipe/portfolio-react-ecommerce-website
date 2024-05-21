@@ -25,7 +25,7 @@ Para instalar a aplicação, siga estas etapas:
 `npm start`
 
 ## Backend da aplicação
-Aplicação feita com Node.js + Express responsável pela conexão com um banco de dados em MySQL: [link](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website)
+Aplicação feita com Node.js + Express responsável pela conexão com um banco de dados em MySQL: [link](https://github.com/NycolasFelipe/portfolio-react-ecommerce-server)
 
 ## Capturas
 ![print-1](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/3b4e460b-fb32-4f06-80c5-171631fb4c39)
