@@ -70,6 +70,7 @@
 .cart-container .contant .cart-item .detail .info h4 {
   text-transform: uppercase;
   font-size: 16px;
+  font-weight: bold;
   color: var(--grey-color-variation-1);
   font-weight: 100;
   letter-spacing: 1.5px;
@@ -80,7 +81,7 @@
   margin-top: 20px;
   color: var(--text-black);
   font-size: 22px;
-  font-weight: 200;
+  font-weight: 300;
   letter-spacing: 1px;
 }
 
