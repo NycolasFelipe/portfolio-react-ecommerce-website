@@ -79,7 +79,7 @@
 .product_detail .view_container .details {
   width: 60%;
   padding: 16px 20px;
-  background: var(--background-color);
+  background: #fff;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
