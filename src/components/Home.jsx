@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsArrowRight, BsCurrencyDollar, BsEye } from "react-icons/bs";
 import { BiHeadphone } from "react-icons/bi";
 import { FiTruck } from "react-icons/fi";
 import { AiOutlineCloseCircle, AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
 import addCartAnimation from "../scripts/addCartAnimation";
-import getProducts from "../scripts/getProducts";
+import getProduct from "../api/getProduct";
 import formatMoney from "../scripts/formatMoney";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -17,16 +17,18 @@ const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) =
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const [homeProduct, setHomeProduct] = useState([]);
   const [loading, setLoading] = useState(true);
-  const sliderSettings = {
-    infinite: false,
-    speed: 300,
-    slidesToShow: 1,
-    variableWidth: true,
-    initialSlide: 1,
+  const sliderSettings = { infinite: false, speed: 300, slidesToShow: 1, variableWidth: true, initialSlide: 1 };
+  const navigate = useNavigate();
+
+  const navigateDetail = (e, productId) => {
+    // Prevent event bubbling
+    if (e.target.nodeName !== "LI") {
+      navigate(`products/detail?productId=${productId}`);
+    }
   }
 
   useEffect(() => {
-    getProducts().then((data) => {
+    getProduct().then((data) => {
       setHomeProduct(data)
       setTimeout(() => {
         setLoading(false);
@@ -35,7 +37,7 @@ const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) =
   }, []);
 
   return (
-    <>   {
+    <main className="home">   {
       closeDetail && (
         <div className="product-detail">
           <div className="container">
@@ -191,7 +193,7 @@ const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) =
               {
                 homeProduct.map((curElm) => {
                   return (
-                    <div className="box" key={curElm.ProductId}>
+                    <div className="box" key={curElm.ProductId} onClick={(e) => navigateDetail(e, curElm.ProductId)}>
                       <div className="img-box">
                         <img src={curElm.Img} alt={curElm.Title} />
                         <div className="icon">
@@ -224,14 +226,14 @@ const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) =
             <h4>A Mais Recente Tecnologia</h4>
             <h3>Apple iPad 10.9" 10ª Geração, Wi-Fi, 64GB, Prateado - MPQ03BZ/A</h3>
             <p>R$ 3799,99</p>
-            <Link className="link" to="/product">Compre agora <BsArrowRight /></Link>
+            <Link className="link" to="/products/detail?productId=11">Compre agora <BsArrowRight /></Link>
           </div>
           <div className="img-box">
             <img src="./img/slider-img.png" alt="Imagem slider iPad" />
           </div>
         </div>
       </div>
-    </>
+    </main>
   );
 }
 

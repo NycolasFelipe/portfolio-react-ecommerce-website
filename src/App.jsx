@@ -4,7 +4,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Routing from "./components/Routing";
 import removeDiacritcs from "./scripts/removeDiacritcs";
-import getProducts from "./scripts/getProducts";
+import getProduct from "./api/getProduct";
 import "./App.css";
 
 const App = () => {
@@ -73,8 +73,8 @@ const App = () => {
 
   // Carregar produtos
   useEffect(() => {
-    getProducts().then((data) => {
-      const categories = data.reduce((categories, product, index) => {
+    getProduct().then((data) => {
+      const categories = !data ? [] : data.reduce((categories, product, index) => {
         const category = product.Category;
         if (categories.indexOf(category) === -1) {
           categories.push(category);

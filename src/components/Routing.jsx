@@ -4,6 +4,7 @@ import Home from "./Home";
 import Product from "./Product";
 import Cart from "./Cart";
 import Contact from "./Contact";
+import ProductDetail from "./ProductDetail";
 
 const Routing = ({ product, setProduct, detail, closeDetail, setCloseDetail, viewProduct, cart, setCart, addToCart, filterProduct, categories, loading }) => {
   return (
@@ -19,7 +20,7 @@ const Routing = ({ product, setProduct, detail, closeDetail, setCloseDetail, vie
           />
         }
         />
-        <Route path="/product" element={
+        <Route path="/products" element={
           <Product
             product={product}
             setProduct={setProduct}
@@ -31,6 +32,12 @@ const Routing = ({ product, setProduct, detail, closeDetail, setCloseDetail, vie
             filterProduct={filterProduct}
             categories={categories}
             loading={loading}
+          />
+        }
+        />
+        <Route path="/products/detail" element={
+          <ProductDetail
+            addToCart={addToCart}
           />
         }
         />

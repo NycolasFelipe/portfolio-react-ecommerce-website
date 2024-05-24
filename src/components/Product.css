@@ -211,6 +211,12 @@
   margin-top: 8px;
   color: var(--text-black);
   transition: 0.3s;
+  line-height: 1.4em;
+  max-height: 4em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
 .products .container .product-box .contant .box:hover .detail h3 {
@@ -218,11 +224,11 @@
 }
 
 .products .container .product-box .contant .box .detail h4 {
-  margin-top: 5px;
+  margin-top: 12px;
   font-size: 14px;
   color: var(--primary-color);
   font-weight: 800;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .product-detail {

@@ -32,6 +32,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 .main-header .container .logo {
   margin-left: 5px;
 }
@@ -42,7 +43,11 @@
 }
 
 .main-header .container .search-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-right: 30px;
+  flex: 1;
 }
 
 .main-header .container .search-box input {
@@ -52,14 +57,14 @@
   border: 3px solid var(--primary-color);
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  width: 300px;
+  flex: 1;
+  max-width: 400px;
   font-size: 18px;
   color: var(--text-black);
 }
 
 .main-header .container .search-box button {
   position: relative;
-  top: 1px;
   outline: none;
   border: 3px solid var(--primary-color);
   border-top-right-radius: 5px;
@@ -71,6 +76,7 @@
   color: var(--text-white);
   font-size: 18px;
   transition: 0.3s;
+  height: 50px;
 }
 
 .main-header .container .search-box button:hover {
@@ -170,7 +176,7 @@
 }
 
 .header .container .auth button {
-  margin-right: 20px;
+  margin-right: 15px;
   font-size: 22px;
   cursor: pointer;
   outline: none;
@@ -211,7 +217,8 @@
     flex-direction: column;
   }
 
-  .main-header .container .search-box  {
+  .main-header .container .search-box {
+    justify-content: flex-start;
     margin-top: 20px;
   }
 
@@ -226,8 +233,36 @@
 
   .main-header .container .search-box .search-button-mobile {
     position: relative;
-    top: 2px;
+    top: 0px;
     font-size: 20px;
     padding: 8px 14px;
+  }
+}
+
+@media (max-width: 540px) {
+  .main-header .container .search-box {
+    display: flex;
+    margin-right: 0;
+  }
+
+  .main-header .container .search-box input {
+    width: 100% !important;
+  }
+
+  .main-header .container .search-box .search-button-mobile {
+    top: 0;
+  }
+}
+
+@media (max-width: 440px) {
+  .free {
+    padding-left: 20px;
+  }
+  .main-header {
+    padding: 20px;
+  }
+
+  .header {
+    padding: 20px 0;
   }
 }

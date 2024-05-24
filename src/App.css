@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 :root {
   --primary-color: #6a33e9;
   --primary-color-variation: #7d4fe9;
   --text-white: #ecf2f7;
   --text-black: #010f1c;
   --text-red: #ff0000;
+  --text-green: #31b331;
   --border-color: #dadada;
   --grey-color-variation-1: #9a9a9a;
   --grey-color-variation-2: #dadada;
@@ -16,7 +19,8 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
   box-sizing: border-box;
 }
 
@@ -24,3 +28,12 @@
   overflow-x: hidden;
 }
 
+::-moz-selection { /* Code for Firefox */
+  color: var(--text-white);
+  background: var(--primary-color);
+}
+
+::selection {
+  color: var(--text-white);
+  background: var(--primary-color);
+}

@@ -42,7 +42,7 @@ const Cart = ({ cart, setCart }) => {
   }
 
   //Preço total
-  const totalPrice = cart.reduce((price, item) => price + item.qtd * item.Price, 0);
+  const totalPrice = !cart ? 0 : cart.reduce((price, item) => price + item.qtd * item.Price, 0);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineCloseCircle, AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { BsEye } from "react-icons/bs";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -11,6 +11,14 @@ import "./Product.css";
 
 const Product = ({ product, detail, closeDetail, setCloseDetail, viewProduct, addToCart, filterProduct, categories, loading }) => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
+
+  const navigateDetail = (e, productId) => {
+    // Prevent event bubbling
+    if (e.target.nodeName !== "LI") {
+      navigate(`detail?productId=${productId}`);
+    }
+  }
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
@@ -52,7 +60,7 @@ const Product = ({ product, detail, closeDetail, setCloseDetail, viewProduct, ad
       }
       <div className="products">
         <h2><FaLaptop className="products-icon" /> Produtos</h2>
-        <p><Link to="/" className="link"> Início <IoChevronForwardSharp className="chevron" /></Link></p>
+        <p><Link to="/" className="link">Início <IoChevronForwardSharp className="chevron" /></Link></p>
         <p>Produtos</p>
         {
           loading ? (
@@ -81,7 +89,7 @@ const Product = ({ product, detail, closeDetail, setCloseDetail, viewProduct, ad
                           {
                             product.map((curElm) => {
                               return (
-                                <div className="box" key={curElm.ProductId}>
+                                <div className="box" key={curElm.ProductId} onClick={(e) => navigateDetail(e, curElm.ProductId)}>
                                   <div className="img-box">
                                     <img src={curElm.Img} alt={curElm.Title} />
                                     <div className="icon">

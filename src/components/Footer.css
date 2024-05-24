@@ -1,12 +1,51 @@
 .footer {
-  padding: 30px 40px;
   width: 100%;
+  padding: 20px 0;
   background: var(--background-color);
 }
 
 .footer .container {
   max-width: 100%;
   display: flex;
+}
+
+.footer .about {
+  padding: 40px;
+  width: 100%;
+}
+
+.footer .about .container {
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer .about .container .box {
+  padding: 10px 20px;
+  display: flex;
+  background: #ecf2f7;
+  width: 30%;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.footer .about .container .box .icon {
+  color: var(--primary-color);
+  font-size: 32px;
+  margin-top: 10px;
+  margin-right: 15px;
+}
+
+.footer .about .container .box .detail {
+  margin-top: 5px;
+}
+
+.footer .about .container .box .detail h3 {
+  color: var(--text-black);
+}
+
+.footer .about .container .box .detail p {
+  color: var(--grey-color-variation-1);
 }
 
 .footer .container .about {
@@ -218,6 +257,10 @@
 }
 
 @media (max-width: 1100px) {
+  .footer {
+    padding: 20px 30px;
+  }
+
   .footer .container {
     display: flex;
     flex-direction: column;
@@ -246,6 +289,12 @@
   .footer .container .about,
   .footer .container .account,
   .footer .container .page {
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width: 440px) {
+  .footer {
     padding: 20px 10px;
   }
 }

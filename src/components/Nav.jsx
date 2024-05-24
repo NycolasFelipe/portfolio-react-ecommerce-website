@@ -22,7 +22,7 @@ const Nav = ({ search, setSearch, searchButton }) => {
       <div className="main-header">
         <div className="container">
           <div className="logo">
-            <Link to="/"><img src="img/logo.svg" alt="Logo" /></Link>
+            <Link to="/"><img src="../img/logo.svg" alt="Logo" /></Link>
           </div>
           <div className="search-box">
             <input
@@ -72,7 +72,7 @@ const Nav = ({ search, setSearch, searchButton }) => {
           <div className="nav">
             <ul>
               <li><Link className="link" to="/">Início</Link></li>
-              <li><Link className="link" to="/product">Produtos</Link></li>
+              <li><Link className="link" to="/products">Produtos</Link></li>
               <li><Link className="link" to="/about">Sobre</Link></li>
               <li><Link className="link" to="/contact">Contato</Link></li>
             </ul>

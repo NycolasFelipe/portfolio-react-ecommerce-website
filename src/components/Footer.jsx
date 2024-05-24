@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="container">
           <div className="about">
             <div className="logo">
-              <img src="./img/logo.svg" alt="Logo" />
+              <img src="../img/logo.svg" alt="Logo" />
             </div>
             <div className="detail">
               <p>Website criado por Nycolas Felipe &#169; 2024</p>

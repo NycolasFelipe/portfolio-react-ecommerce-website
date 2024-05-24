@@ -1,7 +1,5 @@
-export default async function getProducts(id = null) {
-  const url = id ? 
-    `https://portfolio-react-ecommerce-server.vercel.app/products/${id}` :
-    'https://portfolio-react-ecommerce-server.vercel.app/products';
+export default async function getProductCategory(category) {
+  const url = `https://portfolio-react-ecommerce-server.vercel.app/products/category/${category}`;
 
   try {
     const response = await fetch(url, {
