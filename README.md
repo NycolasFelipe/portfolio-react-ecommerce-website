@@ -28,8 +28,9 @@ Para instalar a aplicação, siga estas etapas:
 Aplicação feita com Node.js + Express responsável pela conexão com um banco de dados em MySQL: [link](https://github.com/NycolasFelipe/portfolio-react-ecommerce-server)
 
 ## Capturas
-![print-1](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/3b4e460b-fb32-4f06-80c5-171631fb4c39)
-![print-2](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/d64837d2-34a8-48a1-ad35-2713d37b7573)
-![print-3](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/90879916-f3cf-4687-a021-b0238280478a)
-![print-4](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/7d52293e-e657-4435-898f-c7a2b5e4b22b)
-![print-5](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/b7cd4a63-aec0-46d5-b05e-aad220b0cf5a)
+![1](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/a0c8ba18-9628-42a3-806e-324488990993)
+![2](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/ab784b1d-d027-4e6e-bb3f-c05592d4f991)
+![3](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/a9ecff01-7ebe-44a2-854e-b2a9af1a88e5)
+![4](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/da4ab8bf-75b3-47ea-9275-63183b22395d)
+![5](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/a0f9774b-bf61-46d8-a2cb-db57551e0e0c)
+![6](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/e26ccc8c-d3ea-49f8-816a-a97ddb4381b1)
