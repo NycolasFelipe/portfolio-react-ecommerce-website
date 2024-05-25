@@ -24,6 +24,7 @@ const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) =
     // Prevent event bubbling
     if (e.target.nodeName !== "LI") {
       navigate(`products/detail?productId=${productId}`);
+      window && window.scroll(0,0);
     }
   }
 
@@ -73,7 +74,7 @@ const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) =
         <div className="container">
           <div className="detail">
             <h2>A Melhor Coleção de Notebooks</h2>
-            <Link className='link' to="/product">Compre agora <BsArrowRight /></Link>
+            <Link className='link' to="/products">Compre agora <BsArrowRight /></Link>
           </div>
           <div className="img-box">
             <img src="./img/slider.png" alt="Imagem slider notebook" />

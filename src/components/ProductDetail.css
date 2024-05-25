@@ -135,6 +135,11 @@
   text-transform: uppercase;
 }
 
+.product_detail .container.buy .contant button.unavailable {
+  cursor: not-allowed !important;
+  background: var(--grey-color-variation-1) !important;
+}
+
 .product_detail .container.buy .contant button.confirmation {
   background: var(--background-color-green) !important;
 }
@@ -239,8 +244,8 @@
 
 .product_detail .description {
   padding: 30px 120px;
-  background: var(--grey-color-variation-3);
-  margin: 40px 0;
+  background: var(--background-color);
+  padding-bottom: 40px;
 }
 
 .product_detail .description h3 {
@@ -320,11 +325,6 @@
   .product_detail .container.buy .contant button {
     width: 100%;
     padding: 15px;
-  }
-
-  .product_detail .container.buy .contant button.unavailable {
-    cursor: not-allowed;
-    background: var(--grey-color-variation-1);
   }
 
   .product_detail .container.similar .slider_box .img_box {

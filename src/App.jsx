@@ -45,8 +45,8 @@ const App = () => {
     if (product) {
       //Redireciona para página de pesquisa
       const currentURL = window.location.pathname;
-      if (!currentURL.includes("product")) {
-        navigate("/product");
+      if (!currentURL.includes("products")) {
+        navigate("/products");
       }
       const change = initialProduct.filter((x) => {
         const productCategory = removeDiacritcs(x.Category).toLowerCase().trim();
@@ -56,6 +56,17 @@ const App = () => {
       });
       setProduct(change);
       setSearch("");
+
+      // Exibe texto de resultado da pesquisa
+      setTimeout(() => {
+        const resultadoPesquisa = document.querySelector(".products > .products-header .search-results");
+        if (resultadoPesquisa) {
+          resultadoPesquisa.classList.remove("hide");
+          resultadoPesquisa.innerHTML = change.length > 0 ?
+            `<p>Resultados de busca para "<span class="term">${search}</span>":</p>` :
+            `<p>Não foi possível encontrar resultados para "<span class="term">${search}</span>"</p>`;
+        }
+      }, 10);
     }
   }
 
@@ -69,6 +80,10 @@ const App = () => {
       });
       setProduct(update);
     }
+
+    // Limpa resultados de pesquisa
+    const resultadoPesquisa = document.querySelector(".products > .products-header .search-results");
+    resultadoPesquisa && resultadoPesquisa.classList.add("hide");
   }
 
   // Carregar produtos

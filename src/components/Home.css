@@ -436,10 +436,10 @@
 .product-detail .container .product-box .detail h4 {
   text-transform: uppercase;
   font-size: 16px;
-  font-weight: 200;
   color: var(--grey-color-variation-1);
   letter-spacing: 1px;
   margin-top: -10px;
+  font-weight: bold !important;
 }
 
 .product-detail .container .product-box .detail h2 {
@@ -572,15 +572,6 @@
 
   .main-header .container .logo img {
     width: 100px;
-  }
-
-  .header .container .nav ul {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .header .container .nav ul li {
-    line-height: 2;
   }
 
   .header .container .auth {

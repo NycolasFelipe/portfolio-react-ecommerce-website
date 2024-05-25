@@ -72,13 +72,14 @@
 .footer .container .about .detail .icon li {
   margin-left: 20px;
   list-style: none;
-  padding: 10px;
+  padding: 10px 12px;
   background: #fff;
   box-shadow: var(--box-shadow);
   cursor: pointer;
   transition: 0.3s;
   border-radius: 5px;
   font-size: 16px;
+  line-height: 1;
 }
 
 .footer .container .about .detail .icon li:first-of-type {

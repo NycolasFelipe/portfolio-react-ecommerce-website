@@ -35,6 +35,7 @@ const ProductDetail = ({ addToCart }) => {
     setParam("productId", id);
     setLoading(true);
     fetchData(id);
+    window && window.scroll(0,0);
   }
 
   useEffect(() => {
@@ -77,7 +78,7 @@ const ProductDetail = ({ addToCart }) => {
                 </div>
                 <div className="details">
                   <div className="container stock">
-                    <p>Vendido e entregue por <span className="shop-detail">Ecommerce Shop </span> | <span></span>
+                    <p>Vendido e entregue por <span className="shop-detail"><Link to="/">Ecommerce Shop </Link> </span> | <span></span>
                       <span className="shop-stock">
                         {productDetail.Info[0].Stock > 0 ? productDetail.Info[0].Stock + " em estoque" : "Fora de estoque"}
                       </span>

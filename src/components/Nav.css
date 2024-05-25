@@ -92,7 +92,7 @@
 
 .main-header .container .icon {
   display: flex;
-  margin-right: 30px;
+  margin-right: 2px;
 }
 
 .main-header .container .icon .second-icon {
@@ -148,6 +148,7 @@
 
 .header .container .nav ul {
   display: flex;
+  margin-left: -5px;
 }
 
 .header .container .nav ul li {
@@ -176,7 +177,6 @@
 }
 
 .header .container .auth button {
-  margin-right: 15px;
   font-size: 22px;
   cursor: pointer;
   outline: none;
@@ -240,6 +240,15 @@
 }
 
 @media (max-width: 540px) {
+  .header .container .nav ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header .container .nav ul li {
+    line-height: 2;
+  }
+
   .main-header .container .search-box {
     display: flex;
     margin-right: 0;
