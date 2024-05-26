@@ -4,7 +4,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import "./Footer.css";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <>
       <div className="footer">
@@ -46,5 +46,3 @@ const Footer = () => {
     </>
   );
 }
-
-export default Footer;

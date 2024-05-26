@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Analytics } from "@vercel/analytics/react"
 import { useNavigate } from "react-router-dom";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
-import Routing from "./components/Routing";
+import { Nav } from "./components/nav/Nav";
+import { Footer } from "./components/footer/Footer";
+import { Routing } from "./router/Routing";
 import removeDiacritcs from "./scripts/removeDiacritcs";
 import getProduct from "./api/getProduct";
 import "./App.css";
+import getProductInfo from "./scripts/getProductInfo.js";
 
-const App = () => {
+export const App = () => {
   const navigate = useNavigate();
   const [product, setProduct] = useState([]);
   const [initialProduct, setInitialProduct] = useState([]);
@@ -28,11 +29,16 @@ const App = () => {
       }
     });
     if (!productAdded) {
-      setCart([...cart, { ...product, qtd: 1 }]);
+      getProductInfo(product.ProductId).then((productItem) => {
+        // Adiciona item somente se houver disponível em estoque
+        if (productItem.Info[0].Stock > 0) {
+          setCart([...cart, { ...productItem, qtd: 1 }]); 
+        }
+      });
     }
   }
 
-  // Detalhes do produto
+  // Modal com detalhes do produto
   const [closeDetail, setCloseDetail] = useState(false);
   const [detail, setDetail] = useState([]);
   const viewProduct = (product) => {
@@ -137,5 +143,3 @@ const App = () => {
     </>
   );
 }
-
-export default App;

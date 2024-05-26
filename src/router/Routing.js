@@ -1,12 +1,25 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./Home";
-import Product from "./Product";
-import Cart from "./Cart";
-import Contact from "./Contact";
-import ProductDetail from "./ProductDetail";
+import { Home } from "../pages/home/Home";
+import { Products } from "../pages/products/Products";
+import { Cart } from "../pages/cart/Cart";
+import { Contact } from "../pages/contact/Contact";
+import { ProductDetail } from "../pages/productDetail/ProductDetail";
 
-const Routing = ({ product, setProduct, detail, closeDetail, setCloseDetail, viewProduct, cart, setCart, addToCart, filterProduct, categories, loading }) => {
+export const Routing = ({
+  product,
+  setProduct,
+  detail,
+  closeDetail,
+  setCloseDetail,
+  viewProduct,
+  cart,
+  setCart,
+  addToCart,
+  filterProduct,
+  categories,
+  loading
+}) => {
   return (
     <>
       <Routes>
@@ -21,7 +34,7 @@ const Routing = ({ product, setProduct, detail, closeDetail, setCloseDetail, vie
         }
         />
         <Route path="/products" element={
-          <Product
+          <Products
             product={product}
             setProduct={setProduct}
             detail={detail}

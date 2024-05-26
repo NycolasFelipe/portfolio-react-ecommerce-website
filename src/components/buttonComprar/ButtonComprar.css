@@ -1,0 +1,31 @@
+.btn-comprar {
+  padding: 15px 0;
+  font-size: 18px;
+  color: #fff;
+  background: var(--text-black);
+  transition: 0.3s;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+  height: 55px;
+  text-transform: uppercase;
+  transition: 0.3s;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-comprar:hover {
+  background: var(--primary-color);
+  transition: 0.3s;
+}
+
+.btn-comprar.btn-animate {
+  background: var(--background-color-green) !important;
+}
+
+
+.btn-comprar.disabled {
+  cursor: not-allowed !important;
+  background: var(--grey-color-variation-1) !important;
+}

@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
-import Zoom from "react-img-zoom";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import Zoom from "react-img-zoom";
 import { IoChevronForwardSharp, IoDocumentText } from "react-icons/io5";
-import formatMoney from "../scripts/formatMoney";
 import { AiFillProduct, AiOutlineHeart } from "react-icons/ai";
 import { LuShare2 } from "react-icons/lu";
 import { IoIosInformationCircle } from "react-icons/io";
-import getProductInfo from "../scripts/getProductInfo";
-import getProductCategory from "../api/getProductCategory";
-import setParam from "../scripts/setParam";
+import formatMoney from "../../scripts/formatMoney";
+import getProductInfo from "../../scripts/getProductInfo";
+import getProductCategory from "../../api/getProductCategory";
+import setParam from "../../scripts/setParam";
 import Slider from "react-slick";
+import { ButtonComprar } from "../../components/buttonComprar/ButtonComprar";
 import "./ProductDetail.css";
 
-const ProductDetail = ({ addToCart }) => {
+export const ProductDetail = ({ addToCart }) => {
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
   const productId = new URL(document.location).searchParams.get("productId");
   const [productDetail, setProductDetail] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
@@ -35,7 +38,7 @@ const ProductDetail = ({ addToCart }) => {
     setParam("productId", id);
     setLoading(true);
     fetchData(id);
-    window && window.scroll(0,0);
+    window && window.scroll(0, 0);
   }
 
   useEffect(() => {
@@ -95,9 +98,19 @@ const ProductDetail = ({ addToCart }) => {
                     <div className="contant">
                       {
                         productDetail.Info[0].Stock > 0 ? (
-                          <button>Comprar</button>
+                          isAuthenticated ? (
+                            <div className="btn_container" onClick={() => addToCart(productDetail)}>
+                              <ButtonComprar />
+                            </div>
+                          ) : (
+                            <div className="btn_container" onClick={() => loginWithRedirect()}>
+                              <ButtonComprar redirect={true} />
+                            </div>
+                          )
                         ) : (
-                          <button className="unavailable">Indisponível</button>
+                          <div className="btn_container">
+                            <ButtonComprar disabled={true} />
+                          </div>
                         )
                       }
                     </div>
@@ -174,5 +187,3 @@ const ProductDetail = ({ addToCart }) => {
     </>
   );
 }
-
-export default ProductDetail;

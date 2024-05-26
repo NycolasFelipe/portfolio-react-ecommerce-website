@@ -1,0 +1,252 @@
+.product-card {
+  padding: 10px 20px;
+  overflow: hidden;
+  width: 250px;
+  min-width: 250px;
+  height: 380px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 15px;
+  transition: 0.3s;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 12px;
+  background: #fff;
+}
+
+.product-card:hover {
+  box-shadow: var(--box-shadow);
+  transition: 0.3s ease;
+}
+
+.product-card .img-box {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.product-card .img-box img {
+  width: 210px;
+  height: 210px;
+}
+
+.product-card .img-box .icon {
+  position: relative;
+  top: -5px;
+  right: -50px;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.product-card:hover .icon {
+  right: 28px !important;
+  transition: 0.3s;
+}
+
+.product-card .img-box .icon li:first-of-type {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.product-card .img-box .icon li:last-of-type {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.product-card .img-box .icon li {
+  list-style: none;
+  color: var(--text-black);
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  transition: 0.3s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.product-card .img-box .icon li.confirmation svg {
+  display: none !important;
+}
+
+.product-card .img-box .icon li.confirmation {
+  background: var(--background-color-green) !important;
+}
+
+.product-card .img-box .icon li.confirmation::after {
+  position: relative;
+  top: -2px;
+  content: "✓";
+  color: #fff;
+}
+
+.product-card .img-box .icon li:hover {
+  color: #fff;
+  background: var(--primary-color);
+  transition: 0.3s;
+}
+
+.product-card .img-box .icon li svg {
+  pointer-events: none;
+}
+
+.product-card .detail {
+  margin-top: 10px;
+  pointer-events: none;
+}
+
+.product-card .detail p {
+  color: var(--grey-color-variation-1);
+  font-size: 14px;
+}
+
+.product-card .detail h3 {
+  font-size: 16px;
+  margin-top: 8px;
+  color: var(--text-black);
+  transition: 0.3s;
+  line-height: 1.4em;
+  max-height: 4em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.product-card:hover .detail h3 {
+  color: var(--primary-color);
+}
+
+.product-card .detail h4 {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--primary-color);
+  font-weight: 800;
+  font-size: 22px;
+}
+
+@media (max-width: 860px) {
+  .product-card {
+    height: 330px;
+    width: 180px;
+    min-width: auto;
+  }
+
+  .product-card .img-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card .img-box .icon {
+    position: unset;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .product-card .img-box .icon li {
+    box-shadow: none;
+  }
+
+  .product-card .img-box .icon li:first-of-type,
+  .product-card .img-box .icon li:last-of-type {
+    border-radius: 0;
+  }
+
+  .product-card .img-box .icon li {
+    border-radius: 5px !important;
+  }
+
+  .product-card .img-box img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .product-card .detail p {
+    margin-top: 0;
+  }
+
+  .product-card .detail h3 {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    display: flex;
+    height: 135px;
+    width: 100%;
+    margin-right: 0;
+    position: relative;
+  }
+
+  .product-card .img-box {
+    padding-right: 20px;
+    border-bottom: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-card .img-box img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .product-card .detail {
+    margin-top: 5px;
+  }
+
+  .product-card .detail h3 {
+    margin-top: 0;
+    margin-right: 30px;
+  }
+
+  .product-card .detail h4 {
+    margin-top: 5px;
+  }
+
+  .product-card .icon,
+  .product-card:hover .icon {
+    right: 5px !important;
+  }
+
+  .product-card .img-box .icon {
+    position: absolute;
+    top: 5px;
+    width: auto;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 440px) {
+  .products {
+    padding: 20px !important;
+  }
+
+  .products-header+.products {
+    padding: 0 !important;
+    padding-top: 20px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .product-card {
+    height: 120px;
+  }
+
+  .product-card .img-box img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .product-card .detail h4 {
+    font-size: 16px;
+  }
+
+  .product-card .img-box .icon li {
+    height: 35px;
+  }
+}

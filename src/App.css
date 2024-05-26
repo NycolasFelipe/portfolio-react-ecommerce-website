@@ -12,7 +12,7 @@
   --grey-color-variation-2: #dadada;
   --grey-color-variation-3: #f0f0f0;
   --background-color: #f6f6f6;
-  --background-color-green: #31b331;
+  --background-color-green: #54b354;
   --box-shadow: #00000059 0px 3px 5px;
 }
 
@@ -41,4 +41,23 @@ a {
 ::selection {
   color: var(--text-white);
   background: var(--primary-color);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--grey-color-variation-2);
+  transition: 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--grey-color-variation-1);
+  transition: 0.3s;
 }

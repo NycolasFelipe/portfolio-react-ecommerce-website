@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { IoIosContact } from "react-icons/io";
 import "./Contact.css";
 
-function Contact() {
+export function Contact() {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const [user, setUser] = useState(
     {
@@ -81,5 +81,3 @@ function Contact() {
     </>
   );
 }
-
-export default Contact;

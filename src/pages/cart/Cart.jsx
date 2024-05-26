@@ -1,10 +1,10 @@
 import React from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import formatMoney from "../scripts/formatMoney";
+import { ProductCart } from "../../components/productCart/productCart";
+import formatMoney from "../../scripts/formatMoney";
 import "./Cart.css";
 
-const Cart = ({ cart, setCart }) => {
+export const Cart = ({ cart, setCart }) => {
   //Incrementar quantidade
   const incrementQtd = (product) => {
     const cartItem = cart.find((x) => {
@@ -51,7 +51,7 @@ const Cart = ({ cart, setCart }) => {
           cart.length === 0 && (
             <div className="empty-cart">
               <h2 className="empty">Carrinho vazio</h2>
-              <Link to="/product" className="empty-cart-button">Compre agora</Link>
+              <Link to="/products" className="empty-cart-button">Compre agora</Link>
             </div>
           )
         }
@@ -59,27 +59,12 @@ const Cart = ({ cart, setCart }) => {
           {
             cart.map((curElm) => {
               return (
-                <div className="cart-item" key={curElm.ProductId}>
-                  <div className="img-box">
-                    <img src={curElm.Img} alt={curElm.Title} />
-                  </div>
-                  <div className="detail">
-                    <div className="info">
-                      <h4>{curElm.Category}</h4>
-                      <h3>{curElm.Title}</h3>
-                      <p>Preço: {formatMoney(curElm.Price)}</p>
-                      <div className="qtd">
-                        <button className="dec-qtd" onClick={() => decrementQtd(curElm)}>-</button>
-                        <input type="text" value={curElm.qtd} readOnly />
-                        <button className="inc-qtd" onClick={() => incrementQtd(curElm)}>+</button>
-                      </div>
-                      <h4 className="subtotal">Sub-total: {formatMoney(curElm.Price * curElm.qtd)}</h4>
-                    </div>
-                    <div className="close">
-                      <button onClick={() => removeProduct(curElm)}><AiOutlineClose /></button>
-                    </div>
-                  </div>
-                </div>
+                <ProductCart
+                  product={curElm}
+                  incrementQtd={incrementQtd}
+                  decrementQtd={decrementQtd}
+                  removeProduct={removeProduct}
+                />
               )
             })
           }
@@ -100,5 +85,3 @@ const Cart = ({ cart, setCart }) => {
     </>
   );
 }
-
-export default Cart;

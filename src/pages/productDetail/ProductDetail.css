@@ -121,32 +121,8 @@
   margin-top: 12px;
 }
 
-.product_detail .container.buy .contant button {
-  padding: 15px 100px;
-  font-size: 18px;
-  color: #fff;
-  background: var(--text-black);
-  transition: 0.3s;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  border-radius: 5px;
-  height: 55px;
-  text-transform: uppercase;
-}
-
-.product_detail .container.buy .contant button.unavailable {
-  cursor: not-allowed !important;
-  background: var(--grey-color-variation-1) !important;
-}
-
-.product_detail .container.buy .contant button.confirmation {
-  background: var(--background-color-green) !important;
-}
-
-.product_detail .container.buy .contant button:hover {
-  background: var(--primary-color);
-  transition: 0.3s;
+.product_detail .container.buy .contant .btn_container {
+  width: 280px;
 }
 
 .product_detail .container.similar {
@@ -322,9 +298,8 @@
     gap: 20px;
   }
 
-  .product_detail .container.buy .contant button {
+  .product_detail .container.buy .contant .btn_container {
     width: 100%;
-    padding: 15px;
   }
 
   .product_detail .container.similar .slider_box .img_box {

@@ -10,8 +10,14 @@ import { CiLogout } from "react-icons/ci";
 import { IoSearch } from "react-icons/io5";
 import "./Nav.css";
 
-const Nav = ({ search, setSearch, searchButton }) => {
+export const Nav = ({ search, setSearch, searchButton }) => {
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+  const searchOnEnter = (e) => {
+    if (e.key === "Enter") {
+      searchButton(search);
+      e.target.blur();
+    }
+  }
 
   return (
     <>
@@ -33,9 +39,18 @@ const Nav = ({ search, setSearch, searchButton }) => {
               placeholder="Procure um produto..."
               autoComplete="off"
               onChange={(e) => setSearch(e.target.value)}
+              onKeyUp={(e) => searchOnEnter(e)}
             />
-            <button className="search-button-desktop" type="button" onClick={() => searchButton(search)}><IoSearch className="search-icon" /> Pesquisar</button>
-            <button className="search-button-mobile" type="button" onClick={() => searchButton(search)}><IoSearch /></button>
+            <button
+              className="search-button-desktop"
+              type="button"
+              onClick={() => searchButton(search)}
+            ><IoSearch className="search-icon" /> Pesquisar</button>
+            <button
+              className="search-button-mobile"
+              type="button"
+              onClick={() => searchButton(search)}
+            ><IoSearch /></button>
           </div>
           <div className="icon">
             {
@@ -44,7 +59,7 @@ const Nav = ({ search, setSearch, searchButton }) => {
                   <div className="user-icon">
                     <AiOutlineUser />
                   </div>
-                  <p>Olá, {user.name}</p>
+                  <p>Olá, {user.given_name}</p>
                 </div>
               )
             }
@@ -90,5 +105,3 @@ const Nav = ({ search, setSearch, searchButton }) => {
     </>
   );
 }
-
-export default Nav;

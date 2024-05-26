@@ -1,32 +1,22 @@
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import { BsArrowRight, BsCurrencyDollar, BsEye } from "react-icons/bs";
 import { BiHeadphone } from "react-icons/bi";
 import { FiTruck } from "react-icons/fi";
-import { AiOutlineCloseCircle, AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
-import { useAuth0 } from "@auth0/auth0-react";
-import addCartAnimation from "../scripts/addCartAnimation";
-import getProduct from "../api/getProduct";
-import formatMoney from "../scripts/formatMoney";
+import { ProductModal } from "../../components/productModal/ProductModal";
+import { ProductCard } from "../../components/productCard/ProductCard.jsx";
+import getProduct from "../../api/getProduct";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./Home.css";
 
-const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) => {
+export const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const [homeProduct, setHomeProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const sliderSettings = { infinite: false, speed: 300, slidesToShow: 1, variableWidth: true, initialSlide: 1 };
-  const navigate = useNavigate();
-
-  const navigateDetail = (e, productId) => {
-    // Prevent event bubbling
-    if (e.target.nodeName !== "LI") {
-      navigate(`products/detail?productId=${productId}`);
-      window && window.scroll(0,0);
-    }
-  }
 
   useEffect(() => {
     getProduct().then((data) => {
@@ -40,34 +30,13 @@ const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) =
   return (
     <main className="home">   {
       closeDetail && (
-        <div className="product-detail">
-          <div className="container">
-            <button className="close-button" onClick={() => setCloseDetail(false)}><AiOutlineCloseCircle /></button>
-            {
-              detail.map((curElm) => {
-                return (
-                  <div className="product-box" key={curElm.ProductId}>
-                    <div className="img-box">
-                      <img src={curElm.Img} alt={curElm.Title} />
-                    </div>
-                    <div className="detail">
-                      <h4>{curElm.Category}</h4>
-                      <h2>{curElm.Title}</h2>
-                      <p>{curElm.Description}</p>
-                      <h3>{formatMoney(curElm.Price)}</h3>
-                      {
-                        isAuthenticated ?
-                          <button className="button-detail" onClick={(e) => { addToCart(curElm); addCartAnimation(e) }}>Adicionar ao carrinho</button>
-                          :
-                          <button onClick={() => loginWithRedirect()}>Adicionar ao carrinho</button>
-                      }
-                    </div>
-                  </div>
-                )
-              })
-            }
-          </div>
-        </div>
+        <ProductModal
+          detail={detail}
+          setCloseDetail={setCloseDetail}
+          addToCart={addToCart}
+          isAuthenticated={isAuthenticated}
+          loginWithRedirect={loginWithRedirect}
+        />
       )
     }
       <div className="top-banner">
@@ -192,29 +161,8 @@ const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) =
           ) : (
             <div className="container">
               {
-                homeProduct.map((curElm) => {
-                  return (
-                    <div className="box" key={curElm.ProductId} onClick={(e) => navigateDetail(e, curElm.ProductId)}>
-                      <div className="img-box">
-                        <img src={curElm.Img} alt={curElm.Title} />
-                        <div className="icon">
-                          {
-                            isAuthenticated ?
-                              <li className="button-product" onClick={(e) => { addToCart(curElm); addCartAnimation(e) }}><AiOutlineShoppingCart /></li>
-                              :
-                              <li onClick={() => loginWithRedirect()}><AiOutlineShoppingCart /></li>
-                          }
-                          <li onClick={() => viewProduct(curElm)}><BsEye /></li>
-                          <li><AiOutlineHeart /></li>
-                        </div>
-                      </div>
-                      <div className="detail">
-                        <p>{curElm.Category}</p>
-                        <h3>{curElm.Title}</h3>
-                        <h4>{formatMoney(curElm.Price)}</h4>
-                      </div>
-                    </div>
-                  )
+                homeProduct.map((curElm, index) => {
+                  return <ProductCard key={index} product={curElm} addToCart={addToCart} viewProduct={viewProduct} />
                 })
               }
             </div>
@@ -237,5 +185,3 @@ const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) =
     </main>
   );
 }
-
-export default Home;
