@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Analytics } from "@vercel/analytics/react"
 import { useNavigate } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
@@ -132,6 +133,7 @@ const App = () => {
         loading={loading}
       />
       <Footer />
+      <Analytics />
     </>
   );
 }
