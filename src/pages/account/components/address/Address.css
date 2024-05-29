@@ -1,0 +1,46 @@
+/* hide arrow from number input - Chrome, Safari, Edge, Opera */
+.address input::-webkit-outer-spin-button,
+.address input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* hide arrow from number input -  Firefox */
+.address input[type=number] {
+  appearance: unset;
+  -moz-appearance: textfield;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  margin-top: 25px;
+}
+
+.address .warning {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  color: var(--text-red);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.address .container {
+  margin-top: 5px;
+}
+
+.address .address-field .item-group {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+}
+
+.address .address-field .item-group .item {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  flex: 1;
+}

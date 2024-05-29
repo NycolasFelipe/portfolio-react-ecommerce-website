@@ -1,10 +1,12 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, redirect, Navigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Home } from "../pages/home/Home";
 import { Products } from "../pages/products/Products";
 import { Cart } from "../pages/cart/Cart";
 import { Contact } from "../pages/contact/Contact";
 import { ProductDetail } from "../pages/productDetail/ProductDetail";
+import { Account } from "../pages/account/Account";
 
 export const Routing = ({
   product,
@@ -20,6 +22,8 @@ export const Routing = ({
   categories,
   loading
 }) => {
+  const { isAuthenticated } = useAuth0();
+
   return (
     <>
       <Routes>
@@ -55,13 +59,10 @@ export const Routing = ({
         }
         />
         <Route path="/cart" element={
-          <Cart
-            cart={cart}
-            setCart={setCart}
-          />
-        }
+          isAuthenticated ? <Cart cart={cart} setCart={setCart} /> : <Navigate to="/" />}
         />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/account" element={isAuthenticated ? <Account /> : <Navigate to="/" />} />
       </Routes>
     </>
   );

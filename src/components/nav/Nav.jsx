@@ -56,10 +56,12 @@ export const Nav = ({ search, setSearch, searchButton }) => {
             {
               isAuthenticated && (
                 <div className="account">
-                  <div className="user-icon">
-                    <AiOutlineUser />
-                  </div>
-                  <p>Olá, {user.given_name}</p>
+                  <Link to="/account" >
+                    <div className="user-icon">
+                      <AiOutlineUser />
+                    </div>
+                    <p>Olá, {user.given_name}</p>
+                  </Link>
                 </div>
               )
             }

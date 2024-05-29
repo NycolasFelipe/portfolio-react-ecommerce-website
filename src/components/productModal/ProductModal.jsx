@@ -26,7 +26,7 @@ export const ProductModal = ({ detail, setCloseDetail, isAuthenticated, loginWit
             </div>
           )
             : (
-              detail.map((curElm) => {
+              detail?.map((curElm) => {
                 return (
                   <div className="product-box" key={curElm.ProductId}>
                     <div className="img-box">

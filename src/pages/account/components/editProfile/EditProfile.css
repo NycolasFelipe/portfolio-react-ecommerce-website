@@ -1,0 +1,26 @@
+.edit-profile .container>.item {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.edit-profile .container .item label {
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.edit-profile .container .item input {
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  padding: 12px 16px;
+  font-size: 16px;
+}
+
+.edit-profile .container .item button:hover {
+  background: var(--background-color-green);
+}
+
+.edit-profile .container>.item:last-of-type>label {
+  font-size: 18.5px;
+  margin-top: 25px;
+}

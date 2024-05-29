@@ -21,7 +21,6 @@ export const Products = ({
 }) => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const [visibleOrderBy, setVisibleOrderBy] = useState(false);
-  const navigate = useNavigate();
 
   const handleOrderBy = (e) => {
     setVisibleOrderBy(prev => !prev);
@@ -48,13 +47,6 @@ export const Products = ({
       setProduct(prev => prev.sort((a, b) => {
         return b.Price - a.Price;
       }));
-    }
-  }
-
-  const navigateDetail = (e, productId) => {
-    // Prevent event bubbling
-    if (e.target.nodeName !== "LI") {
-      navigate(`detail?productId=${productId}`);
     }
   }
 
@@ -103,7 +95,7 @@ export const Products = ({
                     <ul>
                       <li key={0} onClick={() => filterProduct("All")}>Todos os produtos</li>
                       {
-                        categories.map((curlElm, index) => {
+                        categories?.map((curlElm, index) => {
                           return (
                             <li key={index + 1} onClick={() => filterProduct(curlElm)}>{curlElm}</li>
                           )
@@ -116,7 +108,7 @@ export const Products = ({
                   <div className="product-box">
                     <div className="contant">
                       {
-                        product.map((curElm, index) => {
+                        product?.map((curElm, index) => {
                           return <ProductCard key={index} product={curElm} addToCart={addToCart} viewProduct={viewProduct} />
                         })
                       }

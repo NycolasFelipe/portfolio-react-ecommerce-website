@@ -21,7 +21,7 @@ export const App = () => {
   const addToCart = (product) => {
     const productId = product.ProductId;
     let productAdded = false;
-    cart.map(e => {
+    cart?.map(e => {
       if (e.ProductId === productId) {
         e.qtd++;
         productAdded = true;

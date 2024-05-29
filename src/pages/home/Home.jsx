@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { BsArrowRight, BsCurrencyDollar, BsEye } from "react-icons/bs";
+import { BsArrowRight, BsCurrencyDollar } from "react-icons/bs";
 import { BiHeadphone } from "react-icons/bi";
 import { FiTruck } from "react-icons/fi";
 import { ProductModal } from "../../components/productModal/ProductModal";
-import { ProductCard } from "../../components/productCard/ProductCard.jsx";
+import { ProductCard } from "../../components/productCard/ProductCard";
 import getProduct from "../../api/getProduct";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
@@ -13,14 +13,16 @@ import "slick-carousel/slick/slick.css";
 import "./Home.css";
 
 export const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) => {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const { user, loginWithRedirect, isAuthenticated } = useAuth0();
   const [homeProduct, setHomeProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const sliderSettings = { infinite: false, speed: 300, slidesToShow: 1, variableWidth: true, initialSlide: 1 };
 
+  // console.log(user.sub)
+
   useEffect(() => {
     getProduct().then((data) => {
-      setHomeProduct(data)
+      setHomeProduct(data);
       setTimeout(() => {
         setLoading(false);
       }, 500);
@@ -161,7 +163,7 @@ export const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCa
           ) : (
             <div className="container">
               {
-                homeProduct.map((curElm, index) => {
+                homeProduct?.map((curElm, index) => {
                   return <ProductCard key={index} product={curElm} addToCart={addToCart} viewProduct={viewProduct} />
                 })
               }

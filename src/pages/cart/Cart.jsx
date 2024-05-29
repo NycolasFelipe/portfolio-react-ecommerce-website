@@ -10,7 +10,7 @@ export const Cart = ({ cart, setCart }) => {
     const cartItem = cart.find((x) => {
       return x.ProductId === product.ProductId;
     });
-    setCart(cart.map((curElm) => {
+    setCart(cart?.map((curElm) => {
       return curElm.ProductId === product.ProductId ? { ...cartItem, qtd: cartItem.qtd + 1 } : curElm;
     }));
   }
@@ -21,7 +21,7 @@ export const Cart = ({ cart, setCart }) => {
       return x.ProductId === product.ProductId;
     });
     if (cartItem.qtd > 1) {
-      setCart(cart.map((curElm) => {
+      setCart(cart?.map((curElm) => {
         return curElm.ProductId === product.ProductId ? { ...cartItem, qtd: cartItem.qtd - 1 } : curElm;
       }));
     } else {
@@ -57,7 +57,7 @@ export const Cart = ({ cart, setCart }) => {
         }
         <div className="contant">
           {
-            cart.map((curElm) => {
+            cart?.map((curElm) => {
               return (
                 <ProductCart
                   product={curElm}

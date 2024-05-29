@@ -122,7 +122,7 @@ export const ProductDetail = ({ addToCart }) => {
                         <div className="slider">
                           <Slider {...sliderSettings}>
                             {
-                              similarProducts.map((curElm) => {
+                              similarProducts?.map((curElm) => {
                                 return (
                                   <div className="slider_box" key={curElm.ProductId} onClick={() => redirectToProduct(curElm.ProductId)}>
                                     <div className="img_box">
@@ -149,7 +149,7 @@ export const ProductDetail = ({ addToCart }) => {
               <div className="description">
                 <h3><IoDocumentText className="icon" />DESCRIÇÃO DO PRODUTO</h3>
                 {
-                  productDetail.Info[0].Description.map((curElm, index) => {
+                  productDetail.Info[0].Description?.map((curElm, index) => {
                     return (
                       <div key={index} className="description_item">
                         <p className="topic">{curElm.topic}</p>
@@ -162,13 +162,13 @@ export const ProductDetail = ({ addToCart }) => {
               <div className="details">
                 <h3><IoIosInformationCircle className="icon" /> DETALHES DO PRODUTO</h3>
                 {
-                  productDetail.Info[0].Details.map((curElm, index) => {
+                  productDetail.Info[0].Details?.map((curElm, index) => {
                     return (
                       <div key={index} className="details_item">
                         <p className="topic">{curElm.topic}</p>
                         <ul>
                           {
-                            productDetail.Info[0].Details[index].items.map((curElm, j) => {
+                            productDetail.Info[0].Details[index].items?.map((curElm, j) => {
                               return (
                                 <li key={j}><p className="item">- {curElm}</p></li>
                               )

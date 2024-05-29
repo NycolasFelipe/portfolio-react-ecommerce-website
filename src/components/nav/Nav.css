@@ -122,6 +122,19 @@
   margin-right: 30px;
 }
 
+.main-header .container .icon .account>a {
+  display: flex;
+  height: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.main-header .container .icon .account>a:hover,
+.main-header .container .icon .account>a:hover .user-icon {  
+  color: var(--primary-color);
+  transition: 0.3s;
+}
+
 .main-header .container .icon .account p {
   margin-right: 5px;
   margin-top: 2px;
@@ -132,7 +145,7 @@
   margin-right: 10px;
   font-size: 26px;
   color: var(--text-black);
-  cursor: pointer;
+  transition: 0.3s;
 }
 
 .header {
@@ -267,6 +280,7 @@
   .free {
     padding-left: 20px;
   }
+
   .main-header {
     padding: 20px;
   }
