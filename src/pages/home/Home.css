@@ -323,7 +323,7 @@
 }
 
 @media (max-width: 330px) {
-  .slick-track {
+  .home .slick-track {
     width: 1000px !important;
   }
 

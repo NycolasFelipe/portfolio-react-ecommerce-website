@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, redirect, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Home } from "../pages/home/Home";
 import { Products } from "../pages/products/Products";
@@ -29,6 +29,7 @@ export const Routing = ({
       <Routes>
         <Route path="/" element={
           <Home
+            product={product}
             detail={detail}
             closeDetail={closeDetail}
             setCloseDetail={setCloseDetail}

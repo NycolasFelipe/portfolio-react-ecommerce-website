@@ -91,6 +91,7 @@
   cursor: pointer;
   color: var(--grey-color-variation-1);
   transition: 0.3s;
+  max-width: 165px;
 }
 
 .account-container>.container .settings ul li.selected {
@@ -111,32 +112,62 @@
   padding-left: 10%;
 }
 
-.account-container>.container .setting-item .save .container {
-  display: flex;
-  width: 45%;
-  min-width: 300px;
-  gap: 10px;
-  padding-top: 40px;
+.account-container>* {
+  transition: 0.3s;
 }
 
-.account-container>.container .setting-item .save .container button {
-  width: 50%;
+/* Settings mobile */
+.account-container .settings-mobile li {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: 180px !important;
+  border: 2px solid var(--border-color);
+  border-radius: 5px;
+  padding: 20px 20px !important;
+  padding-left: 15px !important;
 }
 
-.account-container>.container .setting-item .save .container button:first-of-type {
-  background: transparent;
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
+.account-container .settings-mobile li:hover {
+  border-color: var(--grey-color-variation-1);
 }
 
-.account-container>.container .setting-item .save .container button:first-of-type:hover {
-  border-color: var(--primary-color-variation);
+.account-container .settings-mobile li.selected {
+  border-color: var(--grey-color-variation-1);
 }
 
-.account-container>.container .setting-item .save .container button:last-of-type {
-  background: var(--primary-color);
+.account-container .settings-mobile .slick-slide {
+  margin-right: 10px;
 }
 
-.account-container>.container .setting-item .save .container button:last-of-type:hover {
-  background: var(--primary-color-variation);
+@media (max-width: 1000px) {
+  .account-container>.container {
+    padding: 20px 0;
+  }
+}
+
+@media (min-width: 769px) {
+  .account-container .settings-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .account-container>.container {
+    flex-direction: column;
+  }
+
+  .account-container>.container .settings {
+    width: 100%;
+    border-right: unset;
+  }
+
+  .account-container>.container .setting-item {
+    padding-left: 0;
+    margin-top: 30px;
+  }
+
+  .account-container>.container .settings-desktop {
+    display: none !important;
+  }
 }

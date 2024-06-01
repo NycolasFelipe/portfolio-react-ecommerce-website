@@ -1,11 +1,15 @@
-export default async function getProduct(id = null) {
+export default async function getUser(token) {
   const dev = window.location.hostname.includes("localhost");
-  const url = id ?
-    (dev ? "http://localhost:3000/products/" : "https://portfolio-react-ecommerce-server.vercel.app/products/") + id :
-    (dev ? "http://localhost:3000/products" : "https://portfolio-react-ecommerce-server.vercel.app/products");
+  const url = dev ?
+    "http://localhost:3000/user" :
+    "https://portfolio-react-ecommerce-server.vercel.app/user";
   try {
     const response = await fetch(url, {
-      method: 'GET',
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(token)
     });
     if (!response.ok) {
       throw new Error(`API request failed with status ${response.status}`);

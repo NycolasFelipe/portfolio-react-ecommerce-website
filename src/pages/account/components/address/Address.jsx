@@ -2,7 +2,7 @@ import "./Address.css";
 
 export const Address = ({ address, setAddress }) => {
   return (
-    <div className="address-field" onClick={() => console.log(address)}>
+    <div className="address-field">
       <div className="container">
         <div className="item-group">
           <div className="item">
@@ -11,7 +11,7 @@ export const Address = ({ address, setAddress }) => {
               type="text"
               name="logradouro"
               id="logradouro"
-              value={address?.logradouro}
+              value={address.logradouro ? address.logradouro : ""}
               disabled
             />
           </div>
@@ -21,6 +21,7 @@ export const Address = ({ address, setAddress }) => {
               type="text"
               name="complemento"
               id="complemento"
+              defaultValue={address.complemento ? address.complemento : ""}
               onChange={(e) => {
                 const newAddress = address;
                 newAddress.complemento = e.target.value;
@@ -36,7 +37,7 @@ export const Address = ({ address, setAddress }) => {
               type="text"
               name="bairro"
               id="bairro"
-              value={address?.bairro}
+              value={address.bairro ? address.bairro : ""}
               disabled
             />
           </div>
@@ -46,7 +47,7 @@ export const Address = ({ address, setAddress }) => {
               type="text"
               name="cidade"
               id="cidade"
-              value={address?.localidade}
+              value={address.localidade ? address.localidade : ""}
               disabled
             />
           </div>
@@ -56,7 +57,7 @@ export const Address = ({ address, setAddress }) => {
               type="text"
               name="estado"
               id="estado"
-              value={address?.uf}
+              value={address.uf ? address.uf : ""}
               disabled
             />
           </div>
@@ -66,6 +67,7 @@ export const Address = ({ address, setAddress }) => {
               type="number"
               name="numero"
               id="numero"
+              defaultValue={address.numero ? address.numero : ""}
               onChange={(e) => {
                 const newAddress = address;
                 newAddress.numero = e.target.value;
@@ -77,4 +79,4 @@ export const Address = ({ address, setAddress }) => {
       </div>
     </div>
   );
-}
+};

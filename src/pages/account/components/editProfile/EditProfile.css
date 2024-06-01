@@ -24,3 +24,30 @@
   font-size: 18.5px;
   margin-top: 25px;
 }
+
+.edit-profile+.save .container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 10px;
+  padding-top: 40px;
+}
+
+.edit-profile+.save .container button {
+  background: var(--primary-color);
+  width: 200px;
+}
+
+.edit-profile+.save .container button:hover {
+  background: var(--primary-color-variation);
+}
+
+@media (max-width: 768px) {
+  .edit-profile+.save .container {
+    width: 100%;
+  }
+
+  .edit-profile+.save .container button {
+    width: 100% !important;
+  }
+}

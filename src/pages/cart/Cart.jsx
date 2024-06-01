@@ -57,9 +57,10 @@ export const Cart = ({ cart, setCart }) => {
         }
         <div className="contant">
           {
-            cart?.map((curElm) => {
+            cart?.map((curElm, index) => {
               return (
                 <ProductCart
+                  key={index}
                   product={curElm}
                   incrementQtd={incrementQtd}
                   decrementQtd={decrementQtd}

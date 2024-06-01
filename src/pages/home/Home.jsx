@@ -6,32 +6,25 @@ import { BiHeadphone } from "react-icons/bi";
 import { FiTruck } from "react-icons/fi";
 import { ProductModal } from "../../components/productModal/ProductModal";
 import { ProductCard } from "../../components/productCard/ProductCard";
-import getProduct from "../../api/getProduct";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./Home.css";
 
-export const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCart }) => {
-  const { user, loginWithRedirect, isAuthenticated } = useAuth0();
-  const [homeProduct, setHomeProduct] = useState([]);
+export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct, addToCart }) => {
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
   const [loading, setLoading] = useState(true);
   const sliderSettings = { infinite: false, speed: 300, slidesToShow: 1, variableWidth: true, initialSlide: 1 };
 
-  // console.log(user.sub)
-
   useEffect(() => {
-    getProduct().then((data) => {
-      setHomeProduct(data);
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
-    });
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   }, []);
 
   return (
-    <main className="home">   {
-      closeDetail && (
+    <main className="home">
+      {closeDetail && (
         <ProductModal
           detail={detail}
           setCloseDetail={setCloseDetail}
@@ -40,7 +33,7 @@ export const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCa
           loginWithRedirect={loginWithRedirect}
         />
       )
-    }
+      }
       <div className="top-banner">
         <div className="container">
           <div className="detail">
@@ -163,7 +156,7 @@ export const Home = ({ detail, closeDetail, setCloseDetail, viewProduct, addToCa
           ) : (
             <div className="container">
               {
-                homeProduct?.map((curElm, index) => {
+                product?.map((curElm, index) => {
                   return <ProductCard key={index} product={curElm} addToCart={addToCart} viewProduct={viewProduct} />
                 })
               }
