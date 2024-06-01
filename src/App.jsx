@@ -134,12 +134,11 @@ export const App = () => {
       }, 500);
     });
 
-    // handleUserLogged();
+    handleUserLogged();
   }, []);
 
   return (
     <>
-    {isAuthenticated && handleUserLogged()}
       <Nav
         search={search}
         setSearch={setSearch}
