@@ -17,10 +17,16 @@ export const Button = ({ initialText = "Button", newText = "", disabled = false,
       setText(initialText);
       button.classList.remove("btn-animate");
     }, 2000);
-
   }
 
   return (
-    <button onClick={(e) => { onClick(); updateText(e) }} className={`btn ${disabled ? " disabled" : ""}`}>{text}</button>
+    <div className={`btn-holder ${disabled ? " disabled" : ""}`}>
+      <button
+        onClick={(e) => { onClick(); updateText(e) }}
+        className={`btn ${disabled ? " disabled" : ""}`}
+      >
+        {text}
+      </button>
+    </div>
   );
 }

@@ -11,7 +11,7 @@
 
 .edit-profile .container .item input {
   border-radius: 5px;
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   padding: 12px 16px;
   font-size: 16px;
 }
@@ -42,12 +42,17 @@
   background: var(--primary-color-variation);
 }
 
+.edit-profile #phone.warning {
+  border-color: var(--text-red) !important;
+}
+
 @media (max-width: 768px) {
   .edit-profile+.save .container {
     width: 100%;
   }
 
-  .edit-profile+.save .container button {
+  .edit-profile+.save .container .btn-holder,
+  .edit-profile+.save .container .btn-holder .btn {
     width: 100% !important;
   }
 }

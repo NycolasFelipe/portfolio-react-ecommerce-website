@@ -16,6 +16,6 @@ export default async function getUser(token) {
     }
     return await response.json();
   } catch (error) {
-    console.debug('Error fetching products:', error);
+    console.debug('Error fetching user:', error);
   }
 }

@@ -1,4 +1,8 @@
-.btn {
+.btn-holder.disabled {
+  cursor: not-allowed !important;
+}
+
+.btn-holder>.btn {
   padding: 15px 0;
   font-size: 18px;
   color: #fff;
@@ -15,17 +19,17 @@
   text-align: center;
 }
 
-.btn:hover {
+.btn-holder>.btn:hover {
   background: var(--primary-color);
   transition: 0.3s;
 }
 
-.btn.btn-animate {
+.btn-holder>.btn.btn-animate {
   background: var(--background-color-green) !important;
 }
 
 
-.btn.disabled {
-  cursor: not-allowed !important;
+.btn-holder>.btn.disabled {
+  pointer-events: none;
   background: var(--grey-color-variation-1) !important;
 }

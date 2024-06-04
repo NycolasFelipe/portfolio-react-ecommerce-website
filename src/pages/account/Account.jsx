@@ -12,7 +12,7 @@ import UserContext from "../../context/user/UserContext";
 import "./Account.css";
 
 export const Account = () => {
-  const user = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const { logout } = useAuth0();
   const [menuSettings, setMenuSettings] = useState({
     editarPerfil: true,
@@ -112,7 +112,7 @@ export const Account = () => {
         <div className="setting-item">
           {
             menuSettings.editarPerfil && (
-              <EditProfile data={user} />
+              <EditProfile data={user} setData={setUser} />
             )
           }
         </div>

@@ -15,7 +15,7 @@ import "./App.css";
 
 export const App = () => {
   const navigate = useNavigate();
-  const { getIdTokenClaims, isAuthenticated } = useAuth0();
+  const { getIdTokenClaims } = useAuth0();
   const [product, setProduct] = useState([]);
   const [initialProduct, setInitialProduct] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -43,7 +43,7 @@ export const App = () => {
       if (e.ProductId === productId) {
         e.qtd++;
         productAdded = true;
-        return;
+        return null;
       }
     });
     if (!productAdded) {
@@ -144,7 +144,7 @@ export const App = () => {
         setSearch={setSearch}
         searchButton={searchButton}
       />
-      <UserContext.Provider value={user}>
+      <UserContext.Provider value={{ user, setUser }}>
         <Routing
           product={product}
           setProduct={setProduct}
