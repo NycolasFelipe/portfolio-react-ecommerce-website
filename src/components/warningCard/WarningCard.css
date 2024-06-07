@@ -1,6 +1,7 @@
 .warning_card {
     width: 100%;
     cursor: pointer;
+    z-index: 100;
 }
 
 .warning_card .container {

@@ -16,7 +16,7 @@ import "./App.css";
 
 export const App = () => {
   const navigate = useNavigate();
-  const { getIdTokenClaims } = useAuth0();
+  const { getIdTokenClaims, isAuthenticated } = useAuth0();
   const [product, setProduct] = useState([]);
   const [initialProduct, setInitialProduct] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -43,7 +43,11 @@ export const App = () => {
           }
         });
       } else {
-        setWarning(true);
+        // Somente exibe aviso se o usuário estiver logado, mas não tiver
+        // sido possível resgatar seus dados
+        if (isAuthenticated) {
+          setWarning(true);
+        }
         clearInterval(interval);
       }
     }, 500);
