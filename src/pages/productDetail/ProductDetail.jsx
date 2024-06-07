@@ -12,6 +12,8 @@ import getProductCategory from "../../api/getProductCategory";
 import setParam from "../../scripts/setParam";
 import Slider from "react-slick";
 import { ButtonComprar } from "../../components/buttonComprar/ButtonComprar";
+import { ShareModal } from "../../components/shareModal/ShareModal";
+import { disableScroll, enableScroll } from "../../scripts/disableScroll";
 import "./ProductDetail.css";
 
 export const ProductDetail = ({ addToCart }) => {
@@ -20,6 +22,7 @@ export const ProductDetail = ({ addToCart }) => {
   const [productDetail, setProductDetail] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [shareModal, setShareModal] = useState(false);
   const sliderSettings = { infinite: false, speed: 300, slidesToShow: 1, variableWidth: true, initialSlide: 0 };
 
   async function fetchData(id) {
@@ -39,6 +42,11 @@ export const ProductDetail = ({ addToCart }) => {
     setLoading(true);
     fetchData(id);
     window && window.scroll(0, 0);
+  }
+
+  const handleShareModal = (active) => {
+    setShareModal(active);
+    active ? disableScroll() : enableScroll();
   }
 
   useEffect(() => {
@@ -142,9 +150,15 @@ export const ProductDetail = ({ addToCart }) => {
                   }
                 </div>
               </div>
+              {shareModal && (
+                <>
+                  <div onClick={() => handleShareModal(false)} className="share_modal_blur"></div>
+                  <ShareModal handleShareModal={handleShareModal} />
+                </>
+              )}
               <div className="interact">
-                <button className="like" title="Adicionar aos favoritos"><LuShare2 /></button>
-                <button className="share" title="Compartilhar"><AiOutlineHeart /></button>
+                <button className="like" title="Compartilhar" onClick={() => handleShareModal(true)}><LuShare2 /></button>
+                <button className="share" title="Adicionar aos favoritos"><AiOutlineHeart /></button>
               </div>
               <div className="description">
                 <h3><IoDocumentText className="icon" />DESCRIÇÃO DO PRODUTO</h3>

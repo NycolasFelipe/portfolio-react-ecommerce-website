@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import UserContext from "./context/user/UserContext";
 import { useNavigate } from "react-router-dom";
+import { Warning } from "./components/warning/Warning";
 import { Nav } from "./components/nav/Nav";
 import { Footer } from "./components/footer/Footer";
 import { Routing } from "./router/Routing";
@@ -21,17 +22,31 @@ export const App = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
+  const [warning, setWarning] = useState(false);
+  const userLoginCheckCount = useRef(0);
 
   // Cria usuário ao logar pela primeira vez
   function handleUserLogged() {
-    setTimeout(() => {
-      getIdTokenClaims().then((token) => {
-        createUser(token);
-        getUser(token)
-          .then((data) => setUser(data))
-          .catch((error) => console.debug(error));
-      });
-    }, 1000);
+    const interval = setInterval(() => {
+      // Inicia tentativas de obter dados do usuário
+      if (userLoginCheckCount.current < 20) {
+        userLoginCheckCount.current++;
+        getIdTokenClaims().then((token) => {
+          // Quando os dados forem obtidos, encerra as tentativas
+          if (token) {
+            clearInterval(interval);
+            createUser(token);
+            getUser(token)
+              .then((data) => setUser(data))
+              .catch((error) => console.debug(error));
+            return;
+          }
+        });
+      } else {
+        setWarning(true);
+        clearInterval(interval);
+      }
+    }, 500);
   }
 
   // Adicionar ao carrinho
@@ -139,6 +154,7 @@ export const App = () => {
 
   return (
     <>
+      <Warning warning={warning} />
       <Nav
         search={search}
         setSearch={setSearch}

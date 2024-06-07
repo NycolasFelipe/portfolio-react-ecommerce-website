@@ -1,24 +1,47 @@
 .contact-container {
   padding: 30px 40px;
   width: 100%;
-  background: var(--background-color);
+  background: var(--grey-color-variation-3);
 }
 
 .contact-container .contant {
-  padding: 10px 20px;
   max-width: 100%;
 }
 
-.contact-container .contant h2 {
+.contact-container h2 {
   font-size: 32px;
+  letter-spacing: 1px;
+  font-weight: 500;
   color: var(--text-black);
-  font-weight: 200;
-  margin-bottom: 25px;
 }
 
-.contact-container .contant h2 .contact-icon {
+.contact-container h2 .contact-icon {
   position: relative;
   top: 6px;
+  font-size: 32px;
+}
+
+.contact-container p {
+  display: inline-block;
+  color: var(--grey-color-variation-1);
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+.contact-container p .chevron {
+  position: relative;
+  top: 2px;
+}
+
+.contact-container p .link {
+  text-decoration: none;
+  color: var(--grey-color-variation-1);
+  transition: 0.3s;
+}
+
+.contact-container p .link:hover {
+  color: var(--primary-color);
+  transition: 0.3s;
 }
 
 .contact-container .contant .form {
@@ -26,6 +49,7 @@
   background: #fff;
   border-radius: 10px;
   box-shadow: var(--box-shadow);
+  margin-top: 30px;
 }
 
 .contact-container .contant .form form {

@@ -1,0 +1,62 @@
+.about-container .links .link {
+    border-radius: 5px;
+    padding: 6px 10px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.about-container .links .link:hover {
+    filter: brightness(1.1);
+    transition: 0.3s;
+}
+
+.about-container .links .link.html5 {
+    background: #ff6610;
+    color: #fff;
+}
+
+.about-container .links .link.css3 {
+    background: #3953eb;
+    color: #fff;
+}
+
+.about-container .links .link.javascript {
+    background: #e1db50;
+}
+
+.about-container .links .link.react {
+    color: #fff;
+    background: #0082bc;
+}
+
+.about-container .links .link.auth0 {
+    color: #fff;
+    background: #000;
+}
+
+.about-container .links .link.nodejs {
+    color: #fff;
+    background: #64c74d;
+}
+
+.about-container .links .link.express {
+    background: #fffffc;
+}
+
+.about-container .links .link.mysql {
+    color: #fff;
+    background: #3b7dad;
+}
+
+.about-container .links .link.vercel {
+    background: #fffffc;
+}
+
+.about-container .link-box {
+    display: flex;
+}
+
+.about-container .link-box .icon {
+    margin-top: 2px;
+    margin-right: 2px;
+}

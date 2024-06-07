@@ -6,6 +6,7 @@ import { Products } from "../pages/products/Products";
 import { Cart } from "../pages/cart/Cart";
 import { Contact } from "../pages/contact/Contact";
 import { ProductDetail } from "../pages/productDetail/ProductDetail";
+import { About } from "../pages/about/About";
 import { Account } from "../pages/account/Account";
 
 export const Routing = ({
@@ -62,6 +63,7 @@ export const Routing = ({
         <Route path="/cart" element={
           isAuthenticated ? <Cart cart={cart} setCart={setCart} /> : <Navigate to="/" />}
         />
+        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/account" element={isAuthenticated ? <Account /> : <Navigate to="/" />} />
       </Routes>

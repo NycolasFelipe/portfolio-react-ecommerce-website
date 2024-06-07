@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { IoIosContact } from "react-icons/io";
+import { IoChevronForwardSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import "./Contact.css";
 
 export function Contact() {
@@ -26,6 +28,8 @@ export function Contact() {
       <div className="contact-container">
         <div className="contant">
           <h2><IoIosContact className="contact-icon" /> Entre em contato</h2>
+          <p><Link to="/" className="link">Início <IoChevronForwardSharp className="chevron" /></Link></p>
+            <p>Contato</p>
           <div className="form">
             <form method="POST">
               <h3>Formulário para contato</h3>

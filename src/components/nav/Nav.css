@@ -26,6 +26,7 @@
   padding: 30px 40px;
   width: 100%;
   border-bottom: 1px solid var(--border-color);
+  z-index: 3;
 }
 
 .main-header .container {
@@ -149,8 +150,11 @@
 }
 
 .header {
+  position: relative;
   width: 100%;
   padding: 20px 30px;
+  box-shadow: #afafaf59 0px 3px 5px;
+  z-index: 3;
 }
 
 .header .container {

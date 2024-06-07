@@ -1,0 +1,200 @@
+.share_modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    z-index: 2;
+}
+
+.share_modal .container .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 24px;
+    position: relative;
+    box-shadow: none;
+    background: var(--background-color);
+}
+
+.share_modal .container .header h2 {
+    user-select: none;
+}
+
+.share_modal .container .header .close_button {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 32px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    transition: 0.3s;
+    color: var(--grey-color-variation-2);
+}
+
+.share_modal .container .header .close_button:hover {
+    color: var(--text-red);
+    transition: 0.3s;
+}
+
+.share_modal .container .share_options {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background: var(--background-color);
+    margin-top: -1px;
+}
+
+.share_modal .container .share_options .share_option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: -3px;
+}
+
+.share_modal .container .share_options .share_option:hover>.icon,
+.share_modal .container .share_options .share_option:hover>.title {
+    color: var(--primary-color);
+    transition: 0.3s;
+}
+
+.share_modal .container .share_options .share_option:hover>.icon {
+    background: var(--text-white);
+}
+
+.share_modal .container .share_options .share_option .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--grey-color-variation-3);
+    width: 80px;
+    height: 80px;
+    font-size: 32px;
+    border-radius: 50%;
+    transition: 0.3s;
+    position: relative;
+}
+
+.share_modal .container .share_options .share_option .icon button {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.share_modal .container .share_options .share_option .title {
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.share_modal .container .share_link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 30px;
+    background: var(--background-color);
+}
+
+.share_modal .container .share_link p {
+    font-weight: 600;
+    color: var(--grey-color-variation-1);
+}
+
+.share_modal .container .share_link .link_box {
+    display: flex;
+    padding-top: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.share_modal .container .share_link .link_box input {
+    margin-top: 2px;
+    flex: 1;
+    font-size: 18px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    color: var(--text-color);
+    background: var(--grey-color-variation-3);
+    padding: 10px 12px;
+    padding-right: 40px;
+}
+
+.share_modal .container .share_link .link_box input.confirm {
+    background: var(--background-color-green);
+    color: #fff;
+    font-weight: 500;
+}
+
+.share_modal .container .share_link .link_box input.confirm+button {
+    background: none;
+    color: #fff;
+    transition: 0s;
+}
+
+.share_modal .container .share_link .link_box button {
+    outline: none;
+    border: none;
+    position: absolute;
+    bottom: 0px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: var(--grey-color-variation-1);
+    width: 100%;
+    text-align: right;
+    padding: 4px 0;
+    padding-right: 8px;
+    background: transparent;
+}
+
+.share_modal .container .share_link .link_box button:hover {
+    color: var(--primary-color);
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    .share_modal {
+        top: unset;
+        transform: unset;
+        transform: translateX(-50%);
+        bottom: 0;
+    }
+
+    .share_modal .container .share_options {
+        flex-wrap: wrap;
+        flex-flow: row wrap;
+        gap: 25px;
+    }
+
+    .share_modal .container .share_options::after {
+        content: "";
+        width: 80px;
+    }
+}
+
+@media (max-width: 375px) {
+    .share_modal .container .share_options .share_option .icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .share_modal .container .share_options::after {
+        content: "";
+        width: 70px;
+    }
+
+    .share_modal .container .share_link .link_box input {
+        font-size: 12px;
+    }
+
+    .share_modal .container .share_link .link_box button {
+        font-size: 18px;
+    }
+}

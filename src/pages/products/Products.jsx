@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { FaLaptop } from "react-icons/fa";
 import { IoChevronDownSharp, IoChevronForwardSharp } from "react-icons/io5";
-import { ProductModal } from "../../components/productModal/ProductModal.jsx";
-import { ProductCard } from "../../components/productCard/ProductCard.jsx";
+import { ProductModal } from "../../components/productModal/ProductModal";
+import { ProductCard } from "../../components/productCard/ProductCard";
 import "./Products.css";
 
 export const Products = ({
