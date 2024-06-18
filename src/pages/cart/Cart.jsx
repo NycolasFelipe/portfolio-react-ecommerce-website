@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ProductCart } from "../../components/productCart/productCart";
 import formatMoney from "../../scripts/formatMoney";
@@ -43,6 +43,11 @@ export const Cart = ({ cart, setCart }) => {
 
   //Preço total
   const totalPrice = !cart ? 0 : cart.reduce((price, item) => price + item.qtd * item.Price, 0);
+
+  //Alinhar janela ao topo da página
+  useEffect(() => {
+    window && window.scroll(0, 0);
+  }, []);
 
   return (
     <>

@@ -10,6 +10,7 @@ import { About } from "../pages/about/About";
 import { Account } from "../pages/account/Account";
 
 export const Routing = ({
+  homeProduct,
   product,
   setProduct,
   detail,
@@ -30,7 +31,7 @@ export const Routing = ({
       <Routes>
         <Route path="/" element={
           <Home
-            product={product}
+            product={homeProduct}
             detail={detail}
             closeDetail={closeDetail}
             setCloseDetail={setCloseDetail}

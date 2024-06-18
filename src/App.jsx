@@ -12,6 +12,7 @@ import createUser from "./api/createUser";
 import getUser from "./api/getUser";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Analytics } from "@vercel/analytics/react"
+import { MiniCart } from "./components/miniCart/MiniCart";
 import "./App.css";
 
 export const App = () => {
@@ -23,6 +24,7 @@ export const App = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
   const [warning, setWarning] = useState(false);
+  const [miniCart, setMiniCart] = useState({ visible: false });
   const userLoginCheckCount = useRef(0);
 
   // Cria usuário ao logar pela primeira vez
@@ -58,14 +60,21 @@ export const App = () => {
   const addToCart = (product) => {
     const productId = product.ProductId;
     let productAdded = false;
-    cart?.map(e => {
+    // Caso o item já exista no carrinho, cria uma cópia do carrinho,
+    // modifica a quantidade do item, e atualiza o estado do cart
+    const cartCopy = JSON.parse(JSON.stringify(cart));
+    cartCopy?.map(e => {
       if (e.ProductId === productId) {
         e.qtd++;
         productAdded = true;
         return null;
       }
     });
-    if (!productAdded) {
+    if (productAdded) {
+      setCart(cartCopy);
+    }
+    // Caso contrário, adiciona um item novo ao carrinho através do setState
+    else {
       getProductInfo(product.ProductId).then((productItem) => {
         // Adiciona item somente se houver disponível em estoque
         if (productItem.Info[0].Stock > 0) {
@@ -73,6 +82,13 @@ export const App = () => {
         }
       });
     }
+
+    setTimeout(() => {
+      // Exibe o minicart automaticamente somente ao preencher o carrinho com o primeiro item
+      if (cart.length === 0) {
+        setMiniCart({ ...miniCart, visible: true });
+      }
+    }, 300);
   }
 
   // Modal com detalhes do produto
@@ -159,6 +175,12 @@ export const App = () => {
   return (
     <>
       <Warning warning={warning} />
+      <MiniCart
+        cart={cart}
+        setCart={setCart}
+        miniCart={miniCart}
+        setMiniCart={setMiniCart}
+      />
       <Nav
         search={search}
         setSearch={setSearch}
@@ -168,6 +190,7 @@ export const App = () => {
         <Routing
           product={product}
           setProduct={setProduct}
+          homeProduct={initialProduct}
           detail={detail}
           closeDetail={closeDetail}
           setCloseDetail={setCloseDetail}

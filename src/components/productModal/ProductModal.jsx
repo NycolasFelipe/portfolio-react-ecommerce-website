@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineCloseCircle } from "react-icons/ai";
 import formatMoney from "../../scripts/formatMoney";
 import getProductInfo from "../../scripts/getProductInfo";
-import "./ProductModal.css";
-import { ButtonComprar } from "../buttonComprar/ButtonComprar.jsx";
+import { ButtonComprar } from "../buttonComprar/ButtonComprar";
+import { IoMdClose } from "react-icons/io";
+import "./ProductModal.css"; 
 
 export const ProductModal = ({ detail, setCloseDetail, isAuthenticated, loginWithRedirect, addToCart }) => {
   const [stock, setStock] = useState(0);
@@ -18,7 +18,7 @@ export const ProductModal = ({ detail, setCloseDetail, isAuthenticated, loginWit
   return (
     <div className="product-modal">
       <div className="container">
-        <button className="close-button" onClick={() => setCloseDetail(false)}><AiOutlineCloseCircle /></button>
+        <button className="close-button" onClick={() => setCloseDetail(false)}><IoMdClose /></button>
         {
           loading ? (
             <div className="loading-container">

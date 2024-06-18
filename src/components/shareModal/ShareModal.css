@@ -9,7 +9,7 @@
     border-radius: 5px;
     overflow: hidden;
     box-shadow: var(--box-shadow);
-    z-index: 2;
+    z-index: 100;
 }
 
 .share_modal .container .header {
@@ -38,7 +38,7 @@
 }
 
 .share_modal .container .header .close_button:hover {
-    color: var(--text-red);
+    color: var(--text-black);
     transition: 0.3s;
 }
 

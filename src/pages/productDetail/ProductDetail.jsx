@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Zoom from "react-img-zoom";
 import { IoChevronForwardSharp, IoDocumentText } from "react-icons/io5";
@@ -24,6 +24,7 @@ export const ProductDetail = ({ addToCart }) => {
   const [loading, setLoading] = useState(true);
   const [shareModal, setShareModal] = useState(false);
   const sliderSettings = { infinite: false, speed: 300, slidesToShow: 1, variableWidth: true, initialSlide: 0 };
+  const location = useLocation();
 
   async function fetchData(id) {
     getProductInfo(id)
@@ -51,7 +52,12 @@ export const ProductDetail = ({ addToCart }) => {
 
   useEffect(() => {
     fetchData(productId);
-  }, []);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 600);
+    window && window.scroll(0, 0);
+  }, [location]);
 
   return (
     <>
@@ -81,7 +87,7 @@ export const ProductDetail = ({ addToCart }) => {
                     <Zoom
                       className="img"
                       img={"../" + productDetail.Img}
-                      zoomScale={1.6}
+                      zoomScale={1.4}
                       width={640}
                       height={500}
                     />

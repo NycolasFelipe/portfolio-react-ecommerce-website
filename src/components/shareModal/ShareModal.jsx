@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { IoMdClose } from "react-icons/io";
 import { FaFacebookF, FaRegCopy, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
@@ -31,7 +31,7 @@ export const ShareModal = ({ handleShareModal }) => {
       <div className="container">
         <div className="header">
           <h2>Compartilhar</h2>
-          <button className="close_button" onClick={() => handleShareModal(false)}><AiOutlineCloseCircle /></button>
+          <button className="close_button" onClick={() => handleShareModal(false)}><IoMdClose /></button>
         </div>
         <div className="share_options">
           {shareOptions.map((curElm, index) => {

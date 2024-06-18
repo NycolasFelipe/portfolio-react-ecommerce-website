@@ -179,6 +179,8 @@
   text-decoration: none;
   color: var(--text-black);
   transition: 0.3s;
+  display: block;
+  width: 100%;
 }
 
 .header .container .nav ul li .link:hover {
@@ -263,7 +265,7 @@
   }
 
   .header .container .nav ul li {
-    line-height: 2;
+    line-height: 2.5;
   }
 
   .main-header .container .search-box {
@@ -290,6 +292,6 @@
   }
 
   .header {
-    padding: 20px 0;
+    padding: 20px 10px;
   }
 }
