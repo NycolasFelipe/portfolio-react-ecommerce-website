@@ -15,6 +15,8 @@ export const Products = ({
   setCloseDetail,
   viewProduct,
   addToCart,
+  favorites,
+  addFavorite,
   filterProduct,
   categories,
   loading
@@ -99,7 +101,16 @@ export const Products = ({
                 <div className="product-box">
                   <div className="contant">
                     {product?.map((curElm, index) => {
-                      return <ProductCard key={index} product={curElm} addToCart={addToCart} viewProduct={viewProduct} />
+                      return (
+                        <ProductCard
+                          key={index}
+                          product={curElm}
+                          addToCart={addToCart}
+                          viewProduct={viewProduct}
+                          favorites={favorites}
+                          addFavorite={addFavorite}
+                        />
+                      )
                     })}
                   </div>
                 </div>

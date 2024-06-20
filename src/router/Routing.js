@@ -8,6 +8,7 @@ import { Contact } from "../pages/contact/Contact";
 import { ProductDetail } from "../pages/productDetail/ProductDetail";
 import { About } from "../pages/about/About";
 import { Account } from "../pages/account/Account";
+import { Favorites } from "../pages/favorites/Favorites";
 
 export const Routing = ({
   homeProduct,
@@ -20,6 +21,8 @@ export const Routing = ({
   cart,
   setCart,
   addToCart,
+  addFavorite,
+  favorites,
   filterProduct,
   categories,
   loading
@@ -37,6 +40,8 @@ export const Routing = ({
             setCloseDetail={setCloseDetail}
             viewProduct={viewProduct}
             addToCart={addToCart}
+            favorites={favorites}
+            addFavorite={addFavorite}
             loading={loading}
           />
         }
@@ -50,6 +55,8 @@ export const Routing = ({
             setCloseDetail={setCloseDetail}
             viewProduct={viewProduct}
             addToCart={addToCart}
+            favorites={favorites}
+            addFavorite={addFavorite}
             filterProduct={filterProduct}
             categories={categories}
             loading={loading}
@@ -68,6 +75,10 @@ export const Routing = ({
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/account" element={isAuthenticated ? <Account /> : <Navigate to="/" />} />
+        <Route path="/favorites" element={
+          isAuthenticated ? <Favorites favorites={favorites} addFavorite={addFavorite} /> : <Navigate to="/" />
+        }
+        />
       </Routes>
     </>
   );

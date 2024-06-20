@@ -8,7 +8,7 @@ import { BsBagCheck } from "react-icons/bs";
 import { CiLogin } from "react-icons/ci";
 import { CiLogout } from "react-icons/ci";
 import { IoSearch } from "react-icons/io5";
-import "./Nav.css";
+import styles from "./Nav.module.css";
 
 export const Nav = ({ search, setSearch, searchButton }) => {
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
@@ -21,87 +21,93 @@ export const Nav = ({ search, setSearch, searchButton }) => {
 
   return (
     <>
-      <div className="free">
-        <div className="icon"><FaTruckMoving /></div>
+      <div className={styles.free_shipping}>
+        <div className={styles.icon}><FaTruckMoving /></div>
         <p>Frete grátis em compras acima de R$100,00</p>
       </div>
-      <div className="main-header">
-        <div className="container">
-          <div className="logo">
+      <header className={styles.header}>
+        <div className={styles.container}>
+          <div className={styles.logo}>
             <Link to="/"><img src="../img/logo.svg" alt="Logo" /></Link>
           </div>
-          <div className="search-box">
+          <div className={styles.search_box}>
             <input
               type="text"
               value={search}
               name="searchBox"
               id="searchBox"
-              placeholder="Procure um produto..."
+              placeholder="Pesquise um produto..."
               autoComplete="off"
               onChange={(e) => setSearch(e.target.value)}
               onKeyUp={(e) => searchOnEnter(e)}
             />
             <button
-              className="search-button-desktop"
+              className={styles.search_btn}
               type="button"
-              onClick={() => searchButton(search)}
-            ><IoSearch className="search-icon" /> Pesquisar</button>
-            <button
-              className="search-button-mobile"
-              type="button"
-              onClick={() => searchButton(search)}
-            ><IoSearch /></button>
-          </div>
-          <div className="icon">
-            {
-              isAuthenticated && (
-                <div className="account">
-                  <Link to="/account" >
-                    <div className="user-icon">
-                      <AiOutlineUser />
-                    </div>
-                    <p>Olá, {user.given_name}</p>
-                  </Link>
-                </div>
-              )
-            }
-            <div className="second-icon">
-              <Link to="/" className="link">
-                <AiOutlineHeart />
-              </Link>
-              {
-                isAuthenticated ? (
-                  <Link to="/cart" className="link">
-                    <BsBagCheck />
-                  </Link>
-                ) : (
-                  <Link onClick={() => loginWithRedirect()} className="link">
-                    <BsBagCheck />
-                  </Link>
-                )
-              }
-            </div>
+              onClick={() => searchButton(search)}>
+              <IoSearch className={styles.icon} />
+              <span className={styles.label}>Pesquisar</span>
+            </button>
           </div>
         </div>
-      </div>
-      <div className="header">
-        <div className="container">
-          <div className="nav">
-            <ul>
-              <li><Link className="link" to="/">Início</Link></li>
-              <li><Link className="link" to="/products">Produtos</Link></li>
-              <li><Link className="link" to="/about">Sobre</Link></li>
-              <li><Link className="link" to="/contact">Contato</Link></li>
-            </ul>
+        <div className={styles.side}>
+          <div className={styles.account}>
+            {isAuthenticated && (
+              <Link to="/account" >
+                <AiOutlineUser className={styles.icon} />
+                <p>Olá, {user.given_name}</p>
+              </Link>
+            )}
           </div>
-          <div className="auth">
-            {
-              isAuthenticated ?
-                <button title="Log out" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} type="button"><span>Sair</span><CiLogout className="auth-button-icon" /></button>
-                :
-                <button title="Login" onClick={() => loginWithRedirect()} type="button"><span>Entrar</span><CiLogin className="auth-button-icon" /></button>
-            }
+          <div className={styles.favorites}>
+            {isAuthenticated ? (
+              <Link to="/favorites">
+                <AiOutlineHeart className={styles.icon} />
+              </Link>
+            ) : (
+              <Link onClick={() => loginWithRedirect()}>
+                <AiOutlineHeart className={styles.icon} />
+              </Link>
+            )}
           </div>
+          <div className={styles.cart}>
+            {isAuthenticated ? (
+              <Link to="/cart">
+                <BsBagCheck className={styles.icon} />
+              </Link>
+            ) : (
+              <Link onClick={() => loginWithRedirect()}>
+                <BsBagCheck className={styles.icon} />
+              </Link>
+            )}
+          </div>
+        </div>
+      </header>
+      <div className={styles.navigation}>
+        <nav>
+          <ul>
+            <li><Link to="/">Início</Link></li>
+            <li><Link to="/products">Produtos</Link></li>
+            <li><Link to="/about">Sobre</Link></li>
+            <li><Link to="/contact">Contato</Link></li>
+          </ul>
+        </nav>
+        <div className={styles.login}>
+          {isAuthenticated ?
+            <button
+              title="Log out"
+              onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+              type="button">
+              <span>Sair</span>
+              <CiLogout className={styles.icon} />
+            </button>
+            :
+            <button
+              title="Login"
+              onClick={() => loginWithRedirect()} type="button">
+              <span>Entrar</span><CiLogin className={styles.icon} />
+            </button>
+          }
         </div>
       </div>
     </>

@@ -23,6 +23,7 @@ export const App = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
+  const [favorites, setFavorites] = useState([]);
   const [warning, setWarning] = useState(false);
   const [miniCart, setMiniCart] = useState({ visible: false });
   const userLoginCheckCount = useRef(0);
@@ -53,6 +54,23 @@ export const App = () => {
         clearInterval(interval);
       }
     }, 500);
+  }
+
+  // Adicionar produto aos favoritos
+  const addFavorite = (product) => {
+    if (favorites.length === 0) {
+      favorites.push(product);
+    } else {
+      const unique = favorites.filter((curElm) => {
+        return (curElm.ProductId === product.ProductId)
+      }).length === 0;
+
+      if (unique) {
+        setFavorites([...favorites, product]);
+      } else {
+        setFavorites(favorites.filter((x) => x.ProductId != product.ProductId));
+      }
+    }
   }
 
   // Adicionar ao carrinho
@@ -101,8 +119,8 @@ export const App = () => {
 
   // Pesquisar produtos
   const [search, setSearch] = useState("");
-  const searchButton = (product) => {
-    if (product) {
+  const searchButton = (searchTerm) => {
+    if (searchTerm) {
       // Redireciona para página de pesquisa
       const currentURL = window.location.pathname;
       if (!currentURL.includes("products")) {
@@ -111,8 +129,8 @@ export const App = () => {
       const change = initialProduct.filter((x) => {
         const productCategory = removeDiacritcs(x.Category).toLowerCase().trim();
         const productTitle = removeDiacritcs(x.Title).toLowerCase().trim();
-        product = removeDiacritcs(product).toLowerCase().trim();
-        return productCategory.includes(product) || productTitle.includes(product);
+        searchTerm = removeDiacritcs(searchTerm).toLowerCase().trim();
+        return productCategory.includes(searchTerm) || productTitle.includes(searchTerm);
       });
       setProduct(change);
       setSearch("");
@@ -202,6 +220,8 @@ export const App = () => {
           cart={cart}
           setCart={setCart}
           addToCart={addToCart}
+          addFavorite={addFavorite}
+          favorites={favorites}
           filterProduct={filterProduct}
           categories={categories}
           loading={loading}

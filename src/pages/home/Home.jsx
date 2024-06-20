@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./Home.css";
 
-export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct, addToCart, loading }) => {
+export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct, addToCart, favorites, addFavorite, loading }) => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const sliderSettings = { infinite: false, speed: 300, slidesToShow: 1, variableWidth: true, initialSlide: 1 };
 
@@ -147,7 +147,16 @@ export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct
             <div className="container">
               {
                 product?.map((curElm, index) => {
-                  return <ProductCard key={index} product={curElm} addToCart={addToCart} viewProduct={viewProduct} />
+                  return (
+                    <ProductCard
+                      key={index}
+                      product={curElm}
+                      addToCart={addToCart}
+                      viewProduct={viewProduct}
+                      favorites={favorites}
+                      addFavorite={addFavorite}
+                    />
+                  )
                 })
               }
             </div>

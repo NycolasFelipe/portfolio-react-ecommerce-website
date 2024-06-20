@@ -1,0 +1,142 @@
+.favorites {
+  padding: 30px 40px;
+  background: var(--grey-color-variation-3);
+}
+
+.favorites .header h2 {
+  font-size: 32px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: var(--text-black);
+}
+
+.favorites .header h2 .icon {
+  position: relative;
+  top: 6px;
+  font-size: 32px;
+}
+
+.favorites .header p {
+  display: inline-block;
+  color: var(--grey-color-variation-1);
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+.favorites .header p .chevron {
+  position: relative;
+  top: 2px;
+}
+
+.favorites .header p .link {
+  text-decoration: none;
+  color: var(--grey-color-variation-1);
+  transition: 0.3s;
+}
+
+.favorites .header p .link:hover {
+  color: var(--primary-color);
+  transition: 0.3s;
+}
+
+.greetings {
+  padding: 30px 40px;
+}
+
+.greetings h2 {
+  padding-bottom: 10px;
+}
+
+.greetings h3 {
+  font-weight: normal;
+  font-size: 18px;
+}
+
+.products {
+  padding: 30px 40px;
+  padding-top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.product {
+  display: flex;
+  width: 300px;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+}
+
+.product .product_img {
+  width: 30%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.product .product_img:hover+.product_detail {
+  color: var(--primary-color);
+}
+
+.product .product_img img {
+  width: 100%;
+}
+
+.product .product_detail {
+  flex: 1;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.product .product_detail:hover {
+  color: var(--primary-color);
+  transition: 0.3s;
+}
+
+.product .product_detail .title {
+  line-height: 1.4em;
+  max-height: 3em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.product .product_interact {
+  width: 36px;
+}
+
+.product .product_interact .remove_favorite {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  padding-top: 10px;
+  padding-right: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product .product_interact .remove_favorite:hover .liked {
+  display: none;
+}
+
+.product .product_interact .remove_favorite:hover .deslike {
+  display: block !important;
+}
+
+.product .product_interact .remove_favorite .liked {
+  color: var(--border-color);
+}
+
+.product .product_interact .remove_favorite .deslike {
+  position: relative;
+  right: 1px;
+  top: -1px;
+  display: none;
+  color: var(--primary-color);
+}
