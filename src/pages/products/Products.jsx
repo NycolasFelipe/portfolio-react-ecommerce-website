@@ -52,17 +52,15 @@ export const Products = ({
 
   return (
     <>
-      {
-        closeDetail && (
-          <ProductModal
-            detail={detail}
-            setCloseDetail={setCloseDetail}
-            addToCart={addToCart}
-            isAuthenticated={isAuthenticated}
-            loginWithRedirect={loginWithRedirect}
-          />
-        )
-      }
+      {closeDetail && (
+        <ProductModal
+          detail={detail}
+          setCloseDetail={setCloseDetail}
+          addToCart={addToCart}
+          isAuthenticated={isAuthenticated}
+          loginWithRedirect={loginWithRedirect}
+        />
+      )}
       <div className="products">
         <div className="products-header">
           <div className="contant">
@@ -83,42 +81,32 @@ export const Products = ({
             </div>
           </div>
         </div>
-        {
-          loading ? (
-            <img className="loading" src="./img/loading.svg" alt="Loading" />
-          ) : (
-            <div className="products">
-              <div className="container">
-                <div className="filter">
-                  <div className="categories">
-                    <h3>Categorias</h3>
-                    <ul>
-                      <li key={0} onClick={() => filterProduct("All")}>Todos os produtos</li>
-                      {
-                        categories?.map((curlElm, index) => {
-                          return (
-                            <li key={index + 1} onClick={() => filterProduct(curlElm)}>{curlElm}</li>
-                          )
-                        })
-                      }
-                    </ul>
-                  </div>
+        {loading ? (<img className="loading" src="./img/loading.svg" alt="Loading" />) : (
+          <div className="products">
+            <div className="container">
+              <div className="filter">
+                <div className="categories">
+                  <h3>Categorias</h3>
+                  <ul>
+                    <li key={0} onClick={() => filterProduct("All")}>Todos os produtos</li>
+                    {categories?.map((curlElm, index) => {
+                      return <li key={index + 1} onClick={() => filterProduct(curlElm)}>{curlElm}</li>
+                    })}
+                  </ul>
                 </div>
-                <div className="brand">
-                  <div className="product-box">
-                    <div className="contant">
-                      {
-                        product?.map((curElm, index) => {
-                          return <ProductCard key={index} product={curElm} addToCart={addToCart} viewProduct={viewProduct} />
-                        })
-                      }
-                    </div>
+              </div>
+              <div className="brand">
+                <div className="product-box">
+                  <div className="contant">
+                    {product?.map((curElm, index) => {
+                      return <ProductCard key={index} product={curElm} addToCart={addToCart} viewProduct={viewProduct} />
+                    })}
                   </div>
                 </div>
               </div>
             </div>
-          )
-        }
+          </div>
+        )}
       </div>
     </>
   );

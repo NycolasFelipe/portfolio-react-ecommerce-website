@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import UserContext from "./context/user/UserContext";
 import { useNavigate } from "react-router-dom";
 import { Warning } from "./components/warning/Warning";
@@ -146,30 +146,34 @@ export const App = () => {
     resultadoPesquisa && resultadoPesquisa.classList.add("hide");
   }
 
-  useEffect(() => {
-    // Carregar produtos
-    getProduct().then((data) => {
-      const categories = !data ? [] : data.reduce((categories, product, index) => {
-        const category = product.Category;
-        if (categories.indexOf(category) === -1) {
-          categories.push(category);
-        }
-        if (index === data.length - 1) {
-          return categories.sort();
-        }
-        return categories;
-      }, []);
+  // Carregar produtos
+  const loadProducts = useCallback(async () => {
+    getProduct()
+      .then((data) => {
+        const categories = !data ? [] : data.reduce((categories, product, index) => {
+          const category = product.Category;
+          if (categories.indexOf(category) === -1) {
+            categories.push(category);
+          }
+          if (index === data.length - 1) {
+            return categories.sort();
+          }
+          return categories;
+        }, []);
 
-      setCategories(categories);
-      setProduct(data);
-      setInitialProduct(data);
-
-      setTimeout(() => {
+        setCategories(categories);
+        setProduct(data);
+        setInitialProduct(data);
+      })
+      .then(() => {
+        handleUserLogged();
         setLoading(false);
-      }, 500);
-    });
+      });
+  })
 
-    handleUserLogged();
+  useEffect(() => {
+    // Carregar produtos e dados do usuário
+    loadProducts();
   }, []);
 
   return (

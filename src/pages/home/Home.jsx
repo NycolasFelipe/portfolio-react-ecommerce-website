@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { BsArrowRight, BsCurrencyDollar } from "react-icons/bs";
@@ -11,16 +11,9 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./Home.css";
 
-export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct, addToCart }) => {
+export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct, addToCart, loading }) => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
-  const [loading, setLoading] = useState(true);
   const sliderSettings = { infinite: false, speed: 300, slidesToShow: 1, variableWidth: true, initialSlide: 1 };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
 
   return (
     <main className="home">
@@ -32,8 +25,7 @@ export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct
           isAuthenticated={isAuthenticated}
           loginWithRedirect={loginWithRedirect}
         />
-      )
-      }
+      )}
       <div className="top-banner">
         <div className="container">
           <div className="detail">
@@ -150,10 +142,8 @@ export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct
       </div>
       <div className="product">
         <h2>Produtos em Alta</h2>
-        {
-          loading ? (
-            <img className="loading" src="./img/loading.svg" alt="Loading" />
-          ) : (
+        {loading ? (<img className="loading" src="./img/loading.svg" alt="Loading" />) :
+          (
             <div className="container">
               {
                 product?.map((curElm, index) => {
@@ -161,8 +151,7 @@ export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct
                 })
               }
             </div>
-          )
-        }
+          )}
       </div>
       <div className="banner">
         <div className="container">

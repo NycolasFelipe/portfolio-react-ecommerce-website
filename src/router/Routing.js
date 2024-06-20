@@ -37,6 +37,7 @@ export const Routing = ({
             setCloseDetail={setCloseDetail}
             viewProduct={viewProduct}
             addToCart={addToCart}
+            loading={loading}
           />
         }
         />

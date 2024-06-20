@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Zoom from "react-img-zoom";
@@ -19,14 +19,14 @@ import "./ProductDetail.css";
 export const ProductDetail = ({ addToCart }) => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const productId = new URL(document.location).searchParams.get("productId");
-  const [productDetail, setProductDetail] = useState([]);
+  const [productDetail, setProductDetail] = useState({});
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [shareModal, setShareModal] = useState(false);
   const sliderSettings = { infinite: false, speed: 300, slidesToShow: 1, variableWidth: true, initialSlide: 0 };
   const location = useLocation();
 
-  async function fetchData(id) {
+  const fetchData = useCallback(async (id) => {
     getProductInfo(id)
       .then((data) => {
         setProductDetail(data);
@@ -36,7 +36,7 @@ export const ProductDetail = ({ addToCart }) => {
           setLoading(false);
         });
       });
-  }
+  }, []);
 
   function redirectToProduct(id) {
     setParam("productId", id);
@@ -51,11 +51,8 @@ export const ProductDetail = ({ addToCart }) => {
   }
 
   useEffect(() => {
-    fetchData(productId);
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 600);
+    fetchData(productId);
     window && window.scroll(0, 0);
   }, [location]);
 

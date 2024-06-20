@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaTrash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,20 +10,16 @@ export const MiniCart = ({ cart, setCart, miniCart, setMiniCart }) => {
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
 
-  const hideMiniCart = () => {
-    setMiniCart({ ...miniCart, visible: false });
-  }
+  // Exibir/esconder o minicart
+  const showMiniCart = (visible = false) => setMiniCart({ ...miniCart, visible: visible });
 
-  const showMiniCart = () => {
-    setMiniCart({ ...miniCart, visible: true });
-  }
-
-  const reduceTotal = () => {
+  // Calcular o valor total dos itens do minicart
+  const reduceTotal = useCallback(() => {
     const totalPrice = cart.reduce((total, item) => {
       return total + item.Price * item.qtd;
     }, 0);
     return totalPrice;
-  }
+  }, [cart]);
 
   // Remover um produto
   const removeProduct = (product) => {
@@ -65,8 +61,18 @@ export const MiniCart = ({ cart, setCart, miniCart, setMiniCart }) => {
     }
   }
 
+  // Define comportamento de direcionamento para página do produto
+  const redirectToProduct = (e, productId) => {
+    e.preventDefault();
+    const currentProductId = parseInt(new URL(document.location).searchParams.get("productId"));
+    if (productId !== currentProductId) {
+      navigate("/products/detail?productId=" + productId);
+    }
+  }
+
   useEffect(() => {
-    setTotal(reduceTotal());
+    const totalPrice = reduceTotal();
+    setTotal(totalPrice);
   }, [cart]);
 
   return (
@@ -78,7 +84,7 @@ export const MiniCart = ({ cart, setCart, miniCart, setMiniCart }) => {
             <h5> Carrinho de Compras</h5>
           </div>
           <div className={styles.close_cart}>
-            <button type="button" onClick={() => hideMiniCart()}><IoMdClose /></button>
+            <button type="button" onClick={() => showMiniCart(false)}><IoMdClose /></button>
           </div>
         </div>
         <div className={styles.cart_items}>
@@ -87,13 +93,13 @@ export const MiniCart = ({ cart, setCart, miniCart, setMiniCart }) => {
               <>
                 <div className={styles.cart_item} key={index}>
                   <div className={styles.item_img}>
-                    <Link onClick={() => hideMiniCart()} to={"/products/detail?productId=" + curElm.ProductId}>
-                      <img src={curElm.Img} alt={curElm.Title} />
+                    <Link onClick={(e) => {showMiniCart(false); redirectToProduct(e, curElm.ProductId)}}>
+                      <img src={`.${curElm.Img}`} alt={curElm.Title} />
                     </Link>
                   </div>
                   <div className={styles.item_details}>
                     <div className={styles.item_title}>
-                      <Link onClick={() => hideMiniCart()} to={"/products/detail?productId=" + curElm.ProductId}>
+                      <Link onClick={(e) => {showMiniCart(false); redirectToProduct(e, curElm.ProductId)}}>
                         <h6>{curElm.Title}</h6>
                       </Link>
                     </div>
@@ -132,8 +138,8 @@ export const MiniCart = ({ cart, setCart, miniCart, setMiniCart }) => {
         </div>
         <div className={styles.cart_buttons}>
           <div className={styles.cart_buttons_top}>
-            <button type="button" onClick={() => hideMiniCart()}>Fechar carrinho</button>
-            <button type="button" onClick={() => { hideMiniCart(); navigate("/cart") }}>Ver carrinho</button>
+            <button type="button" onClick={() => showMiniCart(false)}>Fechar carrinho</button>
+            <button type="button" onClick={() => { showMiniCart(false); navigate("/cart") }}>Ver carrinho</button>
           </div>
           <div className={styles.cart_buttons_bottom}>
             <button type="button" onClick={() => navigate("#")}>Finalizar compra</button>
@@ -141,9 +147,8 @@ export const MiniCart = ({ cart, setCart, miniCart, setMiniCart }) => {
         </div>
       </div>
       <div className={`${styles.mini_cart_button} ${cart.length > 0 && styles.mini_cart_button_visible}`}>
-        <button type="button" onClick={() => showMiniCart()}> <FaCartShopping /></button>
+        <button type="button" onClick={() => showMiniCart(true)}> <FaCartShopping /></button>
       </div>
-
     </>
   );
 }
