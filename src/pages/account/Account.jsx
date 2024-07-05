@@ -112,7 +112,7 @@ export const Account = () => {
         <div className="setting-item">
           {
             menuSettings.editarPerfil && (
-              <EditProfile data={user} setData={setUser} />
+              <EditProfile data={user} setUser={setUser} />
             )
           }
         </div>

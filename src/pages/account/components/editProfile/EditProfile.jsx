@@ -8,7 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import updateUser from "../../../../api/updateUser";
 import "./EditProfile.css";
 
-export const EditProfile = ({ data, setData }) => {
+export const EditProfile = ({ data, setUser }) => {
   const { user, getIdTokenClaims } = useAuth0();
   const [address, setAddress] = useState({ erro: true });
   const [zipcode, setZipcode] = useState("");
@@ -85,13 +85,13 @@ export const EditProfile = ({ data, setData }) => {
     const validPhone = phone.length === 15;
 
     if (validZipcode && validPhone) {
-      const userId = user.sub.split("|")[1];
+      const userId = user.sub.replace("google-oauth2|", "").replace("auth0|", "");
       const obj = {
         UserId: userId,
         PhoneNumber: phone,
         Address: JSON.stringify(address)
       }
-      setData([obj]);
+      setUser([obj]);
       getIdTokenClaims().then((token) => {
         updateUser(token, { PhoneNumber: phone, Address: address });
       });
@@ -101,26 +101,35 @@ export const EditProfile = ({ data, setData }) => {
   useEffect(() => {
     if (data) {
       const userData = data[0];
-      try {
-        const phoneNumber = userData.PhoneNumber;
-        const address = JSON.parse(userData.Address);
-        if (typeof address.cep !== "undefined") {
-          address.cep = address.cep.replace("-", "");
-          const cep = address.cep;
-          setZipcode(cep);
-        }
-        setPhone(phoneNumber);
-        setAddress(address);
 
-        if (address.hasOwnProperty("cep")) {
-          fillAddress(address);
-          displayWarning(false);
+      if (userData !== undefined) {
+        try {
+          if (typeof userData.PhoneNumber !== "undefined") {
+            const phoneNumber = userData.PhoneNumber;
+            setPhone(phoneNumber);
+
+            if (phoneNumber.length > 0) {
+              fillPhone(phoneNumber);
+            }
+          }
+
+          if (userData.Address !== undefined) {
+            const address = JSON.parse(userData.Address);
+            if (typeof address.cep !== "undefined") {
+              address.cep = address.cep.replace("-", "");
+              const cep = address.cep;
+              setZipcode(cep);
+            }
+            setAddress(address);
+
+            if (address.hasOwnProperty("cep")) {
+              fillAddress(address);
+              displayWarning(false);
+            }
+          }
+        } catch (err) {
+          console.debug(err);
         }
-        if (phoneNumber.length > 0) {
-          fillPhone(phoneNumber);
-        }
-      } catch (err) {
-        console.debug(err);
       }
     }
   }, []);
