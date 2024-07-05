@@ -99,6 +99,7 @@
   max-height: 3em;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   overflow: hidden;
   margin-bottom: 6px;
@@ -139,4 +140,20 @@
   top: -1px;
   display: none;
   color: var(--primary-color);
+}
+
+@media (max-width: 440px) {
+  .favorites {
+    padding: 10px 20px;
+    padding-top: 20px;
+  }
+
+  .greetings {
+    padding: 0;
+    padding-top: 20px;
+  }
+
+  .products {
+    padding: 20px 0;
+  }
 }

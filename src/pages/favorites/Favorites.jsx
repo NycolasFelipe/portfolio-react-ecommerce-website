@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { IoChevronForwardSharp, IoHeartDislikeOutline, IoHeartOutline } from "react-icons/io5";
@@ -45,7 +45,6 @@ export const Favorites = ({ favorites, addFavorite }) => {
                       <h4 className={styles.title}>{curElm.Title}</h4>
                       <p className={styles.price}>{formatMoney(curElm.Price)}</p>
                     </Link>
-
                   </div>
                   <div className={styles.product_interact}>
                     <button type="button" className={styles.remove_favorite} onClick={() => addFavorite(curElm)}>
