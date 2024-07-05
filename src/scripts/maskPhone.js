@@ -1,29 +1,38 @@
-import { filterDigits } from "./filterDigits.js";
+import filterDigits from "./filterDigits";
 
-export function maskPhone(value) {
-  //@ts-ignore import filterDigits function
-  let digits = filterDigits(11, value);
-  let maskedPhone = "";
-  
-  for (let i = 0; i < digits.length; i++) {
-    switch (i) {
-      case 0: 
-        maskedPhone += "(";
-        break;
-      case 2:
-        maskedPhone += ") ";
-        break;
-      case 6:
-        maskedPhone += "-";
-        break;
-    }
-    maskedPhone += digits[i];
+/**
+ * This function takes a string `values` (assumed to contain phone digits) and
+ * formats it into a standard phone number format (e.g., "(12) 12345-6789").
+ * It utilizes the `filterDigits` function to extract a maximum of 11 digits from
+ * the input string.
+ * 
+ * @param {string} value The input string that may contain phone digits and other characters.
+ * @returns {string}
+ * 
+ * @author Nycolas Felipe
+ */
 
-    if (i === 10) {
-      maskedPhone = maskedPhone.replace("-", "");
-      maskedPhone = maskedPhone.replace(new RegExp(`^(.{${10}})(.*)`), `$1${"-"}$2`);
+const maskPhone = (value) => {
+  const digits = filterDigits(11, value);
+  const maskedPhone = Array.prototype.reduce.call(digits, (acc, cur, index) => {
+    if (index === 0) {
+      return acc + "(" + cur;
     }
-  }
-  
+    if (index === 2) {
+      return acc + ") " + cur;
+    }
+    if (index === 6) {
+      return acc + "-" + cur;
+    }
+    if (index === 10) {
+      return acc
+        .replace("-", "")
+        .replace(new RegExp(`^(.{${10}})(.*)`), `$1${"-"}$2`)
+        + cur;
+    }
+    return acc + cur;
+  }, "");
   return maskedPhone;
 }
+
+export default maskPhone;
