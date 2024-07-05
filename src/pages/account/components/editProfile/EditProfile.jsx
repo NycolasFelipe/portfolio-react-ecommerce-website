@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IoWarningOutline } from "react-icons/io5";
 import getAddress from "../../../../api/getAddress";
-import { maskPhone } from "../../../../scripts/maskPhone";
+import maskPhone from "../../../../scripts/maskPhone";
 import { Address } from "../address/Address";
 import { Button } from "../../../../components/button/Button";
 import { useAuth0 } from "@auth0/auth0-react";

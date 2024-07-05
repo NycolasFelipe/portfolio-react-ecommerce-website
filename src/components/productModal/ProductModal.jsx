@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import formatMoney from "../../scripts/formatMoney";
-import getProductInfo from "../../scripts/getProductInfo";
 import { ButtonComprar } from "../buttonComprar/ButtonComprar";
 import { IoMdClose } from "react-icons/io";
+import formatMoney from "../../scripts/formatMoney";
+import getProductInfo from "../../scripts/getProductInfo";
 import "./ProductModal.css";
 
 export const ProductModal = ({ detail, setCloseDetail, isAuthenticated, loginWithRedirect, addToCart }) => {
@@ -11,13 +11,10 @@ export const ProductModal = ({ detail, setCloseDetail, isAuthenticated, loginWit
   const [loading, setLoading] = useState(true);
 
   const loadProductInfo = useCallback(async (detail) => {
-    getProductInfo(detail[0].ProductId)
-      .then((data) => {
-        setStock(data.Info[0].Stock);
-      })
-      .then(() => {
-        setLoading(false);
-      })
+    const id = detail[0].ProductId;
+    getProductInfo(id)
+      .then((data) => setStock(data.Info.Stock))
+      .then(() => setLoading(false));
   }, [detail]);
 
   useEffect(() => {

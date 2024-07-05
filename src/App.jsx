@@ -8,7 +8,7 @@ import { Routing } from "./router/Routing";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Analytics } from "@vercel/analytics/react"
 import { MiniCart } from "./components/miniCart/MiniCart";
-import removeDiacritcs from "./scripts/removeDiacritcs";
+import removeAccents from "./scripts/removeAccents";
 import getProduct from "./api/getProduct";
 import getProductInfo from "./scripts/getProductInfo";
 import createUser from "./api/createUser";
@@ -95,7 +95,7 @@ export const App = () => {
     else {
       getProductInfo(product.ProductId).then((productItem) => {
         // Adiciona item somente se houver disponível em estoque
-        if (productItem.Info[0].Stock > 0) {
+        if (productItem.Info.Stock > 0) {
           setCart([...cart, { ...productItem, qtd: 1 }]);
         }
       });
@@ -127,9 +127,9 @@ export const App = () => {
         navigate("/products");
       }
       const change = initialProduct.filter((x) => {
-        const productCategory = removeDiacritcs(x.Category).toLowerCase().trim();
-        const productTitle = removeDiacritcs(x.Title).toLowerCase().trim();
-        searchTerm = removeDiacritcs(searchTerm).toLowerCase().trim();
+        const productCategory = removeAccents(x.Category).toLowerCase().trim();
+        const productTitle = removeAccents(x.Title).toLowerCase().trim();
+        searchTerm = removeAccents(searchTerm).toLowerCase().trim();
         return productCategory.includes(searchTerm) || productTitle.includes(searchTerm);
       });
       setProduct(change);

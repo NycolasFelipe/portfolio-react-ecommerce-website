@@ -13,7 +13,7 @@ import setParam from "../../scripts/setParam";
 import Slider from "react-slick";
 import { ButtonComprar } from "../../components/buttonComprar/ButtonComprar";
 import { ShareModal } from "../../components/shareModal/ShareModal";
-import { disableScroll, enableScroll } from "../../scripts/disableScroll";
+import { disableScroll, enableScroll } from "../../scripts/enableDisableScroll";
 import "./ProductDetail.css";
 
 export const ProductDetail = ({ addToCart, favorites, addFavorite }) => {
@@ -105,7 +105,7 @@ export const ProductDetail = ({ addToCart, favorites, addFavorite }) => {
                 <div className="container stock">
                   <p>Vendido e entregue por <span className="shop-detail"><Link to="/">Ecommerce Shop </Link> </span> | <span></span>
                     <span className="shop-stock">
-                      {productDetail.Info[0].Stock > 0 ? productDetail.Info[0].Stock + " em estoque" : "Fora de estoque"}
+                      {productDetail.Info.Stock > 0 ? productDetail.Info.Stock + " em estoque" : "Fora de estoque"}
                     </span>
                   </p>
                 </div>
@@ -118,7 +118,7 @@ export const ProductDetail = ({ addToCart, favorites, addFavorite }) => {
                     <p className="product_parcela">Ou em 1x no cartão com até 7% OFF</p>
                   </div>
                   <div className="contant">
-                    {productDetail.Info[0].Stock > 0 ? (
+                    {productDetail.Info.Stock > 0 ? (
                       isAuthenticated ? (
                         <div className="btn_container" onClick={() => addToCart(productDetail)}>
                           <ButtonComprar />
@@ -184,7 +184,7 @@ export const ProductDetail = ({ addToCart, favorites, addFavorite }) => {
             </div>
             <div className="description">
               <h3><IoDocumentText className="icon" />DESCRIÇÃO DO PRODUTO</h3>
-              {productDetail.Info[0].Description?.map((curElm, index) => {
+              {productDetail.Info.Description?.map((curElm, index) => {
                 return (
                   <div key={index} className="description_item">
                     <p className="topic">{curElm.topic}</p>
@@ -195,12 +195,12 @@ export const ProductDetail = ({ addToCart, favorites, addFavorite }) => {
             </div>
             <div className="details">
               <h3><IoIosInformationCircle className="icon" /> DETALHES DO PRODUTO</h3>
-              {productDetail.Info[0].Details?.map((curElm, index) => {
+              {productDetail.Info.Details?.map((curElm, index) => {
                 return (
                   <div key={index} className="details_item">
                     <p className="topic">{curElm.topic}</p>
                     <ul>
-                      {productDetail.Info[0].Details[index].items?.map((curElm, j) => {
+                      {productDetail.Info.Details[index].items?.map((curElm, j) => {
                         return (
                           <li key={j}><p className="item">- {curElm}</p></li>
                         )
