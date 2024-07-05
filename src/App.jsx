@@ -5,14 +5,14 @@ import { Warning } from "./components/warning/Warning";
 import { Nav } from "./components/nav/Nav";
 import { Footer } from "./components/footer/Footer";
 import { Routing } from "./router/Routing";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Analytics } from "@vercel/analytics/react"
+import { MiniCart } from "./components/miniCart/MiniCart";
 import removeDiacritcs from "./scripts/removeDiacritcs";
 import getProduct from "./api/getProduct";
 import getProductInfo from "./scripts/getProductInfo";
 import createUser from "./api/createUser";
 import getUser from "./api/getUser";
-import { useAuth0 } from "@auth0/auth0-react";
-import { Analytics } from "@vercel/analytics/react"
-import { MiniCart } from "./components/miniCart/MiniCart";
 import "./App.css";
 
 export const App = () => {
@@ -40,11 +40,11 @@ export const App = () => {
             clearInterval(interval);
             createUser(token);
             getUser(token)
-              .then((data) => setUser(data))
+              .then((data) => setUser(data[0]))
               .catch((error) => console.debug(error));
             return;
           }
-        });
+        }).catch((error) => console.debug(error));
       } else {
         // Somente exibe aviso se o usuário estiver logado, mas não tiver
         // sido possível resgatar seus dados
@@ -186,7 +186,8 @@ export const App = () => {
       .then(() => {
         handleUserLogged();
         setLoading(false);
-      });
+      })
+      .catch((error) => console.debug(error));
   })
 
   useEffect(() => {
