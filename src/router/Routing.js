@@ -66,6 +66,8 @@ export const Routing = ({
         <Route path="/products/detail" element={
           <ProductDetail
             addToCart={addToCart}
+            favorites={favorites}
+            addFavorite={addFavorite}
           />
         }
         />

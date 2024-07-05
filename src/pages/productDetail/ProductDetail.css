@@ -207,6 +207,20 @@
   padding-bottom: 40px;
 }
 
+.product_detail .interact .share {
+  position: relative;
+  top: -1px;
+  font-size: 24px;
+}
+
+.product_detail .interact .like {
+  padding-left: 4px;
+}
+
+.product_detail .interact .like.favorited {
+  color: var(--primary-color);
+}
+
 .product_detail .interact button {
   font-size: 26px;
   background: none;
