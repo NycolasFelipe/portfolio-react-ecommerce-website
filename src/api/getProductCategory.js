@@ -1,3 +1,13 @@
+/**
+ * This function asynchronously fetches product information for a specific category
+ * from a backend API.
+ * 
+ * @param {string} category The product category to retrieve.
+ * @returns {Promise<object>}
+ * 
+ * @author Nycolas Felipe
+ */
+
 export default async function getProductCategory(category) {
   const dev = window.location.hostname.includes("localhost");
   const url = dev ?
@@ -12,6 +22,6 @@ export default async function getProductCategory(category) {
     }
     return await response.json();
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.debug('Error fetching category: ', error);
   }
 }

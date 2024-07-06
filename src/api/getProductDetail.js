@@ -1,4 +1,18 @@
+/**
+ * This function asynchronously fetches detailed information for a specific product
+ * by its ID from a backend API.
+ * 
+ * @param {number} id The unique identifier of the product to retrieve details for.
+ * @returns {Promise<object>}
+ * 
+ * @author Nycolas Felipe
+ */
+
 export default async function getProductDetail(id) {
+  if (typeof (id) !== "number") {
+    console.debug("getProductInfo - error: productId is not a valid integer number");
+    return {};
+  }
   const dev = window.location.hostname.includes("localhost");
   const url = dev ?
     "http://localhost:3000/products/" + id + "/detail" :
@@ -12,6 +26,6 @@ export default async function getProductDetail(id) {
     }
     return await response.json();
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.debug(`Error fetching product detail with id ${id}: ${error}`);
   }
 }
