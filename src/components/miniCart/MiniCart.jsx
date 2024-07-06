@@ -1,14 +1,20 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaTrash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import formatMoney from "../../scripts/formatMoney";
 import styles from "./MiniCart.module.css";
+import useOutsideClick from "../../hooks/useOutsideClick";
 
 export const MiniCart = ({ cart, setCart, miniCart, setMiniCart }) => {
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
+  
+  // Esconder minicart ao clicar fora
+  const miniCartRef = useRef(null);
+  const hideMinicart = () => setMiniCart({ ...miniCart, visible: false });
+  useOutsideClick(miniCartRef, hideMinicart);
 
   // Exibir/esconder o minicart
   const showMiniCart = (visible = false) => setMiniCart({ ...miniCart, visible: visible });
@@ -77,7 +83,7 @@ export const MiniCart = ({ cart, setCart, miniCart, setMiniCart }) => {
 
   return (
     <>
-      <div className={`${styles.mini_cart} ${miniCart.visible && styles.mini_cart_visible}`}>
+      <div ref={miniCartRef} className={`${styles.mini_cart} ${miniCart.visible && styles.mini_cart_visible}`}>
         <div className={styles.header}>
           <div className={styles.header_title}>
             <FaCartShopping />
@@ -93,13 +99,13 @@ export const MiniCart = ({ cart, setCart, miniCart, setMiniCart }) => {
               <>
                 <div className={styles.cart_item} key={index}>
                   <div className={styles.item_img}>
-                    <Link onClick={(e) => {showMiniCart(false); redirectToProduct(e, curElm.ProductId)}}>
+                    <Link onClick={(e) => { showMiniCart(false); redirectToProduct(e, curElm.ProductId) }}>
                       <img src={`.${curElm.Img}`} alt={curElm.Title} />
                     </Link>
                   </div>
                   <div className={styles.item_details}>
                     <div className={styles.item_title}>
-                      <Link onClick={(e) => {showMiniCart(false); redirectToProduct(e, curElm.ProductId)}}>
+                      <Link onClick={(e) => { showMiniCart(false); redirectToProduct(e, curElm.ProductId) }}>
                         <h6>{curElm.Title}</h6>
                       </Link>
                     </div>
