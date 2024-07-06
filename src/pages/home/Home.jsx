@@ -145,8 +145,8 @@ export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct
         {loading ? (<img className="loading" src="./img/loading.svg" alt="Loading" />) :
           (
             <div className="container">
-              {
-                product?.map((curElm, index) => {
+              {product[0]?.map((curElm, index) => {
+                if (index < 15) {
                   return (
                     <ProductCard
                       key={index}
@@ -157,8 +157,8 @@ export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct
                       addFavorite={addFavorite}
                     />
                   )
-                })
-              }
+                }
+              })}
             </div>
           )}
       </div>

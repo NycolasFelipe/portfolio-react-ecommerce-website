@@ -189,16 +189,23 @@
   text-decoration: underline;
 }
 
+.products .container .brand {
+  width: 100%;
+}
+
 .products .container .product-box .contant {
   display: flex;
   flex-flow: wrap row;
   flex-wrap: wrap;
-  
 }
 
 .products .container .product-box .contant::after {
   content: "";
   flex: auto;
+}
+
+.products .container .product-pagination {
+  width: 100%;
 }
 
 @media (max-width: 1110px) {

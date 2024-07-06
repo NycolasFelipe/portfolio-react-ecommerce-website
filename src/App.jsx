@@ -14,6 +14,7 @@ import getProductInfo from "./scripts/getProductInfo";
 import createUser from "./api/createUser";
 import getUser from "./api/getUser";
 import "./App.css";
+import paginate from "./scripts/paginate";
 
 export const App = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ export const App = () => {
   const [warning, setWarning] = useState(false);
   const [miniCart, setMiniCart] = useState({ visible: false });
   const userLoginCheckCount = useRef(0);
+  const dataPerPage = useRef(15);
 
   // Cria usuário ao logar pela primeira vez
   function handleUserLogged() {
@@ -126,21 +128,27 @@ export const App = () => {
       if (!currentURL.includes("products")) {
         navigate("/products");
       }
-      const change = initialProduct.filter((x) => {
-        const productCategory = removeAccents(x.Category).toLowerCase().trim();
-        const productTitle = removeAccents(x.Title).toLowerCase().trim();
-        searchTerm = removeAccents(searchTerm).toLowerCase().trim();
-        return productCategory.includes(searchTerm) || productTitle.includes(searchTerm);
+
+      // Array contendo resultados da pesquisa de forma paginada
+      const searchProduct = initialProduct.map((curElm) => {
+        return curElm.filter(x => {
+          const productCategory = removeAccents(x.Category).toLowerCase().trim();
+          const productTitle = removeAccents(x.Title).toLowerCase().trim();
+          searchTerm = removeAccents(searchTerm).toLowerCase().trim();
+          return productCategory.includes(searchTerm) || productTitle.includes(searchTerm);
+        });
       });
-      setProduct(change);
-      setSearch("");
+
+      // Repagina dados para que sejam exibidos de forma correta
+      const paginatedResult = paginate(searchProduct.flat(Infinity));
+      setProduct(paginatedResult);
 
       // Exibe texto de resultado da pesquisa
       setTimeout(() => {
         const resultadoPesquisa = document.querySelector(".products > .products-header .search-results");
         if (resultadoPesquisa) {
           resultadoPesquisa.classList.remove("hide");
-          resultadoPesquisa.innerHTML = change.length > 0 ?
+          resultadoPesquisa.innerHTML = searchProduct[0].length > 0 ?
             `<p>Resultados de busca para "<span class="term">${search}</span>":</p>` :
             `<p>Não foi possível encontrar resultados para "<span class="term">${search}</span>"</p>`;
         }
@@ -153,10 +161,11 @@ export const App = () => {
     if (category === "All") {
       setProduct(initialProduct);
     } else {
-      const update = initialProduct.filter((e) => {
-        return e.Category === category;
+      const filteredProduct = initialProduct.map((curElm) => {
+        return curElm.filter(x => x.Category === category);
       });
-      setProduct(update);
+      const paginatedResult = paginate(filteredProduct.flat(Infinity));
+      setProduct(paginatedResult);
     }
 
     // Limpa resultados de pesquisa
@@ -179,9 +188,13 @@ export const App = () => {
           return categories;
         }, []);
 
+        // Categorias de produtos
         setCategories(categories);
-        setProduct(data);
-        setInitialProduct(data);
+
+        // Produtos paginados
+        const paginatedData = paginate(data, dataPerPage.current);
+        setProduct(paginatedData);
+        setInitialProduct(paginatedData);
       })
       .then(() => {
         handleUserLogged();

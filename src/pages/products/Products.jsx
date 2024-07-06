@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { FaLaptop } from "react-icons/fa";
 import { IoChevronDownSharp, IoChevronForwardSharp } from "react-icons/io5";
 import { ProductModal } from "../../components/productModal/ProductModal";
 import { ProductCard } from "../../components/productCard/ProductCard";
+import Pagination from "../../components/pagination/Pagination";
 import "./Products.css";
 
 export const Products = ({
@@ -23,6 +24,8 @@ export const Products = ({
 }) => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const [visibleOrderBy, setVisibleOrderBy] = useState(false);
+  const [pageIndex, setPageIndex] = useState(0);
+  const productsHeaderRef = useRef(null);
 
   const handleOrderBy = (e) => {
     setVisibleOrderBy(prev => !prev);
@@ -52,6 +55,10 @@ export const Products = ({
     }
   }
 
+  const scrollToProductsHeader = () => {
+    productsHeaderRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   return (
     <>
       {closeDetail && (
@@ -64,7 +71,7 @@ export const Products = ({
         />
       )}
       <div className="products">
-        <div className="products-header">
+        <div className="products-header" ref={productsHeaderRef}>
           <div className="contant">
             <h2><FaLaptop className="products-icon" /> Produtos</h2>
             <p><Link to="/" className="link">Início <IoChevronForwardSharp className="chevron" /></Link></p>
@@ -100,7 +107,7 @@ export const Products = ({
               <div className="brand">
                 <div className="product-box">
                   <div className="contant">
-                    {product?.map((curElm, index) => {
+                    {product[pageIndex]?.map((curElm, index) => {
                       return (
                         <ProductCard
                           key={index}
@@ -113,6 +120,14 @@ export const Products = ({
                       )
                     })}
                   </div>
+                </div>
+                <div className="product-pagination">
+                  <Pagination
+                    data={product}
+                    pageIndex={pageIndex}
+                    setPageIndex={setPageIndex}
+                    scrollTo={scrollToProductsHeader}
+                  />
                 </div>
               </div>
             </div>
