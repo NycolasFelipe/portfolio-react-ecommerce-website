@@ -6,6 +6,7 @@ import { IoChevronDownSharp, IoChevronForwardSharp } from "react-icons/io5";
 import { ProductModal } from "../../components/productModal/ProductModal";
 import { ProductCard } from "../../components/productCard/ProductCard";
 import Pagination from "../../components/pagination/Pagination";
+import paginate from "../../scripts/paginate";
 import "./Products.css";
 
 export const Products = ({
@@ -20,7 +21,8 @@ export const Products = ({
   addFavorite,
   filterProduct,
   categories,
-  loading
+  loading,
+  dataPerPage
 }) => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const [visibleOrderBy, setVisibleOrderBy] = useState(false);
@@ -42,16 +44,17 @@ export const Products = ({
 
       // Ordenação ascendente
       if (optionText.toLowerCase().includes("menor")) {
-        setProduct(prev => prev.sort((a, b) => {
-          return a.Price - b.Price;
-        }));
-        return;
+        const productAsc = product.flat(Infinity).sort((a, b) => a.Price - b.Price);
+        const productAscPaginated = paginate(productAsc, dataPerPage.current);
+        setProduct(productAscPaginated);
       }
 
       // Ordenação decrescente
-      setProduct(prev => prev.sort((a, b) => {
-        return b.Price - a.Price;
-      }));
+      if (optionText.toLowerCase().includes("maior")) {
+        const productDesc = product.flat(Infinity).sort((a, b) => b.Price - a.Price);
+        const productDescPaginated = paginate(productDesc, dataPerPage.current);
+        setProduct(productDescPaginated);
+      }
     }
   }
 

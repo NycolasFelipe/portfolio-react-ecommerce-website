@@ -25,7 +25,8 @@ export const Routing = ({
   favorites,
   filterProduct,
   categories,
-  loading
+  loading,
+  dataPerPage
 }) => {
   const { isAuthenticated } = useAuth0();
 
@@ -60,6 +61,7 @@ export const Routing = ({
             filterProduct={filterProduct}
             categories={categories}
             loading={loading}
+            dataPerPage={dataPerPage}
           />
         }
         />

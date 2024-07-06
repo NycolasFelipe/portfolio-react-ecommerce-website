@@ -13,8 +13,8 @@ import getProduct from "./api/getProduct";
 import getProductInfo from "./scripts/getProductInfo";
 import createUser from "./api/createUser";
 import getUser from "./api/getUser";
-import "./App.css";
 import paginate from "./scripts/paginate";
+import "./App.css";
 
 export const App = () => {
   const navigate = useNavigate();
@@ -239,6 +239,7 @@ export const App = () => {
           filterProduct={filterProduct}
           categories={categories}
           loading={loading}
+          dataPerPage={dataPerPage}
         />
       </UserContext.Provider>
       <Footer />
