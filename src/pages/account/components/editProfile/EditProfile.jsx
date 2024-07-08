@@ -1,138 +1,98 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoWarningOutline } from "react-icons/io5";
-import getAddress from "../../../../api/getAddress";
-import maskPhone from "../../../../scripts/maskPhone";
 import { Address } from "../address/Address";
 import { Button } from "../../../../components/button/Button";
 import { useAuth0 } from "@auth0/auth0-react";
+import getId from "../../../../scripts/getId";
+import getAddress from "../../../../api/getAddress";
+import maskPhone from "../../../../scripts/maskPhone";
 import updateUser from "../../../../api/updateUser";
+import isEmptyObject from "../../../../scripts/isEmptyObject";
 import "./EditProfile.css";
 
 export const EditProfile = ({ data, setUser }) => {
   const { user, getIdTokenClaims } = useAuth0();
-  const [address, setAddress] = useState({ erro: true });
-  const [zipcode, setZipcode] = useState("");
+
+  // Handle phone number
   const [phone, setPhone] = useState("");
+  const phoneRef = useRef(null);
 
-  function displayAddress(active) {
-    if (active) {
-      // Exibe campos de endereço
-      document.querySelector(".address .container").classList.remove("hidden");
+  const handlePhone = (value) => {
+    const maskedPhone = maskPhone(value);
+    setPhone(maskedPhone);
+    if (phoneRef.current.value.length < 15) {
+      phoneRef.current.classList.add("warning");
     } else {
-      // Limpa campos de endereço
-      document.querySelector("#logradouro").value = "";
-      document.querySelector("#complemento").value = "";
-      document.querySelector("#bairro").value = "";
-      document.querySelector("#cidade").value = "";
-      document.querySelector("#estado").value = "";
-      document.querySelector("#numero").value = "";
-
-      // Esconde campo de endereços
-      document.querySelector(".address .container").classList.add("hidden");
+      phoneRef.current.classList.remove("warning");
     }
   }
 
-  function displayWarning(active) {
-    if (active) {
-      document.querySelector(".address .warning").classList.remove("hidden");
-    } else {
-      document.querySelector(".address .warning").classList.add("hidden");
-    }
-  }
+  // Handle address
+  const [address, setAddress] = useState({});
+  const [zipcode, setZipcode] = useState("");
+  const zipcodeRef = useRef(null);
+  const zipcodeWarningRef = useRef(null);
 
-  function fillAddress(address) {
-    document.querySelector("#zipcode").value = parseInt(address.cep);
-    document.querySelector("#logradouro").value = address.logradouro;
-    document.querySelector("#complemento").value = address.complemento;
-    document.querySelector("#bairro").value = address.bairro;
-    document.querySelector("#cidade").value = address.cidade;
-    document.querySelector("#estado").value = address.estado;
-    document.querySelector("#numero").value = address.numero;
-  }
-
-  function fillPhone(phone) {
-    document.querySelector("#phone").value = phone;
-  }
-
-  const handleZipcode = (e) => {
-    // Limita 8 digitos iniciais
-    const value = e.currentTarget.value.substring(0, 8);
-    e.currentTarget.value = value;
+  const handleZipcode = (value) => {
+    setZipcode(value.substring(0, 8));
+    const zipcodeWarning = zipcodeWarningRef.current.classList;
 
     // Se o CEP for diferente do digitado anterior, atualiza objeto
     if (value.length === 8 && value !== zipcode) {
       getAddress(value).then((data) => {
         // CEP inválido
         if (data.erro) {
-          displayAddress(false);
-          return null;
+          setAddress({});
+          zipcodeWarning.add("visible");
+          return;
+        } else {
+          setAddress(data);
+          zipcodeWarning.remove("visible");
         }
-        // CEP válido
-        displayAddress(true);
-        displayWarning(false);
-        setAddress(data);
-        setZipcode(value);
       });
     } else if (value.length < 8) {
-      setZipcode("");
-      displayAddress(false);
-      displayWarning(true);
+      setAddress({});
+      zipcodeWarning.remove("visible");
     }
   }
 
+  // Save changes
   const saveChanges = () => {
-    const validZipcode = zipcode.length > 0;
+    const validAddress = !isEmptyObject(address);
+    const validAddressNumber = address?.numero !== "" && address?.numero !== undefined;
     const validPhone = phone.length === 15;
 
-    if (validZipcode && validPhone) {
-      const userId = user.sub.replace("google-oauth2|", "").replace("auth0|", "");
+    if (validAddress && validAddressNumber && validPhone) {
       const obj = {
-        UserId: userId,
-        PhoneNumber: phone,
-        Address: JSON.stringify(address)
+        UserId: getId(user),
+        FavoriteProducts: data?.FavoriteProducts,
+        PhoneNumber: phoneRef.current.value,
+        Address: JSON.stringify(address),
       }
-      setUser([obj]);
+      setUser(obj);
       getIdTokenClaims().then((token) => {
         updateUser(token, { PhoneNumber: phone, Address: address });
       });
     }
   }
 
-  useEffect(() => {
-    if (data) {
-      const userData = data[0];
-
-      if (userData !== undefined) {
-        try {
-          if (typeof userData.PhoneNumber !== "undefined") {
-            const phoneNumber = userData.PhoneNumber;
-            setPhone(phoneNumber);
-
-            if (phoneNumber.length > 0) {
-              fillPhone(phoneNumber);
-            }
-          }
-
-          if (userData.Address !== undefined) {
-            const address = JSON.parse(userData.Address);
-            if (typeof address.cep !== "undefined") {
-              address.cep = address.cep.replace("-", "");
-              const cep = address.cep;
-              setZipcode(cep);
-            }
-            setAddress(address);
-
-            if (address.hasOwnProperty("cep")) {
-              fillAddress(address);
-              displayWarning(false);
-            }
-          }
-        } catch (err) {
-          console.debug(err);
-        }
+  // Load user data
+  const loadUserData = (data) => {
+    if (data?.hasOwnProperty("Address")) {
+      const userAddress = JSON.parse(data.Address);
+      setAddress(userAddress);
+      const userZipcode = userAddress.cep?.replace("-", "");
+      if (userZipcode !== undefined) {
+        setZipcode(userZipcode);
       }
     }
-  }, []);
+    if (data?.hasOwnProperty("PhoneNumber")) {
+      const userPhone = data.PhoneNumber;
+      setPhone(userPhone);
+    }
+  }
+
+  useEffect(() => loadUserData(data), []);
 
   return (
     <>
@@ -143,7 +103,6 @@ export const EditProfile = ({ data, setUser }) => {
             <label htmlFor="name">Nome</label>
             <input
               type="text"
-              name="name"
               id="name"
               value={user.given_name ? user.given_name : ""}
               disabled
@@ -153,7 +112,6 @@ export const EditProfile = ({ data, setUser }) => {
             <label htmlFor="surname">Sobrenome</label>
             <input
               type="text"
-              name="surname"
               id="surname"
               value={user.family_name ? user.family_name : ""}
               disabled
@@ -163,7 +121,6 @@ export const EditProfile = ({ data, setUser }) => {
             <label htmlFor="email">Email</label>
             <input
               type="email"
-              name="email"
               id="email"
               value={user.email ? user.email : ""}
               disabled
@@ -173,11 +130,11 @@ export const EditProfile = ({ data, setUser }) => {
             <label htmlFor="phone">Número p/ contato</label>
             <input
               type="text"
-              name="phone"
               id="phone"
+              ref={phoneRef}
               value={phone}
-              className={phone.length === 15 ? "" : "warning"}
-              onChange={(e) => setPhone(maskPhone(e.currentTarget.value))} />
+              onChange={(e) => handlePhone(e.currentTarget.value)}
+            />
           </div>
           <div className="item">
             <label>Endereço</label>
@@ -185,16 +142,16 @@ export const EditProfile = ({ data, setUser }) => {
               <label htmlFor="zipcode">CEP</label>
               <input
                 type="number"
-                name="zipcode"
                 id="zipcode"
-                defaultValue=""
-                onChange={(e) => handleZipcode(e)}
+                ref={zipcodeRef}
+                value={zipcode}
+                onChange={(e) => handleZipcode(e.currentTarget.value)}
               />
-              <span className="warning">
+              <span className="warning" ref={zipcodeWarningRef}>
                 <IoWarningOutline /> CEP Inválido.
               </span>
               <div className="container">
-                <Address address={address} setAddress={setAddress} />
+                {!isEmptyObject(address) && <Address address={address} setAddress={setAddress} />}
               </div>
             </div>
           </div>
@@ -206,7 +163,12 @@ export const EditProfile = ({ data, setUser }) => {
             initialText="Salvar"
             newText="Salvo"
             onClick={() => saveChanges()}
-            disabled={(zipcode.length > 0 && phone.length === 15) ? "" : "disabled"}
+            disabled={(
+              address
+              && address?.numero !== undefined
+              && address?.numero !== ""
+              && phone.length === 15
+            ) ? "" : "disabled"}
           />
         </div>
       </div>
