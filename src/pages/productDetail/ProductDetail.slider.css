@@ -1,0 +1,12 @@
+.products_slider .slick-prev::before,
+.products_slider .slick-next::before {
+  color: var(--primary-color);
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.products_slider .slick-prev:hover::before,
+.products_slider .slick-next:hover::before {
+  opacity: 1;
+  transition: 0.3s;
+}

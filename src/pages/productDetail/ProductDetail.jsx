@@ -14,7 +14,8 @@ import Slider from "react-slick";
 import { ButtonComprar } from "../../components/buttonComprar/ButtonComprar";
 import { ShareModal } from "../../components/shareModal/ShareModal";
 import { disableScroll, enableScroll } from "../../scripts/enableDisableScroll";
-import "./ProductDetail.css";
+import "./ProductDetail.slider.css";
+import styles from "./ProductDetail.module.css";
 
 export const ProductDetail = ({ addToCart, favorites, addFavorite }) => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
@@ -24,6 +25,7 @@ export const ProductDetail = ({ addToCart, favorites, addFavorite }) => {
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [shareModal, setShareModal] = useState(false);
+  const [tab, setTab] = useState(1);
   const sliderSettings = { infinite: false, speed: 300, slidesToShow: 1, variableWidth: true, initialSlide: 0 };
   const location = useLocation();
 
@@ -72,145 +74,161 @@ export const ProductDetail = ({ addToCart, favorites, addFavorite }) => {
 
   return (
     <>
-      <div className="product_detail">
-        {loading ? (<img className="loading" src="../img/loading.svg" alt="Loading" />) : (
-          <>
-            <div className="header">
-              <h2>{productDetail.Title}</h2>
-              <p>
-                <Link to="/" className="link">
-                  Início <IoChevronForwardSharp className="chevron" />
-                </Link>
-                <Link to="/products" className="link">
-                  Produtos <IoChevronForwardSharp className="chevron" />
-                </Link>
-                <Link className="link link-last">
-                  {productDetail.Category}
-                </Link>
-              </p>
+      <div className={styles.product_detail}>
+        {loading ? (<img className={styles.loading} src="../img/loading.svg" alt="Loading" />) : (
+          <div className={styles.container}>
+            <div className={styles.header}>
+              <div className={styles.container}>
+                <h2>{productDetail.Title}</h2>
+                <p>
+                  <Link to="/" className={styles.link}>
+                    Início <IoChevronForwardSharp className={styles.chevron} />
+                  </Link>
+                  <Link to="/products" className={styles.link}>
+                    Produtos <IoChevronForwardSharp className={styles.chevron} />
+                  </Link>
+                  <Link className={styles.link}>
+                    {productDetail.Category}
+                  </Link>
+                </p>
+              </div>
             </div>
-            <div className="view_container">
-              <div className="view">
-                <div className="img-box">
+            <div className={styles.view}>
+              <div className={styles.container}>
+                <div className={styles.img_box}>
                   <Zoom
-                    className="img"
+                    className={styles.img}
                     img={"../" + productDetail.Img}
                     zoomScale={1.4}
-                    width={640}
+                    width={500}
                     height={500}
                   />
                 </div>
-              </div>
-              <div className="details">
-                <div className="container stock">
-                  <p>Vendido e entregue por <span className="shop-detail"><Link to="/">Ecommerce Shop </Link> </span> | <span></span>
-                    <span className="shop-stock">
-                      {productDetail.Info.Stock > 0 ? productDetail.Info.Stock + " em estoque" : "Fora de estoque"}
-                    </span>
-                  </p>
-                </div>
-                <div className="container buy">
-                  <div className="contant">
-                    <p className="product_price">{formatMoney(productDetail.Price)}</p>
-                    <p className="product_promo">à vista no PIX como até 7% OFF</p>
-                    <p className="product_price_pix"><b>{formatMoney(productDetail.Price * 0.93)}</b></p>
-                    <p className="product_parcelas">Em até 10x de {formatMoney(productDetail.Price * 0.1)} sem juros no cartão</p>
-                    <p className="product_parcela">Ou em 1x no cartão com até 7% OFF</p>
+                <div className={styles.details}>
+                  <div className={styles.stock}>
+                    <p>Vendido e entregue por <span className={styles.shop_detail}><Link to="/">Ecommerce Shop </Link> </span> | <span></span>
+                      <span className={styles.shop_stock}>
+                        {productDetail.Info.Stock > 0 ? productDetail.Info.Stock + " em estoque" : "Fora de estoque"}
+                      </span>
+                    </p>
                   </div>
-                  <div className="contant">
-                    {productDetail.Info.Stock > 0 ? (
-                      isAuthenticated ? (
-                        <div className="btn_container" onClick={() => addToCart(productDetail)}>
-                          <ButtonComprar />
-                        </div>
-                      ) : (
-                        <div className="btn_container" onClick={() => loginWithRedirect()}>
-                          <ButtonComprar redirect={true} />
-                        </div>
-                      )
-                    ) : (
-                      <div className="btn_container">
-                        <ButtonComprar disabled={true} />
-                      </div>
-                    )}
-                  </div>
-                </div>
-                {similarProducts.length > 0 && (
-                  <div className="container similar">
-                    <p><AiFillProduct className="icon" />Produtos similares</p>
-                    <div className="slider">
-                      <Slider {...sliderSettings}>
-                        {similarProducts?.map((curElm) => {
-                          return (
-                            <div className="slider_box" key={curElm.ProductId} onClick={() => redirectToProduct(curElm.ProductId)}>
-                              <div className="img_box">
-                                <img src={`../${curElm.Img}`} alt={curElm.Title} title={curElm.Title} />
-                              </div>
-                              <div className="price">
-                                <p>{formatMoney(curElm.Price)}</p>
-                              </div>
+                  <div className={styles.buy}>
+                    <div className={styles.container}>
+                      <p className={styles.product_price}>{formatMoney(productDetail.Price)}</p>
+                      <p className={styles.product_promo}>à vista no PIX como até 7% OFF</p>
+                      <p className={styles.product_price_pix}><b>{formatMoney(productDetail.Price * 0.93)}</b></p>
+                      <p className={styles.product_parcelas}>Em até 10x de {formatMoney(productDetail.Price * 0.1)} sem juros no cartão</p>
+                      <p className={styles.product_parcela}>Ou em 1x no cartão com até 7% OFF</p>
+                      <div className={styles.button}>
+                        {productDetail.Info.Stock > 0 ? (
+                          isAuthenticated ? (
+                            <div className={styles.btn_container} onClick={() => addToCart(productDetail)}>
+                              <ButtonComprar />
+                            </div>
+                          ) : (
+                            <div className={styles.btn_container} onClick={() => loginWithRedirect()}>
+                              <ButtonComprar redirect={true} />
                             </div>
                           )
-                        })}
-                      </Slider>
+                        ) : (
+                          <div className={styles.btn_container}>
+                            <ButtonComprar disabled={true} />
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                )}
+                  {similarProducts.length > 0 && (
+                    <div className={styles.similar}>
+                      <p><AiFillProduct className={styles.icon} />Produtos similares</p>
+                      <div className={`products_slider ${styles.slider}`}>
+                        <Slider {...sliderSettings}>
+                          {similarProducts?.map((curElm) => {
+                            return (
+                              <div className={styles.slider_box} key={curElm.ProductId} onClick={() => redirectToProduct(curElm.ProductId)}>
+                                <div className={styles.img_box}>
+                                  <img src={`../${curElm.Img}`} alt={curElm.Title} title={curElm.Title} />
+                                </div>
+                                <div className={styles.price}>
+                                  <p>{formatMoney(curElm.Price)}</p>
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </Slider>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-            {shareModal && (
-              <>
-                <div onClick={() => handleShareModal(false)} className="share_modal_blur"></div>
-                <ShareModal handleShareModal={handleShareModal} />
-              </>
-            )}
-            <div className="interact">
-              <button className="share" title="Compartilhar" onClick={() => handleShareModal(true)}><LuShare2 /></button>
-              {isAuthenticated ?
-                <button
-                  className={favoriteProduct ? "like favorited" : "like"}
-                  onClick={() => { addFavorite(productDetail); setFavoriteProduct(prev => !prev) }}
-                  title="Adicionar aos favoritos">
-                  {favoriteProduct ? <AiFillHeart /> : <AiOutlineHeart />}
-                </button>
-                :
-                <button
-                  className="like"
-                  onClick={() => loginWithRedirect()}
-                  title="Adicionar aos favoritos">
-                  <AiOutlineHeart />
-                </button>
-              }
+            <div
+              onClick={() => handleShareModal(false)}
+              className={`${styles.share_modal_blur} ${shareModal && `${styles.show}`}`}
+            >
             </div>
-            <div className="description">
-              <h3><IoDocumentText className="icon" />DESCRIÇÃO DO PRODUTO</h3>
-              {productDetail.Info.Description?.map((curElm, index) => {
-                return (
-                  <div key={index} className="description_item">
-                    <p className="topic">{curElm.topic}</p>
-                    <p className="text">{curElm.text}</p>
-                  </div>
-                )
-              })}
+            <div className={`${styles.share_modal} ${shareModal && `${styles.show}`}`}>
+              <ShareModal handleShareModal={handleShareModal} />
             </div>
-            <div className="details">
-              <h3><IoIosInformationCircle className="icon" /> DETALHES DO PRODUTO</h3>
-              {productDetail.Info.Details?.map((curElm, index) => {
-                return (
-                  <div key={index} className="details_item">
-                    <p className="topic">{curElm.topic}</p>
-                    <ul>
-                      {productDetail.Info.Details[index].items?.map((curElm, j) => {
-                        return (
-                          <li key={j}><p className="item">- {curElm}</p></li>
-                        )
-                      })}
-                    </ul>
-                  </div>
-                )
-              })}
+            <div className={styles.interact}>
+              <div className={styles.container}>
+                <button className={styles.share} title="Compartilhar" onClick={() => handleShareModal(true)}><LuShare2 /></button>
+                {isAuthenticated ?
+                  <button
+                    className={favoriteProduct ? `${styles.like} ${styles.favorited}` : `${styles.like}`}
+                    onClick={() => { addFavorite(productDetail); setFavoriteProduct(prev => !prev) }}
+                    title="Adicionar aos favoritos">
+                    {favoriteProduct ? <AiFillHeart /> : <AiOutlineHeart />}
+                  </button>
+                  :
+                  <button
+                    className={styles.like}
+                    onClick={() => loginWithRedirect()}
+                    title="Adicionar aos favoritos">
+                    <AiOutlineHeart />
+                  </button>
+                }
+              </div>
             </div>
-          </>
+            <div className={styles.description}>
+              <div className={styles.tabs}>
+                <div className={styles.tab} onClick={() => setTab(1)} active={(tab === 1).toString()}>
+                  <h3><IoDocumentText className={styles.icon} /> Descrição</h3>
+                </div>
+                <div className={styles.tab} onClick={() => setTab(2)} active={(tab === 2).toString()}>
+                  <h3><IoIosInformationCircle className={styles.icon} /> Detalhes</h3>
+                </div>
+              </div>
+              <div className={styles.content}>
+                <div className={styles.text} active={(tab === 1).toString()}>
+                  {productDetail.Info.Description?.map((curElm, index) => {
+                    return (
+                      <div key={index} className={styles.description_item}>
+                        <p className={styles.description_topic}>{curElm.topic}</p>
+                        <p className={styles.description_text}>{curElm.text}</p>
+                      </div>
+                    )
+                  })}
+                </div>
+                <div className={styles.text} active={(tab === 2).toString()}>
+                  {productDetail.Info.Details?.map((curElm, index) => {
+                    return (
+                      <div key={index} className={styles.details_item}>
+                        <p className={styles.details_topic}>{curElm.topic}</p>
+                        <ul>
+                          {productDetail.Info.Details[index].items?.map((curElm, j) => {
+                            return (
+                              <li key={j}><p className="item">- {curElm}</p></li>
+                            )
+                          })}
+                        </ul>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </>
