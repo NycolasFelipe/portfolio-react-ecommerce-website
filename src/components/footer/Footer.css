@@ -5,12 +5,14 @@
 }
 
 .footer .container {
-  max-width: 100%;
   display: flex;
+  gap: 60px;
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 30px 0;
 }
 
 .footer .about {
-  padding: 40px;
   width: 100%;
 }
 
@@ -101,12 +103,6 @@
   color: var(--text-black);
 }
 
-.footer .container .account {
-  margin-top: 30px;
-  padding-right: 50px;
-  margin-right: 40px;
-}
-
 .footer .container .account h3 {
   font-size: 28px;
   color: var(--text-black);
@@ -129,11 +125,6 @@
 
 .footer .container .account ul li:hover {
   color: var(--primary-color);
-}
-
-.footer .container .page {
-  margin-top: 30px;
-  padding-right: 50px;
 }
 
 .footer .container .page h3 {
