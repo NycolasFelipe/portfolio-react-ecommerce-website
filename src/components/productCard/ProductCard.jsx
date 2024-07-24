@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { AiFillHeart, AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
-import { BsEye } from "react-icons/bs";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { ButtonComprar } from "../buttonComprar/ButtonComprar";
 import formatMoney from "../../scripts/formatMoney";
-import addCartAnimation from "../../scripts/addCartAnimation";
-import "./ProductCard.css";
+import styles from "./ProductCard.module.css";
 
-export const ProductCard = ({ product, addToCart, viewProduct, favorites, addFavorite }) => {
+export const ProductCard = ({ product, addToCart, favorites, addFavorite }) => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const [favoriteProduct, setFavoriteProduct] = useState(false);
   const navigate = useNavigate();
@@ -15,7 +14,7 @@ export const ProductCard = ({ product, addToCart, viewProduct, favorites, addFav
   const navigateDetail = (e, productId) => {
     const url = window.location.pathname;
     // Prevent event bubbling
-    if (e.target.nodeName !== "LI") {
+    if (e.target.nodeName !== "P") {
       if (url.includes("products")) {
         // Navegar para produtos a partir da página de produtos
         navigate(`detail?productId=${productId}`);
@@ -42,35 +41,27 @@ export const ProductCard = ({ product, addToCart, viewProduct, favorites, addFav
   }, [favorites]);
 
   return (
-    <div className="product-card" onClick={(e) => navigateDetail(e, product.ProductId)}>
-      <div className="img-box">
+    <div className={styles.product_card}>
+      <div className={styles.img_box} onClick={(e) => navigateDetail(e, product.ProductId)}>
         <img loading="lazy" src={product.Img} alt={product.Title} />
-        <div className="icon">
+        <div className={styles.icon}>
           {isAuthenticated ?
-            <li
-              className="button-product"
-              onClick={(e) => { addToCart(product); addCartAnimation(e) }}>
-              <AiOutlineShoppingCart />
-            </li> :
-            <li
-              onClick={() => loginWithRedirect()}>
-              <AiOutlineShoppingCart />
-            </li>
-          }
-          <li onClick={() => viewProduct(product)}><BsEye /></li>
-          {isAuthenticated ?
-            <li
-              onClick={() => { addFavorite(product); setFavoriteProduct(prev => !prev) }}>
-              {favoriteProduct ? <AiFillHeart className="favorite" /> : <AiOutlineHeart />}
-            </li> :
-            <li onClick={() => loginWithRedirect()}><AiOutlineHeart /></li>
+            <p
+              onClick={() => { addFavorite(product); setFavoriteProduct(prev => !prev) }}
+              title="Favoritar">
+              {favoriteProduct ? <AiFillHeart className={styles.favorite} /> : <AiOutlineHeart />}
+            </p> :
+            <p onClick={() => loginWithRedirect()} title="Favoritar"><AiOutlineHeart /></p>
           }
         </div>
       </div>
-      <div className="detail">
-        <p>{product.Category}<span className="favorite">{favoriteProduct && <AiFillHeart />}</span></p>
-        <h3>{product.Title}</h3>
+      <div className={styles.detail} onClick={(e) => navigateDetail(e, product.ProductId)}>
+        <p>{product.Category}<span className={styles.favorite}>{favoriteProduct && <AiFillHeart />}</span></p>
+        <h3 title={product.Title}>{product.Title}</h3>
         <h4>{formatMoney(product.Price)}</h4>
+      </div>
+      <div className={styles.detail_button}>
+        <ButtonComprar onClick={() => addToCart(product)} />
       </div>
     </div>
   );
