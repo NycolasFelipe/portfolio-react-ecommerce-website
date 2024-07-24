@@ -1,0 +1,54 @@
+.select {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    position: relative;
+}
+
+.select .title {
+    background: var(--grey-color-variation-3);
+    margin-right: -2px;
+    z-index: 1;
+}
+
+.select .value {
+    padding-left: 4px;
+    transition: 0.3s;
+    background: var(--grey-color-variation-3);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.select .value:hover {
+    color: var(--primary-color);
+    transition: 0.3s;
+}
+
+.select .value .icon {
+    position: relative;
+    top: 3px;
+    color: var(--grey-color-variation-1);
+}
+
+.select select {
+    border: none;
+    background: transparent;
+    padding: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    z-index: 0;
+    right: 0;
+    color: transparent;
+    user-select: none;
+
+}
+
+.select select:hover + .value {
+    color: var(--primary-color);
+}
+
+.select select option:not(:first-of-type) {
+    color: black;
+  }
