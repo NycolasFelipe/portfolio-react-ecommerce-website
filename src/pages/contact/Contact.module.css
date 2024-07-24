@@ -1,0 +1,160 @@
+.contact {
+    padding: 0 40px;
+    background: var(--grey-color-variation-3);
+}
+
+.contact .container {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+.header h2 {
+    font-size: 32px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--text-black);
+}
+
+.header h2 .icon {
+    position: relative;
+    top: 6px;
+    font-size: 32px;
+}
+
+.header p {
+    display: inline-block;
+    color: var(--grey-color-variation-1);
+    margin-top: 10px;
+    margin-right: 5px;
+}
+
+.header p .chevron {
+    position: relative;
+    top: 2px;
+}
+
+.header p .link {
+    text-decoration: none;
+    color: var(--grey-color-variation-1);
+    transition: 0.3s;
+}
+
+.header p .link:hover {
+    color: var(--primary-color);
+    transition: 0.3s;
+}
+
+.header p:last-of-type {
+    pointer-events: none;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 0;
+}
+
+.content .presentation {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+}
+
+.content .presentation h3 {
+    font-size: 42px;
+    color: var(--primary-color);
+}
+
+.content .presentation h4 {
+    font-size: 24px;
+}
+
+.content .presentation p {
+    font-size: 18px;
+    word-wrap: break-word;
+}
+
+.content .presentation a {
+    transition: 0.3s;
+}
+
+.content .presentation a:hover {
+    color: var(--primary-color);
+    transition: 0.3s;
+}
+
+.content .presentation .email,
+.content .presentation .social {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 10px;
+}
+
+.content .presentation .icon {
+    position: relative;
+    top: 3px;
+    margin-right: 2px;
+}
+
+.content .form {
+    width: 45%;
+}
+
+.content .form form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.content .form form>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.content .form form label {
+    font-size: 18px;
+    padding-bottom: 8px;
+}
+
+.content .form form input {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 18px;
+}
+
+.content .form form textarea {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 18px;
+    resize: vertical;
+    min-height: 200px;
+}
+
+.content .form .email_warning {
+    color: var(--text-red);
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .content .presentation,
+    .content .form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 440px) {
+    .contact {
+        padding: 0 20px;
+    }
+}

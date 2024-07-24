@@ -1,84 +1,118 @@
 import React, { useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 import { IoIosContact } from "react-icons/io";
 import { IoChevronForwardSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import "./Contact.css";
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
+import { Button } from "../../components/button/Button";
+import validateEmail from "../../scripts/validateEmail";
+import postMail from "../../api/postMail";
+import styles from "./Contact.module.css";
 
 export function Contact() {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
-  const [user, setUser] = useState(
-    {
-      name: "",
-      email: "",
-      subject: "",
-      message: ""
-    }
-  );
+  const [form, setForm] = useState({ name: "", mail: "", subject: "", message: "" });
+  const [mailWarning, setMailWarning] = useState(false);
 
-  let name, value;
-  const data = (e) => {
-    name = e.target.name;
-    value = e.target.value;
-    setUser({ ...user, [name]: value });
+  const handleSubmit = () => {
+    const validMail = validateEmail(form.mail);
+    if (validMail) {
+      setMailWarning(false);
+      postMail(form);
+      setTimeout(() => setForm({ name: "", mail: "", subject: "", message: "" }), 2000);
+    } else {
+      setMailWarning(true);
+    }
   }
 
   return (
     <>
-      <div className="contact-container">
-        <div className="contant">
-          <h2><IoIosContact className="contact-icon" /> Entre em contato</h2>
-          <p><Link to="/" className="link">Início <IoChevronForwardSharp className="chevron" /></Link></p>
+      <div className={styles.contact}>
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <h2><IoIosContact className={styles.icon} /> Entre em contato</h2>
+            <p><Link to="/" className={styles.link}>Início <IoChevronForwardSharp className={styles.chevron} /></Link></p>
             <p>Contato</p>
-          <div className="form">
-            <form method="POST">
-              <h3>Formulário para contato</h3>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                value={user.name}
-                placeholder="Digite seu nome completo"
-                required
-                autoComplete="off"
-                onChange={(e) => data(e)}
-              />
-              <input
-                type="email"
-                name="email"
-                id="email"
-                value={user.email}
-                placeholder="Digite seu endereço de e-mail"
-                required
-                autoComplete="off"
-                onChange={(e) => data(e)}
-              />
-              <input
-                type="text"
-                name="subject"
-                id="subject"
-                value={user.subject}
-                placeholder="Informe o assunto do e-mail"
-                required
-                autoComplete="off"
-                onChange={(e) => data(e)}
-              />
-              <textarea
-                name="message"
-                id="message"
-                value={user.message}
-                placeholder="Sua mensagem..."
-                required
-                autoComplete="off"
-                onChange={(e) => data(e)}
-              ></textarea>
-              {
-                isAuthenticated ?
-                  <button type="submit">Enviar formulário</button>
-                  :
-                  <button onClick={() => loginWithRedirect()} type="submit">Login p/ enviar formulário</button>
-              }
-            </form>
+          </div>
+          <div className={styles.content}>
+            <div className={styles.presentation}>
+              <h3>Vamos conversar!</h3>
+              <p>
+                Tem alguma sugestão para o site? Sinta-se à vontade para
+                entrar em contato e apresentar a sua ideia :)
+              </p>
+              <div className={styles.email}>
+                <h4>Email</h4>
+                <p><SiGmail className={styles.icon} /> nycolasfelipe.contato@gmail.com</p>
+              </div>
+              <div className={styles.social}>
+                <h4>Redes sociais</h4>
+                <p><a target="_blank" href="https://www.linkedin.com/in/nycolas-felipe/">
+                  <FaGithub className={styles.icon} /> LinkedIn</a></p>
+                <p><a target="_blank" href="https://github.com/NycolasFelipe">
+                  <FaLinkedin className={styles.icon} /> GitHub</a></p>
+                <p><a target="_blank" href="https://www.instagram.com/nyc_fel/">
+                  <FaInstagram className={styles.icon} /> Instagram</a></p>
+              </div>
+            </div>
+            <div className={styles.form} onSubmit={(e) => e.preventDefault()}>
+              <form method="POST">
+                <div className={styles.name}>
+                  <label htmlFor="name">Nome</label>
+                  <input
+                    type="text"
+                    id="name"
+                    value={form.name}
+                    required
+                    autoComplete="off"
+                    onChange={(e) => setForm(prevState => ({ ...prevState, name: e.target.value }))}
+                  />
+                </div>
+                <div className={styles.email}>
+                  <label htmlFor="email" className={mailWarning ? styles.email_warning : ""}>
+                    Email {mailWarning && <span>- email inválido*</span>}
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={form.mail}
+                    required
+                    autoComplete="off"
+                    onChange={(e) => setForm(prevState => ({ ...prevState, mail: e.target.value }))}
+                  />
+                </div>
+                <div className={styles.subject}>
+                  <label htmlFor="subject">Assunto</label>
+                  <input
+                    type="text"
+                    id="subject"
+                    value={form.subject}
+                    placeholder="Assunto do email"
+                    required
+                    autoComplete="off"
+                    onChange={(e) => setForm(prevState => ({ ...prevState, subject: e.target.value }))}
+                  />
+                </div>
+                <div className={styles.message}>
+                  <label htmlFor="message">Mensagem</label>
+                  <textarea
+                    id="message"
+                    value={form.message}
+                    placeholder="Sua mensagem..."
+                    required
+                    autoComplete="off"
+                    onChange={(e) => setForm(prevState => ({ ...prevState, message: e.target.value }))}
+                  ></textarea>
+                </div>
+                <div className={styles.submit}>
+                  <Button
+                    initialText="Enviar formulário"
+                    newText="Formulário enviado!"
+                    disabled={!form.name || !form.mail || !form.subject || !form.message}
+                    onClick={() => handleSubmit()}
+                  />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
