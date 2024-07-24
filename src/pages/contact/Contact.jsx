@@ -37,8 +37,7 @@ export function Contact() {
             <div className={styles.presentation}>
               <h3>Vamos conversar!</h3>
               <p>
-                Tem alguma sugestão para o site? Sinta-se à vontade para
-                entrar em contato e apresentar a sua ideia :)
+              Interessado em um site como esse? Sinta-se à vontade para entrar em contato :)
               </p>
               <div className={styles.email}>
                 <h4>Email</h4>
