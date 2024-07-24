@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import useOutsideClick from "../../hooks/useOutsideClick";
 import { IoMdClose } from "react-icons/io";
 import { FaFacebookF, FaRegCopy, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -8,8 +9,10 @@ import { EmailShareButton, FacebookShareButton, TelegramShareButton, TwitterShar
 import "./ShareModal.css";
 
 export const ShareModal = ({ handleShareModal }) => {
+  const modalRef = useRef(null);
   const currentUrl = window.location.href;
   const [copied, setCopied] = useState(false);
+
   const shareOptions = [
     { title: "Facebook", button: <FacebookShareButton url={currentUrl} />, icon: <FaFacebookF /> },
     { title: "X", button: <TwitterShareButton url={currentUrl} />, icon: <FaXTwitter /> },
@@ -26,8 +29,10 @@ export const ShareModal = ({ handleShareModal }) => {
     }, 2000);
   }
 
+  useOutsideClick(modalRef, () => handleShareModal(false));
+
   return (
-    <div className="share_modal">
+    <div className="share_modal" ref={modalRef}>
       <div className="container">
         <div className="header">
           <h2>Compartilhar</h2>
