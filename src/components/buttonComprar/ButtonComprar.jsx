@@ -6,7 +6,8 @@ export const ButtonComprar = ({
   buyText = "Adicionado",
   disabled = false,
   disabledText = "Indisponível",
-  redirect = false
+  redirect = false,
+  onClick = () => {},
 }) => {
   const [text, setText] = useState(initialText);
   const updateText = (e) => {
@@ -28,7 +29,10 @@ export const ButtonComprar = ({
   }
 
   return (
-    <button className={`btn-comprar ${disabled ? " disabled" : ""}`} onClick={(e) => updateText(e)}>
+    <button 
+      className={`btn-comprar ${disabled ? " disabled" : ""}`} 
+      onClick={(e) => {updateText(e); onClick()}}
+      >
       {disabled ? disabledText : text}
     </button>
   );
