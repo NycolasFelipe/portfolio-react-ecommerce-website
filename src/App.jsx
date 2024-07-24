@@ -28,7 +28,7 @@ export const App = () => {
   const [warning, setWarning] = useState(false);
   const [miniCart, setMiniCart] = useState({ visible: false });
   const userLoginCheckCount = useRef(0);
-  const dataPerPage = useRef(15);
+  const dataPerPage = useRef(12);
 
   // Cria usuário ao logar pela primeira vez
   function handleUserLogged() {
@@ -111,21 +111,13 @@ export const App = () => {
     }, 300);
   }
 
-  // Modal com detalhes do produto
-  const [closeDetail, setCloseDetail] = useState(false);
-  const [detail, setDetail] = useState([]);
-  const viewProduct = (product) => {
-    setDetail([{ ...product }]);
-    setCloseDetail(true);
-  }
-
   // Pesquisar produtos
   const [search, setSearch] = useState("");
   const searchButton = (searchTerm) => {
     if (searchTerm) {
       // Redireciona para página de pesquisa
       const currentURL = window.location.pathname;
-      if (!currentURL.includes("products")) {
+      if (currentURL !== "/products") {
         navigate("/products");
       }
 
@@ -139,31 +131,39 @@ export const App = () => {
         });
       });
 
+      // Exibe texto de resultado da pesquisa
+      const displaySearchResult = () => {
+        const isSearchFound = searchProduct.flat(Infinity).length > 0;
+        const nodeSearchResult = document.querySelector("#searchResult");
+        const nodeSearchFound = document.querySelector("#searchFound");
+        const nodeSearchNotFound = document.querySelector("#searchNotFound");
+        nodeSearchResult.setAttribute("visible", true);
+        nodeSearchFound.setAttribute("visible", isSearchFound);
+        nodeSearchNotFound.setAttribute("visible", !isSearchFound);
+        nodeSearchFound.querySelector("span").textContent = search;
+        nodeSearchNotFound.querySelector("span").textContent = search;
+      }
+      setTimeout(() => displaySearchResult(), 10);
+
       // Repagina dados para que sejam exibidos de forma correta
       const paginatedResult = paginate(searchProduct.flat(Infinity));
       setProduct(paginatedResult);
 
-      // Exibe texto de resultado da pesquisa
-      setTimeout(() => {
-        const resultadoPesquisa = document.querySelector(".products > .products-header .search-results");
-        if (resultadoPesquisa) {
-          resultadoPesquisa.classList.remove("hide");
-          resultadoPesquisa.innerHTML = searchProduct[0].length > 0 ?
-            `<p>Resultados de busca para "<span class="term">${search}</span>":</p>` :
-            `<p>Não foi possível encontrar resultados para "<span class="term">${search}</span>"</p>`;
-        }
-      }, 10);
+      // Limpa campo de pesquisa
+      setSearch("");
     }
   }
 
   // Filtrar produtos
   const filterProduct = (category) => {
-    if (category === "All") {
+    if (category === "Todos") {
       setProduct(initialProduct);
     } else {
-      const filteredProduct = initialProduct.map((curElm) => {
-        return curElm.filter(x => x.Category === category);
-      });
+      const filteredProduct = initialProduct.reduce((acc, cur) => {
+        const productFromCategory = cur.filter(x => x.Category === category);
+        return acc.concat(productFromCategory);
+      }, []);
+
       const paginatedResult = paginate(filteredProduct.flat(Infinity));
       setProduct(paginatedResult);
     }
@@ -227,10 +227,6 @@ export const App = () => {
           product={product}
           setProduct={setProduct}
           homeProduct={initialProduct}
-          detail={detail}
-          closeDetail={closeDetail}
-          setCloseDetail={setCloseDetail}
-          viewProduct={viewProduct}
           cart={cart}
           setCart={setCart}
           addToCart={addToCart}

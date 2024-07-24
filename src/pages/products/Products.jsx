@@ -1,21 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 import { FaLaptop } from "react-icons/fa";
-import { IoChevronDownSharp, IoChevronForwardSharp } from "react-icons/io5";
-import { ProductModal } from "../../components/productModal/ProductModal";
+import { IoChevronForwardSharp } from "react-icons/io5";
+import { IoMdClose } from "react-icons/io";
 import { ProductCard } from "../../components/productCard/ProductCard";
+import { Select } from "../../components/select/Select";
 import Pagination from "../../components/pagination/Pagination";
 import paginate from "../../scripts/paginate";
-import "./Products.css";
+import styles from "./Products.module.css";
 
 export const Products = ({
   product,
   setProduct,
-  detail,
-  closeDetail,
-  setCloseDetail,
-  viewProduct,
   addToCart,
   favorites,
   addFavorite,
@@ -24,118 +20,128 @@ export const Products = ({
   loading,
   dataPerPage
 }) => {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
-  const [visibleOrderBy, setVisibleOrderBy] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const productsHeaderRef = useRef(null);
+  const searchResultRef = useRef(null);
 
-  const handleOrderBy = (e) => {
-    setVisibleOrderBy(prev => !prev);
-    const target = e.target.classList[0];
-    if (target?.includes("option")) {
-      const optionText = e.target.innerText;
-      // Muda opção selecionada
-      document.querySelectorAll(".products > .products-header .options .option")
-        .forEach((elm) => elm.classList.remove("selected"));
-      e.target.classList.add("selected");
-
-      // Atualiza texto "Ordenar por"
-      document.querySelector(".products > .products-header .order-type").textContent = optionText;
-
-      // Ordenação ascendente
-      if (optionText.toLowerCase().includes("menor")) {
+  const handleOrderBy = (value) => {
+    switch (value) {
+      case "Menor preço":
         const productAsc = product.flat(Infinity).sort((a, b) => a.Price - b.Price);
         const productAscPaginated = paginate(productAsc, dataPerPage.current);
         setProduct(productAscPaginated);
-      }
+        break;
 
-      // Ordenação decrescente
-      if (optionText.toLowerCase().includes("maior")) {
+      case "Maior preço":
         const productDesc = product.flat(Infinity).sort((a, b) => b.Price - a.Price);
         const productDescPaginated = paginate(productDesc, dataPerPage.current);
         setProduct(productDescPaginated);
-      }
+        break;
+
+      default: break;
     }
+  }
+
+  const handleClearSearch = () => {
+    filterProduct("Todos");
+    searchResultRef.current.setAttribute("visible", false);
   }
 
   const scrollToProductsHeader = () => {
     productsHeaderRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  useEffect(() => {
+    setPageIndex(0);
+  }, [product]);
+
   return (
     <>
-      {closeDetail && (
-        <ProductModal
-          detail={detail}
-          setCloseDetail={setCloseDetail}
-          addToCart={addToCart}
-          isAuthenticated={isAuthenticated}
-          loginWithRedirect={loginWithRedirect}
-        />
-      )}
-      <div className="products">
-        <div className="products-header" ref={productsHeaderRef}>
-          <div className="contant">
-            <h2><FaLaptop className="products-icon" /> Produtos</h2>
-            <p><Link to="/" className="link">Início <IoChevronForwardSharp className="chevron" /></Link></p>
-            <p>Produtos</p>
-          </div>
-          <div className="search-results hide"></div>
-          <div className="order-by">
-            <div className="text">Ordenar por </div>
-            <div className="select" onClick={(e) => handleOrderBy(e)}>
-              <p className="order-type">Menor preço</p>
-              <span className="icon"><IoChevronDownSharp className={`${visibleOrderBy ? "" : "hide"}`} /></span>
-              <div className={`options ${visibleOrderBy ? "" : "hide"}`}>
-                <p className="option menor selected">Menor preço</p>
-                <p className="option maior">Maior preço</p>
+      <div className={styles.products}>
+        <div className={styles.container}>
+          <div className={styles.header} ref={productsHeaderRef}>
+            <div className={styles.container}>
+              <h2><FaLaptop className={styles.icon} /> Produtos</h2>
+              <p>
+                <Link to="/" className={styles.link}>
+                  Início <IoChevronForwardSharp className={styles.chevron} />
+                </Link>
+              </p>
+              <p>Produtos</p>
+            </div>
+            <div className={styles.filter}>
+              <div className={styles.categories_mobile}>
+                <Select
+                  title="Filtrar por"
+                  options={["Todos"].concat(categories)}
+                  defaultValue="Categoria"
+                  onChange={(e) => filterProduct(e.target.value)}
+                />
+              </div>
+              <div className={styles.order_by}>
+                <Select
+                  title="Ordenar por"
+                  options={["Menor preço", "Maior preço"]}
+                  defaultValue="Preço"
+                  onChange={(e) => handleOrderBy(e.target.value)}
+                />
               </div>
             </div>
           </div>
-        </div>
-        {loading ? (<img className="loading" src="./img/loading.svg" alt="Loading" />) : (
-          <div className="products">
-            <div className="container">
-              <div className="filter">
-                <div className="categories">
-                  <h3>Categorias</h3>
-                  <ul>
-                    <li key={0} onClick={() => filterProduct("All")}>Todos os produtos</li>
-                    {categories?.map((curlElm, index) => {
-                      return <li key={index + 1} onClick={() => filterProduct(curlElm)}>{curlElm}</li>
-                    })}
-                  </ul>
-                </div>
+          <div ref={searchResultRef} id="searchResult" visible="false" className={styles.search_result}>
+            <div className={styles.container}>
+              <div id="searchFound" visible="false" className={styles.search_found}>
+                <p>Resultados de busca para “<span className={styles.term}>produto</span>”:</p>
               </div>
-              <div className="brand">
-                <div className="product-box">
-                  <div className="contant">
+              <div id="searchNotFound" visible="false" className={styles.search_not_found}>
+                <p>Não foi possível encontrar resultados para “<span className={styles.term}>produto</span>”:</p>
+              </div>
+              <button type="button" className={styles.search_clear}>
+                <IoMdClose className={styles.icon} onClick={() => handleClearSearch()} />
+              </button>
+            </div>
+          </div>
+          {loading ? (<img className={styles.loading} src="./img/loading.svg" alt="Loading" />) : (
+            <div className={styles.product_items}>
+              <div className={styles.container}>
+                <div className={styles.filter}>
+                  <div className={styles.categories}>
+                    <h3>Categorias</h3>
+                    <ul>
+                      <li key={0} onClick={() => filterProduct("Todos")}>Todos os produtos</li>
+                      {categories?.map((curlElm, index) => {
+                        return <li key={index + 1} onClick={() => filterProduct(curlElm)}>{curlElm}</li>
+                      })}
+                    </ul>
+                  </div>
+                </div>
+                <div className={styles.brand}>
+                  <div className={styles.product_box}>
                     {product[pageIndex]?.map((curElm, index) => {
                       return (
                         <ProductCard
                           key={index}
                           product={curElm}
                           addToCart={addToCart}
-                          viewProduct={viewProduct}
                           favorites={favorites}
                           addFavorite={addFavorite}
                         />
                       )
                     })}
                   </div>
-                </div>
-                <div className="product-pagination">
-                  <Pagination
-                    data={product}
-                    pageIndex={pageIndex}
-                    setPageIndex={setPageIndex}
-                    scrollTo={scrollToProductsHeader}
-                  />
+                  <div className={styles.pagination}>
+                    <Pagination
+                      data={product}
+                      pageIndex={pageIndex}
+                      setPageIndex={setPageIndex}
+                      scrollTo={scrollToProductsHeader}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   );

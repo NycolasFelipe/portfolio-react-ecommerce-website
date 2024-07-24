@@ -14,10 +14,6 @@ export const Routing = ({
   homeProduct,
   product,
   setProduct,
-  detail,
-  closeDetail,
-  setCloseDetail,
-  viewProduct,
   cart,
   setCart,
   addToCart,
@@ -36,10 +32,6 @@ export const Routing = ({
         <Route path="/" element={
           <Home
             product={homeProduct}
-            detail={detail}
-            closeDetail={closeDetail}
-            setCloseDetail={setCloseDetail}
-            viewProduct={viewProduct}
             addToCart={addToCart}
             favorites={favorites}
             addFavorite={addFavorite}
@@ -51,10 +43,6 @@ export const Routing = ({
           <Products
             product={product}
             setProduct={setProduct}
-            detail={detail}
-            closeDetail={closeDetail}
-            setCloseDetail={setCloseDetail}
-            viewProduct={viewProduct}
             addToCart={addToCart}
             favorites={favorites}
             addFavorite={addFavorite}

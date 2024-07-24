@@ -1,31 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 import { BsArrowRight, BsCurrencyDollar } from "react-icons/bs";
 import { BiHeadphone } from "react-icons/bi";
 import { FiTruck } from "react-icons/fi";
-import { ProductModal } from "../../components/productModal/ProductModal";
 import { ProductCard } from "../../components/productCard/ProductCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./Home.css";
 
-export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct, addToCart, favorites, addFavorite, loading }) => {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
+export const Home = ({ product, addToCart, favorites, addFavorite, loading }) => {
   const sliderSettings = { infinite: false, speed: 300, slidesToShow: 1, variableWidth: true, initialSlide: 1 };
 
   return (
     <main className="home">
-      {closeDetail && (
-        <ProductModal
-          detail={detail}
-          setCloseDetail={setCloseDetail}
-          addToCart={addToCart}
-          isAuthenticated={isAuthenticated}
-          loginWithRedirect={loginWithRedirect}
-        />
-      )}
       <div className="top-banner">
         <div className="container">
           <div className="detail">
@@ -152,7 +140,6 @@ export const Home = ({ product, detail, closeDetail, setCloseDetail, viewProduct
                       key={index}
                       product={curElm}
                       addToCart={addToCart}
-                      viewProduct={viewProduct}
                       favorites={favorites}
                       addFavorite={addFavorite}
                     />
