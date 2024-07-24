@@ -4,13 +4,13 @@ import { FaTrash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import formatMoney from "../../scripts/formatMoney";
-import styles from "./MiniCart.module.css";
 import useOutsideClick from "../../hooks/useOutsideClick";
+import styles from "./MiniCart.module.css";
 
 export const MiniCart = ({ cart, setCart, miniCart, setMiniCart }) => {
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
-  
+
   // Esconder minicart ao clicar fora
   const miniCartRef = useRef(null);
   const hideMinicart = () => setMiniCart({ ...miniCart, visible: false });
@@ -83,6 +83,7 @@ export const MiniCart = ({ cart, setCart, miniCart, setMiniCart }) => {
 
   return (
     <>
+      <div className={`${styles.background} ${miniCart.visible && styles.visible}`}></div>
       <div ref={miniCartRef} className={`${styles.mini_cart} ${miniCart.visible && styles.mini_cart_visible}`}>
         <div className={styles.header}>
           <div className={styles.header_title}>
@@ -96,37 +97,34 @@ export const MiniCart = ({ cart, setCart, miniCart, setMiniCart }) => {
         <div className={styles.cart_items}>
           {cart?.map((curElm, index) => {
             return (
-              <>
-                <div className={styles.cart_item} key={index}>
-                  <div className={styles.item_img}>
+              <div className={styles.cart_item} key={index}>
+                <div className={styles.item_img}>
+                  <Link onClick={(e) => { showMiniCart(false); redirectToProduct(e, curElm.ProductId) }}>
+                    <img src={`.${curElm.Img}`} alt={curElm.Title} />
+                  </Link>
+                </div>
+                <div className={styles.item_details}>
+                  <div className={styles.item_title}>
                     <Link onClick={(e) => { showMiniCart(false); redirectToProduct(e, curElm.ProductId) }}>
-                      <img src={`.${curElm.Img}`} alt={curElm.Title} />
+                      <h6>{curElm.Title}</h6>
                     </Link>
                   </div>
-                  <div className={styles.item_details}>
-                    <div className={styles.item_title}>
-                      <Link onClick={(e) => { showMiniCart(false); redirectToProduct(e, curElm.ProductId) }}>
-                        <h6>{curElm.Title}</h6>
-                      </Link>
-                    </div>
-                    <div className={styles.item_price}>
-                      <p>Preço: <span>{formatMoney(curElm.Price)}</span></p>
-                    </div>
-                    <div className={styles.item_quantity}>
-                      <button className={styles.item_decrement} type="button" onClick={() => decrementQtd(curElm)}>-</button>
-                      <input type="number" name="itemQuantity" id="itemQuantity" value={curElm.qtd} disabled />
-                      <button className={styles.item_increment} type="button" onClick={() => incrementQtd(curElm)}>+</button>
-                    </div>
-                    <div className={styles.item_price_total}>
-                      <p>Total: <span>{formatMoney(curElm.Price * curElm.qtd)}</span></p>
-                    </div>
+                  <div className={styles.item_price}>
+                    <p>Preço: <span>{formatMoney(curElm.Price)}</span></p>
                   </div>
-                  <div className={styles.item_remove}>
-                    <button type="button" onClick={() => removeProduct(curElm)}><FaTrash /></button>
+                  <div className={styles.item_quantity}>
+                    <button className={styles.item_decrement} type="button" onClick={() => decrementQtd(curElm)}>-</button>
+                    <input type="number" name="itemQuantity" id="itemQuantity" value={curElm.qtd} disabled />
+                    <button className={styles.item_increment} type="button" onClick={() => incrementQtd(curElm)}>+</button>
+                  </div>
+                  <div className={styles.item_price_total}>
+                    <p>Total: <span>{formatMoney(curElm.Price * curElm.qtd)}</span></p>
                   </div>
                 </div>
-                <hr key={`hr${index}`} />
-              </>
+                <div className={styles.item_remove}>
+                  <button type="button" onClick={() => removeProduct(curElm)}><FaTrash /></button>
+                </div>
+              </div>
             )
           })}
         </div>
