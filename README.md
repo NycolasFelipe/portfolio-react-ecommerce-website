@@ -26,11 +26,3 @@ Para instalar a aplicação, siga estas etapas:
 
 ## Backend da aplicação
 Aplicação feita com Node.js + Express responsável pela conexão com um banco de dados em MySQL: [link](https://github.com/NycolasFelipe/portfolio-react-ecommerce-server)
-
-## Capturas
-![1](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/a0c8ba18-9628-42a3-806e-324488990993)
-![2](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/ab784b1d-d027-4e6e-bb3f-c05592d4f991)
-![3](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/a9ecff01-7ebe-44a2-854e-b2a9af1a88e5)
-![4](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/da4ab8bf-75b3-47ea-9275-63183b22395d)
-![5](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/a0f9774b-bf61-46d8-a2cb-db57551e0e0c)
-![6](https://github.com/NycolasFelipe/portfolio-react-ecommerce-website/assets/71052352/e26ccc8c-d3ea-49f8-816a-a97ddb4381b1)
