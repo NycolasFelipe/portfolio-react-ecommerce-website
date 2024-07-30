@@ -9,7 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { EditProfile } from "./components/editProfile/EditProfile";
 import Slider from "react-slick";
 import UserContext from "../../context/user/UserContext";
-import "./Account.css";
+import styles from "./Account.module.css";
 
 export const Account = () => {
   const { user, setUser } = useContext(UserContext);
@@ -32,7 +32,7 @@ export const Account = () => {
   }
 
   const handleSettingsMenu = (e) => {
-    const setting = e.currentTarget.classList.value.replace("selected", "").trim();
+    const setting = e.currentTarget.getAttribute("setting-option");
     setMenuSettings(prev => {
       const temp = Object.fromEntries(Object.keys(prev).map((key) => [key, false]));
       temp[setting] = true;
@@ -41,80 +41,100 @@ export const Account = () => {
   }
 
   return (
-    <div className="account-container">
-      <div className="account-header">
-        <div className="contant">
-          <h2><AiOutlineUser className="account-icon" /> Conta</h2>
-          <p><Link to="/" className="link">Início <IoChevronForwardSharp className="chevron" /></Link></p>
+    <div className={styles.account}>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h2><AiOutlineUser className={styles.icon} /> Conta</h2>
+          <p><Link to="/" className={styles.link}>Início <IoChevronForwardSharp className={styles.chevron} /></Link></p>
           <p>Conta</p>
         </div>
-      </div>
-      <div className="container">
-        <div className="settings">
-          <h3>Ajustes</h3>
-          <div className="container">
-            <ul className="settings-desktop">
-              <li
-                onClick={(e) => handleSettingsMenu(e)}
-                className={`editarPerfil ${menuSettings.editarPerfil ? "selected" : ""}`}>
-                <RiPencilLine /> Editar perfil</li>
-              <li
-                onClick={(e) => handleSettingsMenu(e)}
-                className={`notificacoes ${menuSettings.notificacoes ? "selected" : ""}`}>
-                <FaRegBell /> Notificações</li>
-              <li
-                onClick={(e) => handleSettingsMenu(e)}
-                className={`seguranca ${menuSettings.seguranca ? "selected" : ""}`}>
-                <AiOutlineLock /> Segurança</li>
-              <li
-                onClick={(e) => handleSettingsMenu(e)}
-                className={`aparencia ${menuSettings.aparencia ? "selected" : ""}`}>
-                <GoGear /> Aparência</li>
-              <li
-                onClick={(e) => handleSettingsMenu(e)}
-                className={`ajuda ${menuSettings.ajuda ? "selected" : ""}`}>
-                <IoHelpCircleOutline /> Ajuda</li>
-              <li
-                onClick={() => logout()}
-                className="logout">
-                <RiLogoutBoxLine /> Sair da conta</li>
-            </ul>
-            <ul className="settings-mobile">
-              <Slider {...sliderSettings}>
+        <div className={styles.settings}>
+          <div className={styles.settings_panel}>
+            <h3>Ajustes</h3>
+            <div className={styles.container}>
+              <ul className={styles.settings_desktop}>
                 <li
                   onClick={(e) => handleSettingsMenu(e)}
-                  className={`editarPerfil ${menuSettings.editarPerfil ? "selected" : ""}`}>
+                  setting-option="editarPerfil"
+                  setting-selected={menuSettings.editarPerfil.toString()}>
                   <RiPencilLine /> Editar perfil</li>
                 <li
                   onClick={(e) => handleSettingsMenu(e)}
-                  className={`notificacoes ${menuSettings.notificacoes ? "selected" : ""}`}>
+                  setting-option="notificacoes"
+                  setting-selected={menuSettings.notificacoes.toString()}>
                   <FaRegBell /> Notificações</li>
                 <li
                   onClick={(e) => handleSettingsMenu(e)}
-                  className={`seguranca ${menuSettings.seguranca ? "selected" : ""}`}>
+                  setting-option="seguranca"
+                  setting-selected={menuSettings.seguranca.toString()}>
                   <AiOutlineLock /> Segurança</li>
                 <li
                   onClick={(e) => handleSettingsMenu(e)}
-                  className={`aparencia ${menuSettings.aparencia ? "selected" : ""}`}>
+                  setting-option="aparencia"
+                  setting-selected={menuSettings.aparencia.toString()}>
                   <GoGear /> Aparência</li>
                 <li
                   onClick={(e) => handleSettingsMenu(e)}
-                  className={`ajuda ${menuSettings.ajuda ? "selected" : ""}`}>
+                  setting-option="ajuda"
+                  setting-selected={menuSettings.ajuda.toString()}>
                   <IoHelpCircleOutline /> Ajuda</li>
                 <li
                   onClick={() => logout()}
                   className="logout">
                   <RiLogoutBoxLine /> Sair da conta</li>
-              </Slider>
-            </ul>
+              </ul>
+              <ul className={styles.settings_mobile}>
+                <Slider {...sliderSettings}>
+                  <li
+                    onClick={(e) => handleSettingsMenu(e)}
+                    setting-option="editarPerfil"
+                    setting-selected={menuSettings.editarPerfil.toString()}>
+                    <RiPencilLine /> Editar perfil</li>
+                  <li
+                    onClick={(e) => handleSettingsMenu(e)}
+                    setting-option="notificacoes"
+                    setting-selected={menuSettings.notificacoes.toString()}>
+                    <FaRegBell /> Notificações</li>
+                  <li
+                    onClick={(e) => handleSettingsMenu(e)}
+                    setting-option="seguranca"
+                    setting-selected={menuSettings.seguranca.toString()}>
+                    <AiOutlineLock /> Segurança</li>
+                  <li
+                    onClick={(e) => handleSettingsMenu(e)}
+                    setting-option="aparencia"
+                    setting-selected={menuSettings.aparencia.toString()}>
+                    <GoGear /> Aparência</li>
+                  <li
+                    onClick={(e) => handleSettingsMenu(e)}
+                    setting-option="ajuda"
+                    setting-selected={menuSettings.ajuda.toString()}>
+                    <IoHelpCircleOutline /> Ajuda</li>
+                  <li
+                    onClick={() => logout()}
+                    className="logout">
+                    <RiLogoutBoxLine /> Sair da conta</li>
+                </Slider>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div className="setting-item">
-          {
-            menuSettings.editarPerfil && (
+          <div className={styles.settings_content}>
+            {menuSettings.editarPerfil && (
               <EditProfile data={user} setUser={setUser} />
-            )
-          }
+            )}
+            {menuSettings.notificacoes && (
+              <img className={styles.icon_wip} alt="Em desenvolvimento" src="img/wip.png" />
+            )}
+            {menuSettings.seguranca && (
+              <img className={styles.icon_wip} alt="Em desenvolvimento" src="img/wip.png" />
+            )}
+            {menuSettings.aparencia && (
+              <img className={styles.icon_wip} alt="Em desenvolvimento" src="img/wip.png" />
+            )}
+            {menuSettings.ajuda && (
+              <img className={styles.icon_wip} alt="Em desenvolvimento" src="img/wip.png" />
+            )}
+          </div>
         </div>
       </div>
     </div>
